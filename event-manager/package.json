@@ -1,0 +1,33 @@
+{
+  "name": "event-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "jquery": true
+    }
+  },
+  "scripts": {
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "seed": "node scripts/seedDB.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "ajax": "^0.0.4",
+    "express": "^4.15.4",
+    "mongoose": "^4.13.0",
+    "request": "^2.83.0"
+  }
+}
