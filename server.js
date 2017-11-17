@@ -2,8 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const dotenv = require("dotenv");
 const app = express();
 const PORT = process.env.PORT || 3001;
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ */
+dotenv.load({ path: ".env" });
 
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: false }));
