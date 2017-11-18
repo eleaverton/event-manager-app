@@ -2,10 +2,6 @@ import React from "react";
 
 const google = window.google;
 
-// const ARC_DE_TRIOMPHE_POSITION = {
-//   lat: 48.873947,
-//   lng: 2.295038
-// };
 
 const Cynthia_Woods_Mitchell_Pavilion = {
   lat: 30.161593,
@@ -15,7 +11,7 @@ const Cynthia_Woods_Mitchell_Pavilion = {
 class Map1 extends React.Component {
   constructor() {
     super();
-    // this.panToArcDeTriomphe = this.panToArcDeTriomphe.bind(this);
+   
   }
   
   componentDidMount() {
@@ -25,16 +21,11 @@ class Map1 extends React.Component {
     });
   }
   
-  // panToArcDeTriomphe() {
-  //   console.log(this)
-  //   this.map.panTo(ARC_DE_TRIOMPHE_POSITION);
-  // }
   
   render() {
 
 
-    //<button onClick={this.panToArcDeTriomphe}>Go to Arc De Triomphe</button>
-    return (
+      return (
       <div>
         
         <div className="map" ref="map" ></div>
