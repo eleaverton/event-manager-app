@@ -14,9 +14,10 @@
     "axios": "^0.17.0",
     "express": "^4.15.4",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
+    "react": "^16.1.1",
+    "react-bootstrap": "^0.31.5",
     "react-countdowntimer": "^0.1.8",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.1.1",
     "react-scripts": "1.0.14",
     "request": "^2.83.0"
   },
