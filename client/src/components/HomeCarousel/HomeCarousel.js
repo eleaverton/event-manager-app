@@ -60,13 +60,6 @@ const HomeCarousel = () => (
       </div>
     </div>
 
-
-
-
-
-
-
-
  
  </div>
     

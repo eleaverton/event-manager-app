@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Jumbotron from "./Jumbotron";
-import Body from "./Body";
-import Nav from "./Nav";
-import HomeCarousel from "./HomeCarousel";
+import Jumbotron from "./components/Jumbotron";
+import Body from "./components/Body";
+import Nav from "./components/Nav";
+import HomeCarousel from "./components/HomeCarousel";
+
+
 
 class App extends Component {
   render() {
@@ -17,6 +19,8 @@ class App extends Component {
       	<Body />
       	
       	<HomeCarousel />
+    
+     
     
       
 

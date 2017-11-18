@@ -1,5 +1,5 @@
 import React from "react";
-import Map1 from "./Map1";
+import Map1 from "../Map1";
 
 const Body = () => (
   <div class="container">
