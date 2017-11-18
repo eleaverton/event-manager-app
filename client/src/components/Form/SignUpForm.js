@@ -1,8 +1,8 @@
 import React, {Component} from 'react';  
-import SingleInput from './SingleInput';   
+import {SingleInput} from './SingleInput';   
 
 
-class SignUpForm extends Component {
+export class SignUpForm extends Component {
 	constructor(props){
 		super(props);
 		this.state={
@@ -110,5 +110,3 @@ class SignUpForm extends Component {
 			)
 	}
 }
-
-export default SignUpForm;

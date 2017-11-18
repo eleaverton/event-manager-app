@@ -4,6 +4,7 @@ import Jumbotron from "./components/Jumbotron";
 import Body from "./components/Body";
 import Nav from "./components/Nav";
 import HomeCarousel from "./components/HomeCarousel";
+import {SignUpForm} from "./components/Form";
 
 
 
@@ -19,6 +20,7 @@ class App extends Component {
       	<Body />
       	
       	<HomeCarousel />
+        <SignUpForm />
     
      
     

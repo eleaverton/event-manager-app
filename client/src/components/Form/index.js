@@ -1,2 +1,2 @@
-export default from "./SignUpForm";
+export * from "./SignUpForm";
 //figure this out
