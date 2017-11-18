@@ -5,7 +5,7 @@ export const SingleInput = (props) => (
   <div className="form-group">
     <label className="form-label">{props.title}</label>
     <input
-      className="form-input"
+      className="form-control"
       name={props.name}
       type={props.inputType}
       value={props.content}
@@ -14,7 +14,7 @@ export const SingleInput = (props) => (
 );
 
 SingleInput.PropTypes = {  
-  inputType: PropTypes.oneOf(['text', 'number','date','email']).isRequired,
+  inputType: PropTypes.oneOf(['text', 'number','date','email','time']).isRequired,
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   controlFunc: PropTypes.func.isRequired,

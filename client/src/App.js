@@ -4,7 +4,7 @@ import Jumbotron from "./components/Jumbotron";
 import Body from "./components/Body";
 import Nav from "./components/Nav";
 import HomeCarousel from "./components/HomeCarousel";
-import {SignUpForm} from "./components/Form";
+import {SignUpForm, CreateEventForm} from "./components/Form";
 
 
 
@@ -21,6 +21,7 @@ class App extends Component {
       	
       	<HomeCarousel />
         <SignUpForm />
+        <CreateEventForm />
     
      
     
