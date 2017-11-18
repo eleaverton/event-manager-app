@@ -28,9 +28,15 @@
     "cloudinary": "^1.9.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
+    "install": "^0.10.2",
     "mongoose": "^4.13.0",
+    "npm": "^5.5.1",
     "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-bootstrap": "^0.31.5",
     "react-countdowntimer": "^0.1.8",
+    "react-dom": "^16.1.1",
+    "react-router-dom": "^4.2.2",
     "request": "^2.83.0"
   }
 }

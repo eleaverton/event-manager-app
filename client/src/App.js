@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
-import './App.css';
-import Jumbotron from "./components/Jumbotron";
-import Body from "./components/Body";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import EventProfile from "./pages/EventProfile";
+import TestPage from "./pages/TestPage";
 import Nav from "./components/Nav";
-import HomeCarousel from "./components/HomeCarousel";
-import {SignUpForm, CreateEventForm} from "./components/Form";
+import Bootstrap from "react-bootstrap";
 
 
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">       
-          
-        <Nav />
-        
-        <Jumbotron />
-        <p className="App-intro">some text here</p>
-      	<Body />
-      	
-      	<HomeCarousel />
-        <SignUpForm />
-        <CreateEventForm />
-    
-     
-    
+const App = () => (
+  <Router>
+    <div>
+      <Nav />      
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/event" component={EventProfile} />
+        <Route exact path="/test" component={TestPage} />
       
+    </div>
+  </Router>
+);
 
+  export default App; 
 
-      </div>
-    );
-  }
-}
-
-export default App;
