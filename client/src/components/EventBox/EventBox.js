@@ -1,5 +1,5 @@
 import React from "react";
-import Bootstrap from "react-bootstrap";
+
 
 const EventBox = () => (
  <div>
