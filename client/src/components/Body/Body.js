@@ -1,4 +1,3 @@
-import Bootstrap from "react-bootstrap";
 import React from "react";
 import Map1 from "../Map1";
 
