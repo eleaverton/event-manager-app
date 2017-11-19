@@ -1,6 +1,7 @@
 import React, {Component} from 'react';  
 import {SingleInput} from './SingleInput'; 
 import {TextArea} from './TextArea';  
+import {DocumentInput} from './DocumentFieldsSet';
 
 
 export class CreateEventForm extends Component {
@@ -18,7 +19,7 @@ export class CreateEventForm extends Component {
 		this.handleInputChange=this.handleInputChange.bind(this);
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
     	this.handleClearForm = this.handleClearForm.bind(this);
-    	// this.appendInput=this.appendInput.bind(this);
+    	this.add = this.add.bind(this);
 	}
 
 	//Need data path to not get error with fetch
@@ -68,12 +69,17 @@ export class CreateEventForm extends Component {
 			
 	    });
 	};
-	// appendInput() {
-	// 	var specificFields = this.state.specificFields.slice();
-	// 	specificFields.push(newField);
-	// 	this.setState({specificFields: specificFields}) ;
-	// }
+
+	add(){
+		const specificFields = this.state.specificFields.concat(DocumentInput);
+    	this.setState({ specificFields });
+    	console.log(this.state.specificFields);
+
+	}
 	render(){
+		const specificFields = this.state.specificFields.map((Element, index) => {
+      	return <Element key={ index } index={ index } />
+    	});
 		return(
 			<div class="panel panel-default">
   				<div class="panel-body">
@@ -111,9 +117,11 @@ export class CreateEventForm extends Component {
 					        name={'description'}
 					        controlFunc={this.handleInputChange} />
 					    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
-					    <button
-          					className="btn btn-link float-left"
-          					onClick={this.handleClearForm}>Add Registrant Info Field</button>
+					    <div className="inputs">
+					        { specificFields }
+					    </div>
+					    <button onClick={ this.add }>Add Registrant Info</button>
+					      
           				
 					    <input
 					        type="submit"

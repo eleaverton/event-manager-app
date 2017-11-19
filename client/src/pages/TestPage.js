@@ -6,6 +6,7 @@ import Nav from "../components/Nav";
 import HomeCarousel from "../components/HomeCarousel";
 import EventBox from "../components/EventBox";
 import Bootstrap from "react-bootstrap";
+import {SignUpForm, CreateEventForm} from "../components/Form";
 
 class App extends Component {
   render() {
@@ -18,6 +19,8 @@ class App extends Component {
         <EventBox />
 
         <HomeCarousel />
+        <SignUpForm />
+        <CreateEventForm />
       </div>
     );
   }
