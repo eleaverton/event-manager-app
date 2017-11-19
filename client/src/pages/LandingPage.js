@@ -10,11 +10,23 @@ class App extends Component {
     return <div className="App">
         <Nav />
         <HomeCarousel />
-        <div></div>
-        <div className="row">
-                <EventBox />
-                <EventBox />
-                <EventBox />
+        <div />
+        <div className="container">
+          <div className="row">
+            <EventBox />
+            <EventBox />
+            <EventBox />
+          </div>
+          <div className="row">
+            <EventBox />
+            <EventBox />
+            <EventBox />
+          </div>
+          <div className="row">
+            <EventBox />
+            <EventBox />
+            <EventBox />
+          </div>
         </div>
       </div>;
   }
