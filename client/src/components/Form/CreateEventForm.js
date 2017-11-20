@@ -1,7 +1,8 @@
 import React, {Component} from 'react';  
 import {SingleInput} from './SingleInput'; 
 import {TextArea} from './TextArea';  
-import {DocumentInput} from './DocumentFieldsSet';
+// import {DocumentInput} from './DocumentFieldsSet';
+import "./Form.css";
 
 
 export class CreateEventForm extends Component {
@@ -13,13 +14,16 @@ export class CreateEventForm extends Component {
 			time:'',
 			location:'',
 			description:'',
+			newField:'',
 			specificFields:[]
 			
 		};
 		this.handleInputChange=this.handleInputChange.bind(this);
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
     	this.handleClearForm = this.handleClearForm.bind(this);
-    	this.add = this.add.bind(this);
+    	this.handleAddSpecificField=this.handleAddSpecificField.bind(this);
+    	this.handleFieldNameChange=this.handleFieldNameChange.bind(this);
+    	// this.add = this.add.bind(this);
 	}
 
 	//Need data path to not get error with fetch
@@ -65,26 +69,46 @@ export class CreateEventForm extends Component {
 			date:'',
 			time:'',
 			location:'',
-			description:''
+			description:'',
+			newField:'',
+			specificFields:[]
 			
 	    });
 	};
 
-	add(){
-		const specificFields = this.state.specificFields.concat(DocumentInput);
-    	this.setState({ specificFields });
-    	console.log(this.state.specificFields);
+	handleAddSpecificField = () => {
+	    this.setState({
+	      specificFields: this.state.specificFields.concat([{ newField: '' }])
+	    });
+  	}
+	handleFieldNameChange = (idx) => (evt) => {
+	    const newFields = this.state.specificFields.map((specificField, sidx) => {
+	      if (idx !== sidx) return specificField;
+	      return { ...specificField, newField: evt.target.value };
+	    });
 
-	}
+    this.setState({ specificFields: newFields });
+  	}
+
+	// add(){
+	// 	const createdFields = this.state.createdFields.concat(DocumentInput);
+ //    	this.setState({ createdFields });
+ //    	this.setState(specificFields: this.state.specificFields.concat)
+ //    	console.log(this.state.createdFields);
+
+	// }
 	render(){
-		const specificFields = this.state.specificFields.map((Element, index) => {
-      	return <Element key={ index } index={ index } />
-    	});
+		// const createdFields = this.state.createdFields.map((Element, index) => {
+  //     		return <Element key={ index } index={ index } />
+  //   	});
 		return(
-			<div class="panel panel-default">
-  				<div class="panel-body">
-					<form className="container" onSubmit={this.handleFormSubmit}>
-						<h4> Create Event </h4>
+			<div className="container">
+			<div className="panel panel-default">
+				<div className="panel-header form-header">
+					Create Event
+				</div>
+  				<div className="panel-body">
+					<form onSubmit={this.handleFormSubmit}>
 						<SingleInput
 							inputType={'text'}
 							title={'Title'}
@@ -117,12 +141,21 @@ export class CreateEventForm extends Component {
 					        name={'description'}
 					        controlFunc={this.handleInputChange} />
 					    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
-					    <div className="inputs">
-					        { specificFields }
-					    </div>
-					    <button onClick={ this.add }>Add Registrant Info</button>
+					    {this.state.specificFields.map((specificField, idx) => (
+				          <div>
+				            <SingleInput
+				              inputType={'text'}
+				              placeholder={`New Field #${idx + 1}`}
+				              value={specificField.newField}
+				              controlFunc={this.handleFieldNameChange(idx)}
+				            />
+				          </div>
+				        ))}
+				        <button type="button" onClick={this.handleAddSpecificField} className="btn btn-primary small">Add Registrant Field</button>
+				        
 					      
-          				
+          				<br></br>
+          				<br></br>
 					    <input
 					        type="submit"
 					        className="btn btn-primary float-right"
@@ -130,6 +163,7 @@ export class CreateEventForm extends Component {
 						
 					</form>
 				</div>
+			</div>
 			</div>
 			)
 	}
