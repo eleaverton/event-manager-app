@@ -1,7 +1,7 @@
 import React, {Component} from 'react';  
 import {SingleInput} from './SingleInput'; 
 import {TextArea} from './TextArea';  
-// import {DocumentInput} from './DocumentFieldsSet';
+import CheckboxOrRadioGroup from './CheckboxOrRadio';  
 import "./Form.css";
 
 
@@ -15,7 +15,9 @@ export class CreateEventForm extends Component {
 			location:'',
 			description:'',
 			newField:'',
-			specificFields:[]
+			specificFields:[],
+			attendeeRegistrationOptions:['One registration per attendee','One registration for multiple attendees'],
+			attendeeRegistration: []
 			
 		};
 		this.handleInputChange=this.handleInputChange.bind(this);
@@ -23,7 +25,7 @@ export class CreateEventForm extends Component {
     	this.handleClearForm = this.handleClearForm.bind(this);
     	this.handleAddSpecificField=this.handleAddSpecificField.bind(this);
     	this.handleFieldNameChange=this.handleFieldNameChange.bind(this);
-    	// this.add = this.add.bind(this);
+    	this.handleRadioSelection=this.handleRadioSelection.bind(this);
 	}
 
 	//Need data path to not get error with fetch
@@ -46,6 +48,11 @@ export class CreateEventForm extends Component {
 	      [name]: value
 	    });
   	};
+
+  	handleRadioSelection(event){
+  		this.setState({attendeeRegistration:[event.target.value]});
+  	};
+
   	handleFormSubmit(event) {
 	    event.preventDefault();
 
@@ -56,7 +63,8 @@ export class CreateEventForm extends Component {
 	      location: this.state.location,
 	      description:this.state.description,
 	      //this array will be used to populate the registration form for the event
-	      specificFields:this.state.specificFields
+	      specificFields:this.state.specificFields,
+	      attendeeRegistration:this.state.attendeeRegistration
 	    };
 	    //create post request with right data path
 	    console.log('Send this in a POST request:', formPayload)
@@ -152,7 +160,16 @@ export class CreateEventForm extends Component {
 				          </div>
 				        ))}
 				        <button type="button" onClick={this.handleAddSpecificField} className="btn btn-primary small">Add Registrant Field</button>
-				        
+				        <br></br>
+          				<br></br>
+				        <CheckboxOrRadioGroup
+						    title={'Do you need each attendee to register individually or can one person register multiple attendees?'}
+						    setName={'attendee'}
+						    type={'radio'}
+						    controlFunc={this.handleRadioSelection}
+						    options={this.state.attendeeRegistrationOptions}
+						    selectedOptions={this.state.attendeeRegistration} />
+
 					      
           				<br></br>
           				<br></br>
