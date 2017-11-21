@@ -1,17 +1,23 @@
 const router = require("express").Router();
-const apiController = require("../controllers/apiController");
+var passport = require("passport");
 const path = require("path");
+const homeController = require("../controllers/homeController");
+// const authController = require("../controllers/authController");
+const authTutorialController = require("../controllers/authTutorialController");
+const apiController = require("../controllers/apiController");
 
-//api articles route
-router.route("/api/").get(apiController.getTestRoute);
+const authCheckMiddleware = require("../middleware/auth-check");
 
-// router
-//   .route("/api/saved")
-//   .get(savedController.findAll)
-//   .post(savedController.create)
-//   .delete(savedController.deleteArticle);
+router.route("/").get(homeController.loadHomeRoute);
 
-// If no API routes are hit, send the React app
+//authorization routes
+router.route("/login").post(authTutorialController.postLogin);
+router.route("/signup").post(authTutorialController.postSignup);
+
+//test authorization routes
+router.route("/dashboard").get(authCheckMiddleware, apiController.getDashboard);
+
+//default to React app
 router.use(function(req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
