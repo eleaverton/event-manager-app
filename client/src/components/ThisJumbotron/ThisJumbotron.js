@@ -6,34 +6,52 @@ import Row from '../../../node_modules/react-bootstrap/lib/Row';
 import Col from '../../../node_modules/react-bootstrap/lib/Col';
 import CountDown from "../CountDown"
 import Map1 from "../Map1";
+import styles from "./ThisJumbotron.css";
 
 
 export default class ThisJumbotron extends React.Component {
   render() {
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron className="abc">
           <Grid>
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <h1>Dandelions in December</h1>
+            <div>
+            <br></br>
+            <br></br>
+            <br></br>
+             <br></br>
+            <br></br>
+            <br></br>
+            </div>
             
           </Grid>
-          <CountDown />
+          <br></br>
+          <Row>
+          <Col md={4}>
+            <CountDown /> 
+          </Col>
+          </Row>
+          
+          
         </Jumbotron>
+
         <Grid>
           <Row>
-            <Col md={4}>
-              <h2>Heading</h2>
-              <p>Adipisicing ratione incidunt eaque expedita rerum porro inventore. Nihil sit ipsam iure officiis sit eos at quibusdam natus dignissimos natus dolore! Vel doloremque ipsa alias nihil harum laborum necessitatibus rerum?</p>
-              <p><Button>View details »</Button></p>
+            <Col md={8}>
+              <h2>Join us for Dandelions in December at the Cockrell Butterfly Center!</h2>
+              <p>During the holiday season, the rainforest conservatory will be filled with sunshine in the form of hundreds of graceful brightly colored butterflies, including a favorite among visitors, the western tiger swallowtail butterfly.</p>
+
+                <p>Beautiful white flowers will transform the conservatory into a tropical wonderland! You won’t want to miss this unique reminder of spring.</p>
+
+                <p>Dandelions in December is included in your Cockrell Butterfly Center admission ticket.</p>
             </Col>
             <Col md={4}>
-              <h2>Heading</h2>
-              <p>Sit quia nemo quis enim provident porro eaque accusamus tenetur provident aliquid commodi? Velit nesciunt maiores obcaecati totam praesentium sint vitae exercitationem quaerat maxime iusto et! Consequatur aspernatur sit impedit.</p>
-              <p><Button>View details »</Button></p>
-            </Col>
-            <Col md={4}>
-              <h2>This is a Map</h2>
+              <h2>The Cockrell Butterfly Center is LocAted Inside HMNS at Herman Park
+              </h2>
+              <p>5555 Hermann Park Dr.</p>
+              <p>Houston,Texas 77030</p>
+              <p>(713) 639-4629</p>
               <Map1 />
             </Col>
           </Row>

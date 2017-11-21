@@ -1,0 +1,11 @@
+.abc{
+    background: url("./assets/winterjpg.jpg") no-repeat center center; 
+    -webkit-background-size: 100% 150%;
+    -moz-background-size: 100% 150%;
+    -o-background-size: 100% 150%;
+    background-size: 100% 150%;
+    color: #D9F3FF;
+    -webkit-text-stroke: .25px white;
+   text-shadow:    
+       1% 1% 0 #000;
+}

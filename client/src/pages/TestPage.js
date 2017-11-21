@@ -15,7 +15,7 @@ class App extends Component {
 
         <ThisJumbotron />
         <p className="App-intro">some text here</p>
-        <CreateEventForm />
+  
         
 
         <Footer />

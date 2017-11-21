@@ -8,7 +8,7 @@ const Body = () => (
         <div className="col-md-4">
           <h2>Heading</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a className="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          
         </div>
         <div className="col-md-4">
           <h2>Heading</h2>
@@ -16,7 +16,7 @@ const Body = () => (
           <p><a className="btn btn-default" href="#" role="button">View details &raquo;</a></p>
        </div>
         <div className="col-md-4">
-          <h2>This is a Map</h2>
+          <h2>This is a Round Map</h2>
           <Map1 />
         </div>
       </div>
