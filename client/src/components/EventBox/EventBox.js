@@ -8,9 +8,10 @@ const EventBox = () => (
             <div className="thumbnail">
                 <img src="/images/event.jpg" alt="..." />
                 <div className="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>Text describing the event goes here.</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    <h3>Super Cool Event</h3>
+                    <p>You should come to this super cool event because you're super cool too.</p>
+                    <p id="date">Monday, December 5</p><p id="time">12:30pm</p>
+                    <p><a href="#" class="btn btn-default" role="button">More Information</a></p>
                 </div>
             </div>
         </div> 

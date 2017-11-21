@@ -70,11 +70,15 @@ body {
     height: 500px;
 }
 
-#statBox {
+#searchBox {
     margin-top: -150px;
     margin-bottom: 30px;
-    background-color: lime;
+    background-color: #ffffff;
     height: 150px;
+}
+
+#search {
+    width: 185px;
 }
 
 .carousel-indicators {

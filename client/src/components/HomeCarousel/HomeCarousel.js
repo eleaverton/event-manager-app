@@ -37,8 +37,22 @@ const HomeCarousel = () => (
     </div>
       <div className="container">
       <div className="row">
-        <div id="statBox" class="col-md-6 col-md-offset-3">
-          <h1>Search</h1>
+        <div id="searchBox" className="well well-lg col-md-6 col-md-offset-3">
+          <h2>Search for Your Next Event</h2>
+            <form class="form-inline">
+                <div class="form-group">
+                  <label class="sr-only" for="search">Search Upcoming Events</label>
+                  <input type="email" class="form-control" id="search" placeholder="Search Upcoming Events"/>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword3">Location</label>
+                  <input type="password" class="form-control" id="location" placeholder="Location"/>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+
+
+
         </div>
       </div>
     </div>
