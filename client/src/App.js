@@ -5,6 +5,7 @@ import EventProfile from "./pages/EventProfile";
 import TestPage from "./pages/TestPage";
 import Nav1 from "./components/Nav1";
 import Bootstrap from "react-bootstrap";
+import SignUpForm from "./components/Form/SignUpForm"
 
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/event" component={EventProfile} />
         <Route exact path="/test" component={TestPage} />
+        <Route exact path="/signup" component={SignUpForm} />
       
     </div>
   </Router>
