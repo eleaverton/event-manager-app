@@ -98,17 +98,8 @@ export class CreateEventForm extends Component {
     this.setState({ specificFields: newFields });
   	}
 
-	// add(){
-	// 	const createdFields = this.state.createdFields.concat(DocumentInput);
- //    	this.setState({ createdFields });
- //    	this.setState(specificFields: this.state.specificFields.concat)
- //    	console.log(this.state.createdFields);
-
-	// }
 	render(){
-		// const createdFields = this.state.createdFields.map((Element, index) => {
-  //     		return <Element key={ index } index={ index } />
-  //   	});
+
 		return(
 			<div className="container">
 			<div className="panel panel-default">
