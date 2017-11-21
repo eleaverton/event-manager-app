@@ -1,6 +1,7 @@
 module.exports = {
-  getTestRoute: (req, res) => {
-    const data = { test: "success" };
-    res.json(data);
+  getDashboard: (req, res) => {
+    res.status(200).json({
+      message: "You're authorized to see this secret message."
+    });
   }
 };
