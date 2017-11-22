@@ -44,14 +44,13 @@ body {
 .xyz{
   font-family: "Arial Black", Gadget, sans-serif;
   display: inline-block;
-  width: 20%;
-  height: 100%;
+  float: left;
+  width: 13%;
   border-radius: 50%;
-  font-size: 135%;
-  color: #87FF00;
-  line-height: 180%;
+  font-size: 2rem;
+  color: #D9F3FF;
+  line-height: 120%;
   text-align: center;
-  background: #9900B2;
 }
 
 .carousel {
@@ -86,3 +85,12 @@ body {
 .carousel-indicators{
  visibility: hidden;
 }
+
+#myContainer {
+  width:800px;
+  height:600px;
+  margin:auto;
+  border:1px;
+  border-style:solid;
+  border-color:#696969;
+  }

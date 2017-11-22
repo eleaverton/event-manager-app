@@ -1,47 +1,65 @@
-import React, {Component} from 'react';  
-import {SingleInput} from './SingleInput';
+import React, { Component } from "react";
+import axios from "axios";
+import { SingleInput } from "./SingleInput";
 import "./Form.css";
 
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      email: "",
+      zip: "",
+      twitterHandle: "",
+      password: ""
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleClearForm = this.handleClearForm.bind(this);
+  }
 
-export class SignUpForm extends Component {
-	constructor(props){
-		super(props);
-		this.state={
-			firstName:'',
-			lastName:'',
-			dateOfBirth:'',
-			email:'',
-			zip:'',
-			twitterHandle:''
-		};
-		this.handleInputChange=this.handleInputChange.bind(this);
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    	this.handleClearForm = this.handleClearForm.bind(this);
-	}
+  //Need data path to not get error with fetch
+  // componentDidMount(){
+  // 	fetch()
+  // 	.then(res => res.json())
+  // 	.then(data =>{
+  // 		this.setState({
+  // 		firstName=data.firstName,
+  // 		lastName=data.lastName,
+  // 		dateOfBirth=data.dateOfBirth,
+  // 		email=data.email,
+  // 		zip=data.zip,
+  // 		twitterHandle=data.twitterHandle
+  // 		});
+  // 	});
+  // }
+  handleInputChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+  handleFormSubmit(event) {
+    event.preventDefault();
 
-	//Need data path to not get error with fetch
-	// componentDidMount(){
-	// 	fetch()
-	// 	.then(res => res.json())
-	// 	.then(data =>{
-	// 		this.setState({
-	// 		firstName=data.firstName,
-	// 		lastName=data.lastName,
-	// 		dateOfBirth=data.dateOfBirth,
-	// 		email=data.email,
-	// 		zip=data.zip,
-	// 		twitterHandle=data.twitterHandle
-	// 		});
-	// 	});
-	// }
-	handleInputChange(event){
-    	const { name, value } = event.target;
-	    this.setState({
-	      [name]: value
-	    });
-  	};
-  	handleFormSubmit(event) {
-	    event.preventDefault();
+    const formPayload = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      dateOfBirth: this.state.dateOfBirth,
+      email: this.state.email,
+      zip: this.state.zip,
+      twitterHandle: this.state.twitterHandle,
+      password: this.state.password
+    };
+    //create post request with right data path
+    console.log("Send this in a POST request:", formPayload);
+    const { firstName, email, password } = this.state;
+    axios
+      .post("/signup", { email, password, name: firstName })
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
 
 	    const formPayload = {
 	      firstName: this.state.firstName,
@@ -123,3 +141,5 @@ export class SignUpForm extends Component {
 			)
 	}
 }
+
+export default SignUpForm;
