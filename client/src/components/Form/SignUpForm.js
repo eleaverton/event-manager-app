@@ -3,7 +3,7 @@ import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
 
-class SignUpForm extends Component {
+export class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,17 +61,8 @@ class SignUpForm extends Component {
       .then(response => console.log(response))
       .catch(err => console.log(err));
 
-	    const formPayload = {
-	      firstName: this.state.firstName,
-	      lastName: this.state.lastName,
-	      dateOfBirth: this.state.dateOfBirth,
-	      email: this.state.email,
-	      zip: this.state.zip,
-	      twitterHandle: this.state.twitterHandle
-	    };
-	    //create post request with right data path
-	    console.log('Send this in a POST request:', formPayload)
-	    this.handleClearForm(event);
+	    
+	this.handleClearForm(event);
 	};
 	handleClearForm(event) {
 	    event.preventDefault();
@@ -142,4 +133,4 @@ class SignUpForm extends Component {
 	}
 }
 
-export default SignUpForm;
+// export default SignUpForm;
