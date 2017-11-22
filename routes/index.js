@@ -2,7 +2,6 @@ const router = require("express").Router();
 var passport = require("passport");
 const path = require("path");
 const homeController = require("../controllers/homeController");
-// const authController = require("../controllers/authController");
 const authTutorialController = require("../controllers/authTutorialController");
 const apiController = require("../controllers/apiController");
 const eventController = require("../controllers/eventController");
@@ -19,6 +18,7 @@ router.route("/signup").post(authTutorialController.postSignup);
 router.route("/dashboard").get(authCheckMiddleware, apiController.getDashboard);
 
 //create API routes to event
+router.use("/api", authCheckMiddleware);
 router.route("/api/event").post(eventController.createNewEvent);
 
 
