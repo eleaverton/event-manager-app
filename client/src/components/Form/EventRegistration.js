@@ -58,6 +58,11 @@ export class EventRegistrationForm extends Component {
 										content={this.state.input1} />
 									</div>
 								))}
+
+								<input
+							        type="submit"
+							        className="btn btn-primary float-right"
+							        value="Submit"/>
 		  						
 
 		  					</form>

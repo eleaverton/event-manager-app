@@ -65,6 +65,8 @@ export class CreateEventForm extends Component {
 	      //this array will be used to populate the registration form for the event
 	      specificFields:this.state.specificFields,
 	      attendeeRegistration:this.state.attendeeRegistration
+	      //add in image
+	      //add in UserId
 	    };
 	    //create post request with right data path
 	    console.log('Send this in a POST request:', formPayload)

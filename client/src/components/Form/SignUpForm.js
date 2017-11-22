@@ -98,6 +98,12 @@ export class SignUpForm extends Component {
 							controlFunc={this.handleInputChange}
 							content={this.state.lastName} />
 						<SingleInput
+							inputType={'password'}
+							title={'Password'}
+							name={'password'}
+							controlFunc={this.handleInputChange}
+							content={this.state.password} />
+						<SingleInput
 							inputType={'date'}
 							title={'Birthday'}
 							name={'dateOfBirth'}
