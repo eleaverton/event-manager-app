@@ -68,10 +68,14 @@ export class SignUpForm extends Component {
 	};
 	render(){
 		return(
-			<div class="panel panel-default">
+			<div className="container">
+			<div className="panel panel-default">
+				<div className="panel-header form-header">
+					Sign Up Form
+				</div>
   				<div class="panel-body">
 					<form className="container" onSubmit={this.handleFormSubmit}>
-						<h4> Sign Up Form </h4>
+						
 						<SingleInput
 							inputType={'text'}
 							title={'First Name'}
@@ -114,6 +118,7 @@ export class SignUpForm extends Component {
 					        value="Submit"/>
 					</form>
 				</div>	
+			</div>
 			</div>	
 			)
 	}

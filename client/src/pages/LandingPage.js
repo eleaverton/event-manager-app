@@ -5,7 +5,8 @@ import Nav1 from "../components/Nav1";
 import HomeCarousel from "../components/HomeCarousel";
 import Footer from "../components/Footer";
 
-
+//eventBoxes will render based on a get API call
+//need to use map to render the boxes
 
 class App extends Component {
   render() {

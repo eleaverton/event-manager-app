@@ -1,3 +1,5 @@
 export * from "./SignUpForm";
 export * from "./CreateEventForm";
-//figure this out
+export * from "./EventRegistration";
+
+

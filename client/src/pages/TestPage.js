@@ -4,7 +4,7 @@ import HomeCarousel from "../components/HomeCarousel";
 import EventBox from "../components/EventBox";
 import ThisJumbotron from "../components/ThisJumbotron";
 import Footer from "../components/Footer";
-import {CreateEventForm} from "../components/Form";
+import {SignUpForm, CreateEventForm} from "../components/Form";
 
 
 class App extends Component {
@@ -15,7 +15,9 @@ class App extends Component {
 
         <ThisJumbotron />
         <p className="App-intro">some text here</p>
+        <SignUpForm />
         <CreateEventForm />
+        
         
 
         <Footer />
