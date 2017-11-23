@@ -7,6 +7,11 @@ import Col from '../../../node_modules/react-bootstrap/lib/Col';
 import CountDown from "../CountDown"
 import Map1 from "../Map1";
 import styles from "./ThisJumbotron.css";
+import RecentHashTags from "../RecentHashTags";
+import AddHashTagComment from "../AddHashTagComment";
+
+
+
 
 
 export default class ThisJumbotron extends React.Component {
@@ -45,6 +50,11 @@ export default class ThisJumbotron extends React.Component {
                 <p>Beautiful white flowers will transform the conservatory into a tropical wonderland! You won’t want to miss this unique reminder of spring.</p>
 
                 <p>Dandelions in December is included in your Cockrell Butterfly Center admission ticket.</p>
+                <RecentHashTags />
+                  <h1>OR</h1>
+                  <AddHashTagComment />
+                
+
             </Col>
             <Col md={4}>
               <h2>The Cockrell Butterfly Center is LocAted Inside HMNS at Herman Park
@@ -54,6 +64,7 @@ export default class ThisJumbotron extends React.Component {
               <p>(713) 639-4629</p>
               <Map1 />
             </Col>
+            
           </Row>
         </Grid>
       </div>
