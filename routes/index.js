@@ -18,9 +18,11 @@ router.route("/signup").post(authTutorialController.postSignup);
 router.route("/dashboard").get(authCheckMiddleware, apiController.getDashboard);
 
 //create API routes to event
-router.use("/api", authCheckMiddleware);
-router.route("/api/event").post(eventController.createNewEvent);
-
+// router.use("/api", authCheckMiddleware);
+router
+  .route("/api/event")
+  .get(eventController.getAllEvents)
+  .post(authCheckMiddleware, eventController.createNewEvent);
 
 //default to React app
 router.use(function(req, res) {
