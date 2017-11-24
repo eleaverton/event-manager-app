@@ -94,3 +94,12 @@ body {
   border-style:solid;
   border-color:#696969;
   }
+ 
+  .hoverTest{
+    
+  }
+
+  table{
+    border-collapse: separate;
+    border-spacing: 10px 50px;
+  }

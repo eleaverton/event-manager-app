@@ -8,7 +8,7 @@ const HomeCarousel = () => (
 
   <Carousel>
     <Carousel.Item>
-      <img width={900} height={500} alt="900x500" src="/assets/carousel.png" />
+      <img width={900} height={500} alt="900x500" src="https://static.pexels.com/photos/433452/pexels-photo-433452.jpeg" />
       <Carousel.Caption>
         <h4>First slide label</h4>
       </Carousel.Caption>
