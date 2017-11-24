@@ -83,7 +83,7 @@ export class SignUpForm extends Component {
 					Sign Up Form
 				</div>
   				<div class="panel-body">
-					<form className="container" onSubmit={this.handleFormSubmit}>
+					<form onSubmit={this.handleFormSubmit}>
 						
 						<SingleInput
 							inputType={'text'}
