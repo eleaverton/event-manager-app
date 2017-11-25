@@ -6,7 +6,7 @@ import Row from '../../../node_modules/react-bootstrap/lib/Row';
 import Col from '../../../node_modules/react-bootstrap/lib/Col';
 import CountDown from "../CountDown"
 import Map1 from "../Map1";
-import Nav1 from "../Nav1";
+// import Nav1 from "../Nav1";
 import styles from "./ThisJumbotron.css";
 import RecentHashTags from "../RecentHashTags";
 import AddHashTagComment from "../AddHashTagComment";
@@ -20,7 +20,7 @@ export default class ThisJumbotron extends React.Component {
     return (
       <div>
         <body className="abc">
-            <Nav1 className="Jnav" />           
+                     
           <Grid>
             <h1 className="JT">Dandelions in December</h1>
             <div>
