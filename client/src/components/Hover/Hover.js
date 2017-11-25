@@ -14,7 +14,7 @@ const tooltip = (
 const Hover = () => (
  	
     <OverlayTrigger placement="top" overlay={tooltip}>
-     <a HREF=""><Image className="Image" src="/images/winterjpg.jpg" rounded responsive /></a>
+     <a HREF="/event"><Image className="Image" src="/images/winterjpg.jpg" rounded responsive /></a>
     </OverlayTrigger>
 	    
 );

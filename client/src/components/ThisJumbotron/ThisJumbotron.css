@@ -1,11 +1,20 @@
 .abc{
     background: url("./assets/winterjpg.jpg") no-repeat center center; 
-    -webkit-background-size: 100% 150%;
-    -moz-background-size: 100% 150%;
-    -o-background-size: 100% 150%;
-    background-size: 100% 150%;
-    color: #D9F3FF;
-    -webkit-text-stroke: .25px white;
-   text-shadow:    
-       1% 1% 0 #000;
+   	height: 400px;
+    background-repeat:no-repeat;
+	background-size:cover;
+	background-position:center;
+}
+
+.JT {
+	 font-family: 'Muli', sans-serif;
+	font-weight: bolder !important;
+	color: white;
+	opacity: .8;
+   	text-shadow:
+   		2px 2px 0 #000,
+    	-1px -1px 0 #000,  
+    	1px -1px 0 #000,
+    	-1px 1px 0 #000,
+     	1px 1px 0 #000;
 }

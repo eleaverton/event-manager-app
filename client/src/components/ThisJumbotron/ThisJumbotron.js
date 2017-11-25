@@ -6,6 +6,7 @@ import Row from '../../../node_modules/react-bootstrap/lib/Row';
 import Col from '../../../node_modules/react-bootstrap/lib/Col';
 import CountDown from "../CountDown"
 import Map1 from "../Map1";
+import Nav1 from "../Nav1";
 import styles from "./ThisJumbotron.css";
 import RecentHashTags from "../RecentHashTags";
 import AddHashTagComment from "../AddHashTagComment";
@@ -18,9 +19,10 @@ export default class ThisJumbotron extends React.Component {
   render() {
     return (
       <div>
-        <Jumbotron className="abc">
+        <body className="abc">
+            <Nav1 className="Jnav" />           
           <Grid>
-            <h1>Dandelions in December</h1>
+            <h1 className="JT">Dandelions in December</h1>
             <div>
             <br></br>
             <br></br>
@@ -39,7 +41,7 @@ export default class ThisJumbotron extends React.Component {
           </Row>
           
           
-        </Jumbotron>
+        </body>
 
         <Grid>
           <Row>
@@ -51,8 +53,8 @@ export default class ThisJumbotron extends React.Component {
 
                 <p>Dandelions in December is included in your Cockrell Butterfly Center admission ticket.</p>
                 <RecentHashTags />
-                  <h1>OR</h1>
-                  <AddHashTagComment />
+                  
+                 
                 
 
             </Col>

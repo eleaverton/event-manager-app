@@ -18,7 +18,7 @@ import Auth from "./modules/Auth";
 const App = () => (
   <Router>
     <div>
-      <Nav1 />
+      
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/event" component={EventProfile} />
       <Route exact path="/test" component={TestPage} />
