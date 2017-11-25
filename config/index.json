@@ -1,0 +1,4 @@
+{
+    "dbUri": "mongodb://localhost/eventmanagerapp",
+    "jwtSecret": "a secret phrasesssssss!!"
+}

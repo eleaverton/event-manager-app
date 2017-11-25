@@ -3,10 +3,11 @@ import React from "react";
 const google = window.google;
 
 
-const Cynthia_Woods_Mitchell_Pavilion = {
-  lat: 30.161593,
-  lng: -95.466217
+const Cockrell_Butterfly_Center = {
+  lat: 29.7221625,
+  lng: -95.3924962,
 };
+
 
 class Map1 extends React.Component {
   constructor() {
@@ -16,7 +17,7 @@ class Map1 extends React.Component {
   
   componentDidMount() {
     this.map = new google.maps.Map(this.refs.map, {
-      center: Cynthia_Woods_Mitchell_Pavilion,
+      center: Cockrell_Butterfly_Center,
       zoom: 14
     });
   }

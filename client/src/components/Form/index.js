@@ -1,2 +1,3 @@
-export default from "./SignUpForm";
+export * from "./SignUpForm";
+export * from "./CreateEventForm";
 //figure this out
