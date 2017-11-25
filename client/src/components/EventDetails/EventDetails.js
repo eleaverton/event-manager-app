@@ -3,6 +3,7 @@
 
 import React, { Component } from "react";
 import {EventRegistrationForm} from "../Form";
+import {CommentDisplay} from "../Comments";
 
 export class EventDetails extends Component{
 	constructor(props){
@@ -40,6 +41,7 @@ export class EventDetails extends Component{
 				<p>{this.state.description}</p>
 			</div>
 			<EventRegistrationForm specificFields={this.state.specificFields} />
+			<CommentDisplay eventId={this.props._id} />
 		</div>
 		)
 	}

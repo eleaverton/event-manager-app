@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
+import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
+
 
 export class SignUpForm extends Component {
   constructor(props) {
@@ -77,12 +79,11 @@ export class SignUpForm extends Component {
 	};
 	render(){
 		return(
-			<div className="container">
-			<div className="panel panel-default">
-				<div className="panel-header form-header">
-					Sign Up Form
-				</div>
-  				<div class="panel-body">
+			<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+        		<Modal.Header closeButton>
+          			<Modal.Title id="contained-modal-title-sm">Sign Up</Modal.Title>
+        		</Modal.Header>
+        		<Modal.Body>
 					<form onSubmit={this.handleFormSubmit}>
 						
 						<SingleInput
@@ -132,11 +133,11 @@ export class SignUpForm extends Component {
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
 					</form>
-				</div>	
-			</div>
-			</div>	
-			)
+				</Modal.Body>	
+			</Modal>
+				
+		);
 	}
 }
 
-// export default SignUpForm;
+

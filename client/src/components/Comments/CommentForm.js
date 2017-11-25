@@ -6,7 +6,7 @@ export class CommentForm extends Component {
 	constructor(props){
 		super(props);
 		this.state={
-			comment:''
+			description:''
 		};
 		this.handleInputChange=this.handleInputChange.bind(this);
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -24,8 +24,8 @@ export class CommentForm extends Component {
 
 	    const formPayload = {
 	    	//user: however we get the user id from authentication
-	      	comment:this.state.comment,
-	      	//event: need to store this info as a prop coming in
+	      	description:this.state.description,
+	      	event:this.props._id
 
 	      	
 	    };
@@ -36,7 +36,7 @@ export class CommentForm extends Component {
 	handleClearForm(event) {
 	    event.preventDefault();
 	    this.setState({
-	      	comment:''
+	      	description:''
 	
 	    });
 	};
@@ -48,7 +48,7 @@ export class CommentForm extends Component {
 			        title={'Comment'}
 			        rows={4}
 			        resize={false}
-			        content={this.state.comment}
+			        content={this.state.description}
 			        name={'comment'}
 			        controlFunc={this.handleInputChange} />
 			    <input

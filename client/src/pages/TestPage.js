@@ -12,6 +12,7 @@ import Grid from '../../node_modules/react-bootstrap/lib/Grid';
 import Hover from "../components/Hover";
 import Hover1 from "../components/Hover1";
 import ButtonToolbar from '../../node_modules/react-bootstrap/lib/ButtonToolbar';
+import {CommentDisplay} from "../components/Comments";
 
 
 
@@ -53,9 +54,14 @@ class App extends Component {
               <SignUpForm />
             </Col>
           </Row>
-           <Row>
+          <Row>
             <Col md={12}>
               <CreateEventForm />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <CommentDisplay />
             </Col>
           </Row>
           <Row>
