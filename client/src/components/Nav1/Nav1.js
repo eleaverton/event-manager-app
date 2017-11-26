@@ -12,7 +12,7 @@ class Nav1 extends Component {
      super(props);
      this.state={
        signInShow:false,
-       loginShow:false
+       loginShow:false,
      };
      this.signInOpen=this.signInOpen.bind(this);
      this.signInClose=this.signInClose.bind(this);

@@ -5,7 +5,7 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage2";
 import EventProfile from "./pages/EventProfile";
 import TestPage from "./pages/TestPage";
 import Nav1 from "./components/Nav1";
