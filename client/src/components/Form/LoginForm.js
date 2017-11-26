@@ -3,6 +3,7 @@ import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
 import Auth from "../../modules/Auth";
+import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class LoginForm extends Component {
       .then(response => {
         console.log(`Logged in successfully. Token: ${response.data.token}`)
         Auth.authenticateUser(response.data.token);
+        this.props.history.replace("/");
       })
       .catch(err => console.log(err));
 
@@ -75,6 +77,7 @@ class LoginForm extends Component {
               value="Submit"
             />
           </form>
+          <small>Already have an account? <Link to={'/signup'}>Sign Up</Link></small>
         </div>
       </div>
     );

@@ -2,6 +2,29 @@ import React, { Component } from "react";
 import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
+import { Link } from 'react-router-dom';
+import Auth from "../../modules/Auth";
+import { FileInput } from "./FileInput";
+const firebase = require("firebase");
+const jwt = require("jsonwebtoken");
+
+
+
+var config = {
+  apiKey: "AIzaSyBzQgBrwi4n--HUeIHap9BInecSmfGZwSA",
+  authDomain: "fantasyleague-932e1.firebaseapp.com",
+  databaseURL: "https://fantasyleague-932e1.firebaseio.com",
+  projectId: "fantasyleague-932e1",
+  storageBucket: "fantasyleague-932e1.appspot.com",
+  messagingSenderId: "300882421573"
+};
+
+firebase.initializeApp(config);
+const storage = firebase.storage()
+const storageRef = storage.ref();
+var file;
+var decode;
+
 
 export class SignUpForm extends Component {
   constructor(props) {
@@ -12,6 +35,7 @@ export class SignUpForm extends Component {
       dateOfBirth: "",
       email: "",
       zip: "",
+      image:"",
       twitterHandle: "",
       password: ""
     };
@@ -37,6 +61,10 @@ export class SignUpForm extends Component {
   // }
   handleInputChange(event) {
     const { name, value } = event.target;
+    if (event.target.files){
+      file = event.target.files[0];
+      this.setState({image:file});
+    }
     this.setState({
       [name]: value
     });
@@ -53,16 +81,30 @@ export class SignUpForm extends Component {
       twitterHandle: this.state.twitterHandle,
       password: this.state.password
     };
+
+
     //create post request with right data path
     console.log("Send this in a POST request:", formPayload);
-    const { firstName, email, password } = this.state;
+    const { firstName, email, password, dateOfBirth, lastName, zip, twitterHandle } = this.state;
     axios
-      .post("/signup", { email, password, name: firstName })
-      .then(response => console.log(response))
-      .catch(err => console.log(err));
+      .post("/signup", { email, password, name: firstName, lastName, dateOfBirth, zip, twitterHandle })
+      .then(response =>{
+        console.log(response);
+        Auth.authenticateUser(response.data.token);
 
-	    
-	this.handleClearForm(event);
+        jwt.verify(response.data.token, "a secret phrasesssssss!!", (err, decoded) => {
+          // the 401 code is for unauthorized status
+          decode = decoded.sub;
+          storageRef.child(decode + "/" + file.name).put(file).then(function(snapshot) {
+            console.log(snapshot);
+          });
+        });
+      }).catch(err => console.log(err));
+      console.log("hello");
+      setTimeout(()=> {
+        this.props.history.replace("/");
+      },1000);
+	    this.handleClearForm(event);
 	};
 	handleClearForm(event) {
 	    event.preventDefault();
@@ -71,6 +113,7 @@ export class SignUpForm extends Component {
 			lastName:'',
 			dateOfBirth:'',
 			email:'',
+      password:'',
 			zip:'',
 			twitterHandle:''
 	    });
@@ -82,9 +125,9 @@ export class SignUpForm extends Component {
 				<div className="panel-header form-header">
 					Sign Up Form
 				</div>
-  				<div class="panel-body">
+  				<div className="panel-body">
 					<form className="container" onSubmit={this.handleFormSubmit}>
-						
+
 						<SingleInput
 							inputType={'text'}
 							title={'First Name'}
@@ -127,14 +170,21 @@ export class SignUpForm extends Component {
 							name={'twitterHandle'}
 							controlFunc={this.handleInputChange}
 							content={this.state.twitterHandle} />
+            <FileInput
+  							type={'file'}
+  							title={'Upload Image'}
+  							name={'image'}
+                value={this.state.image}
+                controlFunc={this.handleInputChange} />
 						<input
 					        type="submit"
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
 					</form>
-				</div>	
+          <small>Already have an account? <Link to={'/login'}>Log In</Link></small>
+				</div>
 			</div>
-			</div>	
+			</div>
 			)
 	}
 }

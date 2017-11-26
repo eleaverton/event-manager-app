@@ -5,6 +5,9 @@ import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
 import Navbar from "../../../node_modules/react-bootstrap/lib/Navbar";
 import NavDropdown from "../../../node_modules/react-bootstrap/lib/NavDropdown";
 import MenuItem from "../../../node_modules/react-bootstrap/lib/MenuItem";
+import { LinkContainer } from 'react-router-bootstrap';
+import LogoutButton from '../LogoutButton';
+import Auth from "../../modules/Auth";
 
 const Nav1 = () => (
   <Navbar inverse collapseOnSelect>
@@ -26,10 +29,18 @@ const Nav1 = () => (
           <MenuItem eventKey={3.3}>Separated link</MenuItem>
         </NavDropdown>
       </Nav>
+
       <Nav pullRight>
-        <NavItem eventKey={1} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
+        <LinkContainer to="/event">
+          <NavItem eventKey={4}>Create an Event</NavItem>
+        </LinkContainer>
+        {Auth.isUserAuthenticated() ? (
+        <LinkContainer to="/logout" onClick = {Auth.deauthenticateUser}>
+          <NavItem eventKey={5}>Log Out</NavItem>
+        </LinkContainer>):(
+        <LinkContainer to="/login">
+          <NavItem eventKey={6}>Log In</NavItem>
+        </LinkContainer>)}
       </Nav>
     </Navbar.Collapse>
   </Navbar>

@@ -13,6 +13,8 @@ class LogoutButton extends Component {
 
         console.log("logging user out");
         Auth.deauthenticateUser();
+        //this.props.history.replace("/");
+        console.log(this);
     }
 
     render() {
