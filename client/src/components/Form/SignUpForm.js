@@ -5,6 +5,9 @@ import "./Form.css";
 import { Link } from 'react-router-dom';
 import Auth from "../../modules/Auth";
 import { FileInput } from "./FileInput";
+import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
+
+
 const firebase = require("firebase");
 const jwt = require("jsonwebtoken");
 
@@ -24,6 +27,9 @@ const storage = firebase.storage()
 const storageRef = storage.ref();
 var file;
 var decode;
+
+
+
 
 
 export class SignUpForm extends Component {
@@ -102,6 +108,7 @@ export class SignUpForm extends Component {
       }).catch(err => console.log(err));
       console.log("hello");
       setTimeout(()=> {
+        console.log(this);
         this.props.history.replace("/");
       },1000);
 	    this.handleClearForm(event);
@@ -120,13 +127,15 @@ export class SignUpForm extends Component {
 	};
 	render(){
 		return(
-			<div className="container">
-			<div className="panel panel-default">
-				<div className="panel-header form-header">
-					Sign Up Form
-				</div>
-  				<div className="panel-body">
-					<form className="container" onSubmit={this.handleFormSubmit}>
+
+
+			<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+        		<Modal.Header closeButton>
+          			<Modal.Title id="contained-modal-title-sm">Sign Up</Modal.Title>
+        		</Modal.Header>
+        		<Modal.Body>
+					<form onSubmit={this.handleFormSubmit}>
+
 
 						<SingleInput
 							inputType={'text'}
@@ -180,13 +189,16 @@ export class SignUpForm extends Component {
 					        type="submit"
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
-					</form>
           <small>Already have an account? <Link to={'/login'}>Log In</Link></small>
-				</div>
-			</div>
-			</div>
-			)
+
+					</form>
+
+
+
+				</Modal.Body>
+			</Modal>
+
+		);
+
 	}
 }
-
-// export default SignUpForm;

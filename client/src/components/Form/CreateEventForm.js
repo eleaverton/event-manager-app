@@ -1,19 +1,23 @@
-import React, {Component} from 'react';  
+import React, {Component} from 'react'; 
+import axios from "axios"; 
 import {SingleInput} from './SingleInput'; 
 import {TextArea} from './TextArea';  
 import CheckboxOrRadioGroup from './CheckboxOrRadio';  
 import "./Form.css";
-
+import Auth from "../../modules/Auth";
 
 export class CreateEventForm extends Component {
 	constructor(props){
 		super(props);
 		this.state={
+			admin:'',
 			title:'',
-			date:'',
+			dateOfEvent:'',
 			time:'',
 			location:'',
 			description:'',
+			hashtag:'',
+			image:'',
 			newField:'',
 			specificFields:[],
 			attendeeRegistrationOptions:['One registration per attendee','One registration for multiple attendees'],
@@ -57,31 +61,43 @@ export class CreateEventForm extends Component {
 	    event.preventDefault();
 
 	    const formPayload = {
-	      title: this.state.title,
-	      date: this.state.date,
-	      time: this.state.time,
-	      location: this.state.location,
-	      description:this.state.description,
-	      //this array will be used to populate the registration form for the event
-	      specificFields:this.state.specificFields,
-	      attendeeRegistration:this.state.attendeeRegistration
-	      //add in image
-	      //add in UserId
+	    	//admin: however we get the user id from authentication
+	      	title: this.state.title,
+	      	dateOfEvent: this.state.date,
+	      	time: this.state.time,
+	      	location: this.state.location,
+	      	description:this.state.description,
+	      	hashtag:this.state.hashtag,
+	      	//this array will be used to populate the registration form for the event
+	      	specificFields:this.state.specificFields,
+	      	attendeeRegistration:this.state.attendeeRegistration
+	      	//add in image path to Firebase and Firebase link to image:this.state.image
+	      	
 	    };
 	    //create post request with right data path
 	    console.log('Send this in a POST request:', formPayload)
+	    const authToken = Auth.getToken();
+	    const headers = { Authorization: authToken}
+	    axios
+	    	.post("/api/events", formPayload, {headers:headers})
+	    	.then(response => console.log(response))
+	    	.catch(err => console.log(err));
+
 	    this.handleClearForm(event);
 	};
 	handleClearForm(event) {
 	    event.preventDefault();
 	    this.setState({
 	      	title:'',
-			date:'',
+			dateOfEvent:'',
 			time:'',
 			location:'',
 			description:'',
+			hashtag:'',
+			image:'',
 			newField:'',
-			specificFields:[]
+			specificFields:[], 
+
 			
 	    });
 	};
@@ -119,9 +135,9 @@ export class CreateEventForm extends Component {
 						<SingleInput
 							inputType={'date'}
 							title={'Event Date'}
-							name={'date'}
+							name={'dateOfEvent'}
 							controlFunc={this.handleInputChange}
-							content={this.state.date} />
+							content={this.state.dateOfEvent} />
 						<SingleInput
 							inputType={'time'}
 							title={'Event Time'}
@@ -141,6 +157,24 @@ export class CreateEventForm extends Component {
 					        content={this.state.description}
 					        name={'description'}
 					        controlFunc={this.handleInputChange} />
+					     <SingleInput
+							inputType={'text'}
+							title={'Location'}
+							name={'location'}
+							controlFunc={this.handleInputChange}
+							content={this.state.location} />
+						<SingleInput
+							inputType={'text'}
+							title={'Event Hashtag'}
+							name={'hashtag'}
+							controlFunc={this.handleInputChange}
+							content={this.state.hashtag} />
+					    <SingleInput
+							inputType={'file'}
+							title={'Event Image'}
+							name={'image'}
+							controlFunc={this.handleInputChange}
+							content={this.state.image} />
 					    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
 					    {this.state.specificFields.map((specificField, idx) => (
 				          <div>

@@ -2,15 +2,9 @@ body {
     color: black;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-}
+    font-family: 'Muli', sans-serif;
+    font-weight: 900;
 
-h4{
-    color: black;
-    background-color: lime; 
-    padding: 30px;
-    margin-bottom: -50px;
-    font-size: 5rem;
 }
 
 .App {
@@ -47,9 +41,6 @@ h4{
 }
 
 
-
-
-
 .carousel {
     height: 500px;
     margin-bottom: 60px;
@@ -78,14 +69,5 @@ h4{
     height: 500px;
 }
 
-#statBox {
-    margin-top: -150px;
-    margin-bottom: 30px;
-    background-color: lime;
-    height: 150px;
-}
 
-.carousel-indicators {
-    visibility: hidden;
-}
 

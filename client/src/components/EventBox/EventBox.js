@@ -1,23 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
 
 
-const EventBox = () => (
- <div>
+
+class EventBox extends Component {
+    constructor(props){
+    super(props);
+  };
+
+  render(){
+    return(
 
         <div className="col-sm-6 col-md-4">
             <div className="thumbnail">
                 <img src="/images/event.jpg" alt="..." />
                 <div className="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>Text describing the event goes here.</p>
-                    <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#" className="btn btn-default" role="button">Button</a></p>
+                    <h3>{this.props.title}</h3>
+                    <p>{this.props.description}</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> </p>
                 </div>
             </div>
         </div>
+    )
+  }
 
+}
 
-</div>
-);
 
 
 export default EventBox;

@@ -15,7 +15,7 @@ module.exports = {
     })
       .then(event => {
         return User.findOneAndUpdate(
-          {},
+          {_id:req.user},
           { $push: { eventOrganized: event._id } },
           { new: true }
         );
@@ -23,5 +23,17 @@ module.exports = {
       .then(user => {
         res.json(req.body);
       });
+  },
+  getAllEvents: (req, res) => {
+    Event.find({})
+      .populate("organizer")
+      .then(events => res.json(events))
+    // .then(events => res.json(events));
+  },
+  getOneEvent: (req, res) => {
+    const eventId = req.params.id
+    Event.find({ id: eventId })
+      .populate(organizer)
+      .then(event => res.json(event));
   }
 };
