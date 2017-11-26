@@ -6,7 +6,6 @@ import "./HomeCarousel.css";
 // import Nav1 from "../Nav1";
 
 const HomeCarousel = () => (
-
   <Carousel>
     <Carousel.Item>
      <Carousel.Caption>
