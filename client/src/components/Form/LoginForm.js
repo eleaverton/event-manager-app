@@ -3,8 +3,9 @@ import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
 import Auth from "../../modules/Auth";
+import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,10 +52,12 @@ class LoginForm extends Component {
   }
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-body">
-          <form className="container" onSubmit={this.handleFormSubmit}>
-            <h4> Login Form </h4>
+      <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+        <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-sm">Log In</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={this.handleFormSubmit}>
             <SingleInput
               inputType={"email"}
               title={"Email"}
@@ -75,10 +78,10 @@ class LoginForm extends Component {
               value="Submit"
             />
           </form>
-        </div>
-      </div>
+        </Modal.Body>
+      </Modal>
+        
     );
   }
 }
 
-export default LoginForm;

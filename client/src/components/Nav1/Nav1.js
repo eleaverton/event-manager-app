@@ -5,34 +5,27 @@ import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
 import Navbar from "../../../node_modules/react-bootstrap/lib/Navbar";
 import NavDropdown from "../../../node_modules/react-bootstrap/lib/NavDropdown";
 import MenuItem from "../../../node_modules/react-bootstrap/lib/MenuItem";
+import Button from "../../../node_modules/react-bootstrap/lib/Button";
 
 const Nav1 = () => (
-  <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
+  <div>
+  <Navbar className="nav2" collapseOnSelect navbarStaticTop>
+    
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        <a className="logoText" href="#"><h3 className="navT"> Eventster</h3></a>
       </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
+      <Navbar.Toggle className="navTog"/>
+    
     <Navbar.Collapse>
-      <Nav>
-        <NavItem eventKey={1} href="#">Link</NavItem>
-        <NavItem eventKey={2} href="#">Link</NavItem>
-        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-          <MenuItem eventKey={3.1}>Action</MenuItem>
-          <MenuItem eventKey={3.2}>Another action</MenuItem>
-          <MenuItem eventKey={3.3}>Something else here</MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey={3.3}>Separated link</MenuItem>
-        </NavDropdown>
-      </Nav>
+    
       <Nav pullRight>
-        <NavItem eventKey={1} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
+        <Button className="button" bsStyle="custom" eventKey={1} href="/login"><span className="navItem">Sign In</span></Button>
+        <Button className="button" bsStyle="custom" eventKey={2} href="/"><span className="navItem">Home</span></Button>
+        <Button className="button" bsStyle="custom" eventKey={1} href="#"><span className="navItem">Create Event</span></Button>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
+  </div>
 );
 
 export default Nav1;

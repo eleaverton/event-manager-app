@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const Comment = require("./comment");
+const Event = require("./event");
 
 // define the User model schema
 const UserSchema = new mongoose.Schema({
@@ -8,7 +10,10 @@ const UserSchema = new mongoose.Schema({
     index: { unique: true }
   },
   password: String,
-  name: String
+  name: String,
+  eventRegistered: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+  eventOrganized: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
 });
 
 /**

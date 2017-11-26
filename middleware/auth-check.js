@@ -29,7 +29,9 @@ module.exports = (req, res, next) => {
         console.log("User error");
         return res.status(401).end();
       }
-
+      
+      //pass the user id and allow the function to access it via req.user
+      req.user = user._id;
       return next();
     });
   });

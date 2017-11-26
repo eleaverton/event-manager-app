@@ -9,11 +9,14 @@ export class CreateEventForm extends Component {
 	constructor(props){
 		super(props);
 		this.state={
+			admin:'',
 			title:'',
 			date:'',
 			time:'',
 			location:'',
 			description:'',
+			hashtag:'',
+			image:'',
 			newField:'',
 			specificFields:[],
 			attendeeRegistrationOptions:['One registration per attendee','One registration for multiple attendees'],
@@ -57,14 +60,18 @@ export class CreateEventForm extends Component {
 	    event.preventDefault();
 
 	    const formPayload = {
-	      title: this.state.title,
-	      date: this.state.date,
-	      time: this.state.time,
-	      location: this.state.location,
-	      description:this.state.description,
-	      //this array will be used to populate the registration form for the event
-	      specificFields:this.state.specificFields,
-	      attendeeRegistration:this.state.attendeeRegistration
+	    	//admin: however we get the user id from authentication
+	      	title: this.state.title,
+	      	date: this.state.date,
+	      	time: this.state.time,
+	      	location: this.state.location,
+	      	description:this.state.description,
+	      	hashtag:this.state.hashtag,
+	      	//this array will be used to populate the registration form for the event
+	      	specificFields:this.state.specificFields,
+	      	attendeeRegistration:this.state.attendeeRegistration
+	      	//add in image path to Firebase and Firebase link to image:this.state.image
+	      	
 	    };
 	    //create post request with right data path
 	    console.log('Send this in a POST request:', formPayload)
@@ -75,11 +82,15 @@ export class CreateEventForm extends Component {
 	    this.setState({
 	      	title:'',
 			date:'',
+			password:'',
 			time:'',
 			location:'',
 			description:'',
+			hashtag:'',
+			image:'',
 			newField:'',
-			specificFields:[]
+			specificFields:[], 
+
 			
 	    });
 	};
@@ -98,17 +109,8 @@ export class CreateEventForm extends Component {
     this.setState({ specificFields: newFields });
   	}
 
-	// add(){
-	// 	const createdFields = this.state.createdFields.concat(DocumentInput);
- //    	this.setState({ createdFields });
- //    	this.setState(specificFields: this.state.specificFields.concat)
- //    	console.log(this.state.createdFields);
-
-	// }
 	render(){
-		// const createdFields = this.state.createdFields.map((Element, index) => {
-  //     		return <Element key={ index } index={ index } />
-  //   	});
+
 		return(
 			<div className="container">
 			<div className="panel panel-default">
@@ -148,6 +150,24 @@ export class CreateEventForm extends Component {
 					        content={this.state.description}
 					        name={'description'}
 					        controlFunc={this.handleInputChange} />
+					     <SingleInput
+							inputType={'text'}
+							title={'Location'}
+							name={'location'}
+							controlFunc={this.handleInputChange}
+							content={this.state.location} />
+						<SingleInput
+							inputType={'text'}
+							title={'Event Hashtag'}
+							name={'hashtag'}
+							controlFunc={this.handleInputChange}
+							content={this.state.hashtag} />
+					    <SingleInput
+							inputType={'file'}
+							title={'Event Image'}
+							name={'image'}
+							controlFunc={this.handleInputChange}
+							content={this.state.image} />
 					    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
 					    {this.state.specificFields.map((specificField, idx) => (
 				          <div>

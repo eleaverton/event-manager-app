@@ -13,11 +13,13 @@
   "dependencies": {
     "axios": "^0.17.0",
     "express": "^4.15.4",
+    "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",
     "react-countdowntimer": "^0.1.8",
     "react-dom": "^16.1.1",
+    "react-google-maps": "^9.2.2",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "react-zoomify": "^1.0.9",

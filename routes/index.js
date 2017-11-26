@@ -2,9 +2,9 @@ const router = require("express").Router();
 var passport = require("passport");
 const path = require("path");
 const homeController = require("../controllers/homeController");
-// const authController = require("../controllers/authController");
 const authTutorialController = require("../controllers/authTutorialController");
 const apiController = require("../controllers/apiController");
+const eventController = require("../controllers/eventController");
 
 const authCheckMiddleware = require("../middleware/auth-check");
 
@@ -16,6 +16,13 @@ router.route("/signup").post(authTutorialController.postSignup);
 
 //test authorization routes
 router.route("/dashboard").get(authCheckMiddleware, apiController.getDashboard);
+
+//create API routes to event
+// router.use("/api", authCheckMiddleware);
+router
+  .route("/api/event")
+  .get(eventController.getAllEvents)
+  .post(authCheckMiddleware, eventController.createNewEvent);
 
 //default to React app
 router.use(function(req, res) {
