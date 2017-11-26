@@ -32,7 +32,7 @@ module.exports = {
   },
   getOneEvent: (req, res) => {
     const eventId = req.params.id
-    Event.find({ id: eventId })
+    Event.find({ _id: eventId })
       .populate(organizer)
       .then(event => res.json(event));
   }
