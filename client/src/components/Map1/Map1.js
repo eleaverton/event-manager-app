@@ -4,6 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 const google = window.google;
 
+
 const NewMap = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
@@ -25,9 +26,9 @@ const NewMap = compose(
   <GoogleMap
     defaultZoom={14}
     defaultCenter={props.center}
-   
+
   >
-   
+
     <Marker
       position={{ lat: 29.7221625, lng: -95.3924962 }}
       onClick={props.onToggleOpen}

@@ -9,7 +9,7 @@ class TestAuthentication extends Component {
         if(Auth.isUserAuthenticated()) {
             return (
                 <div>
-                    <div>Secret Message - You're logged in</div>
+                    <div>Secret Message - Youre logged in</div>
                     <LogoutButton/>
                 </div>
             );

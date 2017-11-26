@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 
 
+
 class EventBox extends Component {
     constructor(props){
     super(props);
   };
 
   render(){
-    return( 
+    return(
+
         <div className="col-sm-6 col-md-4">
             <div className="thumbnail">
                 <img src="/images/event.jpg" alt="..." />
@@ -17,11 +19,12 @@ class EventBox extends Component {
                     <p><a href="#" class="btn btn-primary" role="button">Button</a> </p>
                 </div>
             </div>
-        </div> 
+        </div>
     )
   }
 
 }
+
 
 
 export default EventBox;

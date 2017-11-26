@@ -1,7 +1,7 @@
-import React, {Component} from 'react';  
-import {SingleInput} from './SingleInput'; 
-import {TextArea} from './TextArea'; 
-import CheckboxOrRadioGroup from './CheckboxOrRadio';  
+import React, {Component} from 'react';
+import {SingleInput} from './SingleInput';
+import {TextArea} from './TextArea';
+import CheckboxOrRadioGroup from './CheckboxOrRadio';
 import "./Form.css";
 
 //This component will use a get API call to get the user info
@@ -17,8 +17,8 @@ export class EventRegistrationForm extends Component {
     	this.handleInputChange=this.handleInputChange.bind(this);
 		// this.loadSpecificFields=this.loadSpecificFields.bind(this);
 		}
-	
-		
+
+
 		//define functions here
 		handleInputChange(event){
 	    	const { name, value } = event.target;
@@ -47,9 +47,9 @@ export class EventRegistrationForm extends Component {
 		  				<div className="panel-body">
 		  					<form>
 								<p>We can autopopulate base user info here if needed </p>
-		  						
+
 								{this.props.specificFields.map((specificField,idx) =>(
-									<div>
+									<div key= {idx}>
 										<SingleInput
 										inputType={'text'}
 										title={specificField.newField}
@@ -63,7 +63,7 @@ export class EventRegistrationForm extends Component {
 							        type="submit"
 							        className="btn btn-primary float-right"
 							        value="Submit"/>
-		  						
+
 
 		  					</form>
 						</div>
@@ -72,6 +72,3 @@ export class EventRegistrationForm extends Component {
 				)
 		}
 	}
-
-
-

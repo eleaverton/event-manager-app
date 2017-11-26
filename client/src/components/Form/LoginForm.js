@@ -3,7 +3,9 @@ import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
 import Auth from "../../modules/Auth";
+import { Link } from 'react-router-dom';
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
+
 
 export class LoginForm extends Component {
   constructor(props) {
@@ -38,6 +40,7 @@ export class LoginForm extends Component {
       .then(response => {
         console.log(`Logged in successfully. Token: ${response.data.token}`)
         Auth.authenticateUser(response.data.token);
+        this.props.history.replace("/");
       })
       .catch(err => console.log(err));
 
@@ -77,11 +80,11 @@ export class LoginForm extends Component {
               className="btn btn-primary float-right"
               value="Submit"
             />
+            <small>Already have an account? <Link to={'/signup'}>Sign Up</Link></small>
           </form>
+
         </Modal.Body>
       </Modal>
-        
     );
   }
 }
-

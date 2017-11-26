@@ -24,6 +24,7 @@ const App = () => (
       <Route exact path="/test" component={TestPage} />
       <Route exact path="/signup" component={SignUpForm} />
       <Route exact path="/login" component={LoginForm} />
+      <Route exact path="/logout" component={LoginForm} />
       <Route exact path="/testauth" component={TestAuthentication} />
     </div>
   </Router>

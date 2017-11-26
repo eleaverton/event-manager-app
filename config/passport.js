@@ -92,19 +92,29 @@ module.exports = function(passport) {
         passReqToCallback: true
       },
       (req, email, password, done) => {
+
         const userData = {
           email: email.trim(),
           password: password.trim(),
           name: req.body.name.trim()
         };
 
-        const newUser = new User(userData);
-        newUser.save(err => {
+        const newUser = new User(req.body);
+        newUser.save((err,user) => {
           if (err) {
             return done(err);
           }
 
-          return done(null);
+          const payload = {
+            sub: user._id
+          };
+
+          // create a token string
+          const token = jwt.sign(payload, config.jwtSecret);
+          const data = {
+            name: user.name
+          };
+          return done(null,token,data);
         });
       }
     )
