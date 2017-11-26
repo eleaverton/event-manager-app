@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
@@ -13,7 +14,7 @@ const jwt = require("jsonwebtoken");
 
 
 
-var config = {
+const config = {
   apiKey: "AIzaSyBzQgBrwi4n--HUeIHap9BInecSmfGZwSA",
   authDomain: "fantasyleague-932e1.firebaseapp.com",
   databaseURL: "https://fantasyleague-932e1.firebaseio.com",
@@ -32,9 +33,9 @@ var decode;
 
 
 
-export class SignUpForm extends Component {
-  constructor(props) {
-    super(props);
+export class SignUpForm extends React.Component {
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       firstName: "",
       lastName: "",
@@ -109,8 +110,8 @@ export class SignUpForm extends Component {
       console.log("hello");
       setTimeout(()=> {
         console.log(this);
-        this.props.history.replace("/");
-      },1000);
+        this.context.router.history.replace("/");
+      },2000);
 	    this.handleClearForm(event);
 	};
 	handleClearForm(event) {
@@ -189,7 +190,7 @@ export class SignUpForm extends Component {
 					        type="submit"
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
-          <small>Already have an account? <Link to={'/login'}>Log In</Link></small>
+          // <small>Already have an account? <Link to={'/login'}>Log In</Link></small>
 
 					</form>
 
@@ -202,3 +203,7 @@ export class SignUpForm extends Component {
 
 	}
 }
+
+SignUpForm.contextTypes = {
+  router: PropTypes.object.isRequired
+};

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavbarBrand from "../../../node_modules/react-bootstrap/lib/NavbarBrand";
 import NavItem from "../../../node_modules/react-bootstrap/lib/NavItem";
+import Image from "../../../node_modules/react-bootstrap/lib/Image";
 import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
 import Navbar from "../../../node_modules/react-bootstrap/lib/Navbar";
 import NavDropdown from "../../../node_modules/react-bootstrap/lib/NavDropdown";
@@ -46,7 +47,7 @@ import Auth from "../../modules/Auth";
 //     </Navbar.Collapse>
 //   </Navbar>
 // );
-// =======
+// ======
 
 
 class Nav1 extends Component {
@@ -61,6 +62,11 @@ class Nav1 extends Component {
      this.loginOpen=this.loginOpen.bind(this);
      this.loginClose=this.loginClose.bind(this);
    }
+
+
+
+
+
 
 
    signInClose() {
@@ -101,15 +107,14 @@ class Nav1 extends Component {
            </Nav>
            <Nav pullRight>
              <NavItem eventKey={1} href="#">Link Right</NavItem>
-             <NavItem eventKey={2} onClick={this.loginOpen}>Log In</NavItem>
-             <NavItem eventKey={3} onClick={this.signInOpen}>Sign Up</NavItem>
              {Auth.isUserAuthenticated() ? (
              <LinkContainer to="/logout" onClick = {Auth.deauthenticateUser}>
-               <NavItem eventKey={5}>Log Out</NavItem>
+               <NavItem eventKey={5}>Log Out </NavItem>
              </LinkContainer>):(
-             <LinkContainer to="/login">
-               <NavItem eventKey={6}>Log In</NavItem>
-             </LinkContainer>)}
+             <Nav>
+               <NavItem eventKey={2} onClick={this.loginOpen}>Log In</NavItem>
+               <NavItem eventKey={3} onClick={this.signInOpen}>Sign Up</NavItem>
+             </Nav>)}
            </Nav>
          </Navbar.Collapse>
          <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} />
