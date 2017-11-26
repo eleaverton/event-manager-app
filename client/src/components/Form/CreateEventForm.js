@@ -1,9 +1,10 @@
-import React, {Component} from 'react';  
+import React, {Component} from 'react'; 
+import axios from "axios"; 
 import {SingleInput} from './SingleInput'; 
 import {TextArea} from './TextArea';  
 import CheckboxOrRadioGroup from './CheckboxOrRadio';  
 import "./Form.css";
-
+import Auth from "../../modules/Auth";
 
 export class CreateEventForm extends Component {
 	constructor(props){
@@ -11,7 +12,7 @@ export class CreateEventForm extends Component {
 		this.state={
 			admin:'',
 			title:'',
-			date:'',
+			dateOfEvent:'',
 			time:'',
 			location:'',
 			description:'',
@@ -62,7 +63,7 @@ export class CreateEventForm extends Component {
 	    const formPayload = {
 	    	//admin: however we get the user id from authentication
 	      	title: this.state.title,
-	      	date: this.state.date,
+	      	dateOfEvent: this.state.date,
 	      	time: this.state.time,
 	      	location: this.state.location,
 	      	description:this.state.description,
@@ -75,14 +76,20 @@ export class CreateEventForm extends Component {
 	    };
 	    //create post request with right data path
 	    console.log('Send this in a POST request:', formPayload)
+	    const authToken = Auth.getToken();
+	    const headers = { Authorization: authToken}
+	    axios
+	    	.post("/api/events", formPayload, {headers:headers})
+	    	.then(response => console.log(response))
+	    	.catch(err => console.log(err));
+
 	    this.handleClearForm(event);
 	};
 	handleClearForm(event) {
 	    event.preventDefault();
 	    this.setState({
 	      	title:'',
-			date:'',
-			password:'',
+			dateOfEvent:'',
 			time:'',
 			location:'',
 			description:'',
@@ -128,9 +135,9 @@ export class CreateEventForm extends Component {
 						<SingleInput
 							inputType={'date'}
 							title={'Event Date'}
-							name={'date'}
+							name={'dateOfEvent'}
 							controlFunc={this.handleInputChange}
-							content={this.state.date} />
+							content={this.state.dateOfEvent} />
 						<SingleInput
 							inputType={'time'}
 							title={'Event Time'}
