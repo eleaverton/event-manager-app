@@ -31,9 +31,15 @@ module.exports = {
     // .then(events => res.json(events));
   },
   getOneEvent: (req, res) => {
-    const eventId = req.params.id
-    Event.find({ id: eventId })
-      .populate(organizer)
+    const eventId = req.params.eventId
+    Event.find({ _id: eventId })
+      .populate("organizer")
+      .then(event => res.json(event));
+  },
+  findEvents: (req,res) => {
+    const title = req.params.searchTitle;
+    Event.find({ title: title })
+      .populate("organizer")
       .then(event => res.json(event));
   }
 };
