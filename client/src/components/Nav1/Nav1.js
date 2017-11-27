@@ -117,8 +117,8 @@ class Nav1 extends Component {
              </Nav>)}
            </Nav>
          </Navbar.Collapse>
-         <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} />
-         <LoginForm show = {this.state.loginShow} onHide={this.loginClose} />
+         <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
+         <LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
        </Navbar>
 
      )

@@ -46,6 +46,7 @@ export class LoginForm extends Component {
       .catch(err => console.log(err));
 
     this.handleClearForm(event);
+    this.props.closeModal();
   }
   handleClearForm(event) {
     event.preventDefault();

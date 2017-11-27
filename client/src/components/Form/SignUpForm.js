@@ -113,6 +113,7 @@ export class SignUpForm extends React.Component {
         this.context.router.history.replace("/");
       },2000);
 	    this.handleClearForm(event);
+	    this.props.closeModal();
 	};
 	handleClearForm(event) {
 	    event.preventDefault();
