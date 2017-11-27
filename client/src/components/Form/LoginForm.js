@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { SingleInput } from "./SingleInput";
 import "./Form.css";
@@ -40,7 +41,7 @@ export class LoginForm extends Component {
       .then(response => {
         console.log(`Logged in successfully. Token: ${response.data.token}`)
         Auth.authenticateUser(response.data.token);
-        this.props.history.replace("/");
+        this.context.router.history.replace("/");
       })
       .catch(err => console.log(err));
 
@@ -80,7 +81,7 @@ export class LoginForm extends Component {
               className="btn btn-primary float-right"
               value="Submit"
             />
-            <small>Already have an account? <Link to={'/signup'}>Sign Up</Link></small>
+            // <small>Already have an account? <Link to={'/signup'}>Sign Up</Link></small>
           </form>
 
         </Modal.Body>
@@ -88,3 +89,7 @@ export class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.contextTypes = {
+  router: PropTypes.object.isRequired
+};
