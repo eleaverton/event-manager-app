@@ -5,6 +5,7 @@ import {TextArea} from './TextArea';
 import CheckboxOrRadioGroup from './CheckboxOrRadio';  
 import "./Form.css";
 import Auth from "../../modules/Auth";
+import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
 
 export class CreateEventForm extends Component {
 	constructor(props){
@@ -84,6 +85,7 @@ export class CreateEventForm extends Component {
 	    	.catch(err => console.log(err));
 
 	    this.handleClearForm(event);
+	    this.props.closeModal();
 	};
 	handleClearForm(event) {
 	    event.preventDefault();
@@ -119,12 +121,11 @@ export class CreateEventForm extends Component {
 	render(){
 
 		return(
-			<div className="container">
-			<div className="panel panel-default">
-				<div className="panel-header form-header">
-					Create Event
-				</div>
-  				<div className="panel-body">
+			<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+        		<Modal.Header closeButton>
+          			<Modal.Title id="contained-modal-title-sm">Create Event</Modal.Title>
+        		</Modal.Header>
+        		<Modal.Body>
 					<form onSubmit={this.handleFormSubmit}>
 						<SingleInput
 							inputType={'text'}
@@ -206,9 +207,8 @@ export class CreateEventForm extends Component {
 					        value="Submit"/>
 						
 					</form>
-				</div>
-			</div>
-			</div>
+				</Modal.Body>
+			</Modal>
 			)
 	}
 }
