@@ -21,6 +21,7 @@ var decode;
 
 
 
+
 export class CreateEventForm extends Component {
 	constructor(props){
 		super(props);
@@ -129,11 +130,15 @@ export class CreateEventForm extends Component {
 						});
 					});
 			}).catch(err => console.log(err));
+			console.log(this);
 			setTimeout(()=> {
-      	this.context.router.history.replace("/");
+      	//this.context.router.history.replace("/");
+				window.location.reload();
       },1000);
 	    this.handleClearForm(event);
-	};
+	    this.props.closeModal();
+	}
+
 	handleClearForm(event) {
 	    event.preventDefault();
 	    this.setState({
@@ -149,7 +154,7 @@ export class CreateEventForm extends Component {
 
 
 	    });
-	};
+	}
 
 	handleAddSpecificField = () => {
 	    this.setState({
@@ -171,12 +176,13 @@ export class CreateEventForm extends Component {
 
 
 
-		<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
 			<Modal.Header closeButton>
 			<Modal.Title id="contained-modal-title-sm">Create an Event</Modal.Title>
 			</Modal.Header>
-		<Modal.Body>
+<Modal.Body>
 		{Auth.isUserAuthenticated() ? (
+
 					<form onSubmit={this.handleFormSubmit}>
 						<SingleInput
 							inputType={'text'}
@@ -251,6 +257,7 @@ export class CreateEventForm extends Component {
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
 					</form>
+
 						):(
 					<div className="container">
 						<Nav>
@@ -269,7 +276,6 @@ export class CreateEventForm extends Component {
 ) //return
 	} //render
 }; //class
-
 
 
 CreateEventForm.contextTypes = {
