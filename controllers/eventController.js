@@ -21,7 +21,7 @@ module.exports = {
         );
       })
       .then(user => {
-        res.json(req.body);
+        res.json(user);
       });
   },
   getAllEvents: (req, res) => {

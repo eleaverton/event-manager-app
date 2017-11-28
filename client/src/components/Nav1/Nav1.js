@@ -6,7 +6,7 @@ import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
 import Navbar from "../../../node_modules/react-bootstrap/lib/Navbar";
 import NavDropdown from "../../../node_modules/react-bootstrap/lib/NavDropdown";
 import MenuItem from "../../../node_modules/react-bootstrap/lib/MenuItem";
-import {SignUpForm, LoginForm} from  "../Form";
+import {SignUpForm, LoginForm, CreateEventForm} from  "../Form";
 import { LinkContainer } from 'react-router-bootstrap';
 import LogoutButton from '../LogoutButton';
 import Auth from "../../modules/Auth";
@@ -56,17 +56,15 @@ class Nav1 extends Component {
      this.state={
        signInShow:false,
        loginShow:false,
+       eventShow:false
      };
      this.signInOpen=this.signInOpen.bind(this);
      this.signInClose=this.signInClose.bind(this);
      this.loginOpen=this.loginOpen.bind(this);
      this.loginClose=this.loginClose.bind(this);
+     this.eventClose=this.eventClose.bind(this);
+     this.eventOpen=this.eventOpen.bind(this);
    }
-
-
-
-
-
 
 
    signInClose() {
@@ -80,6 +78,12 @@ class Nav1 extends Component {
    }
    loginOpen(){
      this.setState({loginShow:true});
+   }
+   eventClose() {
+     this.setState({eventShow:false});
+   }
+   eventOpen(){
+     this.setState({eventShow:true});
    }
 
    render(){
@@ -106,7 +110,9 @@ class Nav1 extends Component {
              </NavDropdown>
            </Nav>
            <Nav pullRight>
-             <NavItem eventKey={1} href="#">Link Right</NavItem>
+             <Nav>
+              <NavItem eventKey={1} onClick={this.eventOpen}>Create an Event</NavItem>
+             </Nav>
              {Auth.isUserAuthenticated() ? (
              <LinkContainer to="/logout" onClick = {Auth.deauthenticateUser}>
                <NavItem eventKey={5}>Log Out </NavItem>
@@ -119,6 +125,7 @@ class Nav1 extends Component {
          </Navbar.Collapse>
          <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
          <LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
+         <CreateEventForm show = {this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose}/>
        </Navbar>
 
      )
