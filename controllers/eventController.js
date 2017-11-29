@@ -41,5 +41,12 @@ module.exports = {
     Event.find({ title: new RegExp(title, "i") })
       .populate("organizer")
       .then(event => res.json(event));
+  },
+  registerUserToEvent: (req,res) => {
+    const eventId  = req.params.eventId;
+    const userId = req.user;
+    Event.update({_id:eventId}, {$push:{attendees:userId}});
+    User.update({_id:userId}, {$push:{eventsRegistered:eventId}});
+    console.log(`eventId: ${eventId} and userId =${userId}`);
   }
 };

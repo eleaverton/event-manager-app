@@ -14,8 +14,8 @@ const UserSchema = new mongoose.Schema({
   dateOfBirth:String,
   twitterHandle:String,
   zip: String,
-  eventRegistered: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-  eventOrganized: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+  eventsRegistered: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+  eventsOrganized: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
 });
 
