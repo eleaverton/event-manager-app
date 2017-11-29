@@ -24,16 +24,18 @@ router
   .get(eventController.getAllEvents)
   .post(authCheckMiddleware, eventController.createNewEvent);
 
-router
-  .route("/api/events/:eventId")
-  .get(eventController.getOneEvent) //get one event
-  .put(); // change details of one event
-//no delete route as we want to set status to cancel
+router.route("/api/events/search").get(eventController.findEvents);
 
 router
   .route("api/events/:eventId/register")
   .post() // register a user for an event
   .put(); // unregister a user for an event
+
+router
+  .route("/api/events/:eventId")
+  .get(eventController.getOneEvent) //get one event
+  .put(); // change details of one event
+//no delete route as we want to set status to cancel
 
 router.route("/api/users").get(); //get all users
 
@@ -45,9 +47,10 @@ router
 
 router.route("/api/events/:eventId/comment").post(); // create new comment
 
-router.route("/api/events/:eventId/comment/:commentId")
-.delete() // delete a comment
-.put() // edit a comment
+router
+  .route("/api/events/:eventId/comment/:commentId")
+  .delete() // delete a comment
+  .put(); // edit a comment
 
 //default to React app
 router.use(function(req, res) {
