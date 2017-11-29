@@ -5,6 +5,7 @@ import Nav1 from "../components/Nav1";
 import HomeCarousel from "../components/HomeCarousel";
 import Footer from "../components/Footer";
 import API from "../utils/API";
+import {SearchBox} from "../components/SearchBox";
 
 //eventBoxes will render based on a get API call
 //need to use map to render the boxes
@@ -30,28 +31,30 @@ class LandingPage extends Component {
   render() {
     
     return <div className="App">
-           <HomeCarousel />
-           <div />
+        <HomeCarousel />
+        <SearchBox />
+        <div />
         <div className="container">
           <div className="panel panel-default">
             <div className="panel-body">
               {this.state.events.length ? (
                 <div className="eventList">
                   {this.state.events.map(event => (
-                    <EventBox key={event._id} title={event.title} description={event.description}/>
-                      
+                    <EventBox
+                      key={event._id}
+                      title={event.title}
+                      description={event.description}
+                    />
                   ))}
                 </div>
-                ) : (
-                  <h5> No events yet - Be the first to add! </h5>
-                )}
-             
-
+              ) : (
+                <h5> No events yet - Be the first to add! </h5>
+              )}
             </div>
           </div>
         </div>
         <div>
-        <Footer />
+          <Footer />
         </div>
       </div>;
   }

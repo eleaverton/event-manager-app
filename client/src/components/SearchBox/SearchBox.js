@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
 
 
-export class SearchForm extends Component {
+export class SearchBox extends Component {
   constructor(props){
     super(props);
       //set the component's initial state
@@ -10,7 +10,7 @@ export class SearchForm extends Component {
       };
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
-      this.handleClearForm = this.handleClearForm.bind(this);
+    
   }
   
 
@@ -33,7 +33,7 @@ handleFormSubmit = event => {
   
 }
 
-}; //closes Form extends Component
+
 
 render(){
   return (
@@ -46,7 +46,7 @@ render(){
               <div className="form-group">
                  <input type="text" className="form-control" placeholder="Search" />
               </div>
-                <button type="submit" className="btn btn-default" onClick={props.handleFormSubmit}>
+                <button type="submit" className="btn btn-default" onClick={this.props.handleFormSubmit}>
                   Search
                 </button>
               </div>
@@ -55,3 +55,4 @@ render(){
 );
 
 }
+}; //closes Form extends Component
