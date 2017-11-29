@@ -65,7 +65,8 @@ export class EventRegistrationForm extends Component {
 										        value="Submit">
 										        Register
 										    </input>
-										</div>		
+										</div>	
+									))}	
 								    </div>
 								):(
 									<div>
