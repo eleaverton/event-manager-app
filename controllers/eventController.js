@@ -15,30 +15,30 @@ module.exports = {
     })
       .then(event => {
         return User.findOneAndUpdate(
-          {_id:req.user},
+          { _id: req.user },
           { $push: { eventOrganized: event._id } },
           { new: true }
         );
       })
       .then(user => {
-        res.json(req.body);
+        res.json(user);
       });
   },
   getAllEvents: (req, res) => {
     Event.find({})
       .populate("organizer")
-      .then(events => res.json(events))
+      .then(events => res.json(events));
     // .then(events => res.json(events));
   },
   getOneEvent: (req, res) => {
-    const eventId = req.params.eventId
+    const eventId = req.params.eventId;
     Event.find({ _id: eventId })
       .populate("organizer")
       .then(event => res.json(event));
   },
-  findEvents: (req,res) => {
-    const title = req.params.searchTitle;
-    Event.find({ title: title })
+  findEvents: (req, res) => {
+    const title = req.query.title;
+    Event.find({ title: new RegExp(title, "i") })
       .populate("organizer")
       .then(event => res.json(event));
   }

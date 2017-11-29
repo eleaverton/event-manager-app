@@ -107,11 +107,9 @@ export class SignUpForm extends React.Component {
           });
         });
       }).catch(err => console.log(err));
-      console.log("hello");
       setTimeout(()=> {
-        console.log(this);
         this.context.router.history.replace("/");
-      },2000);
+      },1000);
 	    this.handleClearForm(event);
 	    this.props.closeModal();
 	};

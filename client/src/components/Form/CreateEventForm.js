@@ -1,16 +1,34 @@
-import React, {Component} from 'react'; 
-import axios from "axios"; 
-import {SingleInput} from './SingleInput'; 
-import {TextArea} from './TextArea';  
-import CheckboxOrRadioGroup from './CheckboxOrRadio';  
+import React, {Component} from 'react';
+import axios from "axios";
+import {SingleInput} from './SingleInput';
+import {TextArea} from './TextArea';
+import CheckboxOrRadioGroup from './CheckboxOrRadio';
 import "./Form.css";
 import Auth from "../../modules/Auth";
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
+import PropTypes from 'prop-types';
+import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
+import NavItem from "../../../node_modules/react-bootstrap/lib/NavItem";
+import {SignUpForm, LoginForm} from  "../Form";
+
+
+const firebase = require("firebase");
+const jwt = require("jsonwebtoken");
+const storage = firebase.storage()
+const storageRef = storage.ref();
+var file;
+var decode;
+
+
+
 
 export class CreateEventForm extends Component {
 	constructor(props){
 		super(props);
 		this.state={
+			signInShow:false,
+			loginShow:false,
+			eventShow:false,
 			admin:'',
 			title:'',
 			dateOfEvent:'',
@@ -23,7 +41,7 @@ export class CreateEventForm extends Component {
 			specificFields:[],
 			attendeeRegistrationOptions:['One registration per attendee','One registration for multiple attendees'],
 			attendeeRegistration: []
-			
+
 		};
 		this.handleInputChange=this.handleInputChange.bind(this);
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -31,6 +49,24 @@ export class CreateEventForm extends Component {
     	this.handleAddSpecificField=this.handleAddSpecificField.bind(this);
     	this.handleFieldNameChange=this.handleFieldNameChange.bind(this);
     	this.handleRadioSelection=this.handleRadioSelection.bind(this);
+
+			this.signInOpen=this.signInOpen.bind(this);
+      this.signInClose=this.signInClose.bind(this);
+      this.loginOpen=this.loginOpen.bind(this);
+      this.loginClose=this.loginClose.bind(this);
+	}
+
+	signInClose() {
+		this.setState({signInShow:false});
+	}
+	signInOpen(){
+		this.setState({signInShow:true});
+	}
+	loginClose() {
+		this.setState({loginShow:false});
+	}
+	loginOpen(){
+		this.setState({loginShow:true});
 	}
 
 	//Need data path to not get error with fetch
@@ -43,12 +79,16 @@ export class CreateEventForm extends Component {
 	// 		date=data.date,
 	// 		time=data.time,
 	// 		location=data.location,
-	// 		
+	//
 	// 		});
 	// 	});
 	// }
 	handleInputChange(event){
     	const { name, value } = event.target;
+			if (event.target.files){
+	      file = event.target.files[0];
+	      this.setState({image:file});
+	    }
 	    this.setState({
 	      [name]: value
 	    });
@@ -73,7 +113,7 @@ export class CreateEventForm extends Component {
 	      	specificFields:this.state.specificFields,
 	      	attendeeRegistration:this.state.attendeeRegistration
 	      	//add in image path to Firebase and Firebase link to image:this.state.image
-	      	
+
 	    };
 	    //create post request with right data path
 	    console.log('Send this in a POST request:', formPayload)
@@ -81,12 +121,24 @@ export class CreateEventForm extends Component {
 	    const headers = { Authorization: authToken}
 	    axios
 	    	.post("/api/events", formPayload, {headers:headers})
-	    	.then(response => console.log(response))
-	    	.catch(err => console.log(err));
-
+	    	.then(response =>{ console.log(response)
+					jwt.verify(localStorage.getItem("token"), "a secret phrasesssssss!!", (err, decoded) => {
+						// the 401 code is for unauthorized status
+						decode = decoded.sub;
+						storageRef.child(decode + "/events/" + response.data.eventOrganized[response.data.eventOrganized.length-1] +"/"+file.name).put(file).then(function(snapshot) {
+							console.log(snapshot);
+						});
+					});
+			}).catch(err => console.log(err));
+			console.log(this);
+			setTimeout(()=> {
+      	//this.context.router.history.replace("/");
+				window.location.reload();
+      },1000);
 	    this.handleClearForm(event);
 	    this.props.closeModal();
-	};
+	}
+
 	handleClearForm(event) {
 	    event.preventDefault();
 	    this.setState({
@@ -98,11 +150,11 @@ export class CreateEventForm extends Component {
 			hashtag:'',
 			image:'',
 			newField:'',
-			specificFields:[], 
+			specificFields:[],
 
-			
+
 	    });
-	};
+	}
 
 	handleAddSpecificField = () => {
 	    this.setState({
@@ -121,11 +173,16 @@ export class CreateEventForm extends Component {
 	render(){
 
 		return(
-			<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
-        		<Modal.Header closeButton>
-          			<Modal.Title id="contained-modal-title-sm">Create Event</Modal.Title>
-        		</Modal.Header>
-        		<Modal.Body>
+
+
+
+<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+			<Modal.Header closeButton>
+			<Modal.Title id="contained-modal-title-sm">Create an Event</Modal.Title>
+			</Modal.Header>
+<Modal.Body>
+		{Auth.isUserAuthenticated() ? (
+
 					<form onSubmit={this.handleFormSubmit}>
 						<SingleInput
 							inputType={'text'}
@@ -158,12 +215,6 @@ export class CreateEventForm extends Component {
 					        content={this.state.description}
 					        name={'description'}
 					        controlFunc={this.handleInputChange} />
-					     <SingleInput
-							inputType={'text'}
-							title={'Location'}
-							name={'location'}
-							controlFunc={this.handleInputChange}
-							content={this.state.location} />
 						<SingleInput
 							inputType={'text'}
 							title={'Event Hashtag'}
@@ -178,7 +229,7 @@ export class CreateEventForm extends Component {
 							content={this.state.image} />
 					    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
 					    {this.state.specificFields.map((specificField, idx) => (
-				          <div>
+				          <div key = {idx}>
 				            <SingleInput
 				              inputType={'text'}
 				              placeholder={`New Field #${idx + 1}`}
@@ -198,17 +249,35 @@ export class CreateEventForm extends Component {
 						    options={this.state.attendeeRegistrationOptions}
 						    selectedOptions={this.state.attendeeRegistration} />
 
-					      
+
           				<br></br>
           				<br></br>
 					    <input
 					        type="submit"
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
-						
 					</form>
-				</Modal.Body>
-			</Modal>
-			)
-	}
-}
+
+						):(
+					<div className="container">
+						<Nav>
+							<NavItem eventKey={2} onClick={this.loginOpen}>Log In</NavItem>
+							<NavItem eventKey={3} onClick={this.signInOpen}>Sign Up</NavItem>
+						</Nav>
+						<SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
+						<LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
+					</div>
+					)}
+	</Modal.Body>
+	</Modal>
+
+
+
+) //return
+	} //render
+}; //class
+
+
+CreateEventForm.contextTypes = {
+  router: PropTypes.object.isRequired
+};

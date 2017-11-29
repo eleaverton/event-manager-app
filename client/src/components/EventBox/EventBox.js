@@ -18,6 +18,7 @@ class EventBox extends Component {
                     <h3>{this.props.title}</h3>
                     <p>{this.props.description}</p>
                     <p><a href={'api/events/'+ this.props.id} class="btn btn-primary" role="button">Button</a> </p>
+
                 </div>
             </div>
         </div>
