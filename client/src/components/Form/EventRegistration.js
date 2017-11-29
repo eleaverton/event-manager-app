@@ -18,7 +18,9 @@ export class EventRegistrationForm extends Component {
 		// this.loadSpecificFields=this.loadSpecificFields.bind(this);
 		}
 
-
+		// componentDidMount(){
+		// 	this.loadSpecificFields(this.props.specificFields);
+		// }
 		//define functions here
 		handleInputChange(event){
 	    	const { name, value } = event.target;
@@ -47,25 +49,35 @@ export class EventRegistrationForm extends Component {
 		  				<div className="panel-body">
 		  					<form>
 								<p>We can autopopulate base user info here if needed </p>
-
-								{this.props.specificFields.map((specificField,idx) =>(
-									<div key= {idx}>
-										<SingleInput
-										inputType={'text'}
-										title={specificField.newField}
-										name={'input1'}
-										controlFunc={this.handleInputChange}
-										content={this.state.input1} />
-									</div>
-								))}
-
-								<input
-							        type="submit"
-							        className="btn btn-primary float-right"
-							        value="Submit"/>
-
-
-		  					</form>
+								{this.props.specificFields.length ? (
+									<div className="registration">
+										{this.props.specificFields.map((specificField,idx) =>(
+										<div key= {idx}>
+											<SingleInput
+												inputType={'text'}
+												title={specificField.newField}
+												name={'input1'}
+												controlFunc={this.handleInputChange}
+												content={this.state.input1} />
+											<input
+										        type="submit"
+										        className="btn btn-primary float-right"
+										        value="Submit">
+										        Register
+										    </input>
+										</div>		
+								    </div>
+								):(
+									<div>
+										<input
+									        type="submit"
+									        className="btn btn-primary float-right"
+									        value="Submit">
+									        Register
+									    </input>
+								    </div>
+								)}
+							</form>
 						</div>
 					</div>
 				</div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Bootstrap from "react-bootstrap";
 import EventBox from "../components/EventBox";
 import Nav1 from "../components/Nav1";
+import {UserEventsList} from "../components/UserEventsList";
 import HomeCarousel from "../components/HomeCarousel";
 import Footer from "../components/Footer";
 import API from "../utils/API";
@@ -29,16 +30,18 @@ class LandingPage extends Component {
 
   render() {
     
-    return <div className="App">
+    return (<div className="App">
            <HomeCarousel />
            <div />
-        <div className="container">
-          <div className="panel panel-default">
+        <div className="container-fluid">
+          <div className="row">
+          <UserEventsList />
+          <div className="panel panel-default col-sm-9">
             <div className="panel-body">
               {this.state.events.length ? (
                 <div className="eventList">
                   {this.state.events.map(event => (
-                    <EventBox key={event._id} title={event.title} description={event.description}/>
+                    <EventBox key={event._id} id={event._id} title={event.title} description={event.description}/>
                       
                   ))}
                 </div>
@@ -49,11 +52,12 @@ class LandingPage extends Component {
 
             </div>
           </div>
+          </div>
         </div>
         <div>
         <Footer />
         </div>
-      </div>;
+      </div>)
   }
 }
 
