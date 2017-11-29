@@ -1,18 +1,17 @@
-import React from "react";
+import React, {Component} from "react";
 
 
-export class SearchForm extends Component {
+class SearchBox extends Component {
   constructor(props){
     super(props);
       //set the component's initial state
-      this.state = { 
+      this.state = {
         title: ""
-      };
+      }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
-      this.handleClearForm = this.handleClearForm.bind(this);
   }
-  
+
 
 
   handleInputChange = event => {
@@ -23,35 +22,40 @@ export class SearchForm extends Component {
     this.setState({
       [name]: value
     });
-  }; //closes handleInPutChange
+  } //closes handleInPutChange
 
 handleFormSubmit = event => {
   //prevent default behaviour of form submit
   event.preventDefault();
-  
+console.log("hello search box");
   //API magic here
-  
+  this.props.updateSearch("Onur");
 }
-
-}; //closes Form extends Component
 
 render(){
   return (
-    <div className="panel panel-default">
+
+<div className="container">
+  <div className="panel panel-default">
             <div className="panel-heading">
               <h3 className="panel-title">Search for Your Next Event</h3>
             </div>
-            <div className="panel-body">
-              <div>
+          <div className="panel-body">
               <div className="form-group">
                  <input type="text" className="form-control" placeholder="Search" />
               </div>
-                <button type="submit" className="btn btn-default" onClick={props.handleFormSubmit}>
+                <button type="submit" className="btn btn-default" onClick={this.handleFormSubmit}>
                   Search
                 </button>
-              </div>
-            </div>
           </div>
-);
+  </div>
+</div>
+        )
 
-}
+      }
+
+
+}; //closes Form extends Component
+
+
+export default SearchBox;
