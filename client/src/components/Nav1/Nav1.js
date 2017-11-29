@@ -131,7 +131,6 @@ class Nav1 extends Component {
              </Nav>
              {Auth.isUserAuthenticated() ? (
               <Nav>
-              <NavItem eventKey={2} onClick={this.createEventOpen}>Create Event</NavItem>
              <LinkContainer to="/logout" onClick = {Auth.deauthenticateUser}>
                <NavItem eventKey={5} >Log Out </NavItem>
 
