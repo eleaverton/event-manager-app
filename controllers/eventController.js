@@ -16,7 +16,7 @@ module.exports = {
       .then(event => {
         return User.findOneAndUpdate(
           { _id: req.user },
-          { $push: { eventOrganized: event._id } },
+          { $push: { eventsOrganized: event._id } },
           { new: true }
         );
       })
@@ -42,11 +42,22 @@ module.exports = {
       .populate("organizer")
       .then(event => res.json(event));
   },
-  registerUserToEvent: (req,res) => {
-    const eventId  = req.params.eventId;
+  registerUserToEvent: (req, res) => {
+    const eventId = req.params.eventId;
     const userId = req.user;
-    Event.update({_id:eventId}, {$push:{attendees:userId}});
-    User.update({_id:userId}, {$push:{eventsRegistered:eventId}});
-    console.log(`eventId: ${eventId} and userId =${userId}`);
+
+    User.findOneAndUpdate(
+      { _id: req.user },
+      { $addToSet: { eventsRegistered: eventId } },
+      { new: true }
+    )
+      .then(user =>
+        Event.findOneAndUpdate(
+          { _id: eventId },
+          { $addToSet: { attendees: userId } },
+          { new: true }
+        )
+      )
+      .then(event => res.json({ event }));
   }
 };
