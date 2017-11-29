@@ -8,6 +8,7 @@ class EventBox extends Component {
   };
 
   render(){
+    console.log(this.props);
     return(
 
         <div className="col-sm-6 col-md-4">
@@ -16,7 +17,8 @@ class EventBox extends Component {
                 <div className="caption">
                     <h3>{this.props.title}</h3>
                     <p>{this.props.description}</p>
-                    <p><a href="#" className="btn btn-primary" role="button">Button</a> </p>
+                    <p><a href={'api/events/'+ this.props.id} class="btn btn-primary" role="button">Button</a> </p>
+
                 </div>
             </div>
         </div>
