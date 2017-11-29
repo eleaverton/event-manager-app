@@ -38,6 +38,7 @@ module.exports = {
   },
   findEvents: (req, res) => {
     const title = req.query.title;
+    console.log(req);
     Event.find({ title: new RegExp(title, "i") })
       .populate("organizer")
       .then(event => res.json(event));

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import API from "../../utils/API";
 
 
 export class SearchBox extends Component {
@@ -16,10 +16,9 @@ export class SearchBox extends Component {
 
 
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     //getting the value and name of the input that triggers the change
     const {name, value} = event.target;
-
     //update the input's state
     this.setState({
       [name]: value
@@ -29,9 +28,12 @@ export class SearchBox extends Component {
 handleFormSubmit = event => {
   //prevent default behaviour of form submit
   event.preventDefault();
-console.log("hello search box");
   //API magic here
-  this.props.updateSearch("Onur");
+  API.getSearchedEvents(this.state.title)
+    .then(res => {console.log(res);
+          this.props.updateSearch(res.data);})
+    .catch(err => console.log(err));
+
 }
 
 render(){
@@ -44,7 +46,7 @@ render(){
             </div>
           <div className="panel-body">
               <div className="form-group">
-                 <input type="text" className="form-control" placeholder="Search" />
+                 <input name = "title" type="text" value = {this.state.title} className="form-control" placeholder="Search" onChange = {this.handleInputChange} />
               </div>
                 <button type="submit" className="btn btn-default" onClick={this.handleFormSubmit}>
                   Search

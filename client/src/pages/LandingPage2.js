@@ -32,7 +32,7 @@ class LandingPage extends Component {
 
   updateEventsBasedOnSearch = (events)=> {
     console.log("events: ", events);
-    // this.setState({events:events})
+     this.setState({events:events})
   }
 
   render() {
@@ -51,14 +51,14 @@ class LandingPage extends Component {
                     <EventBox key={event._id} id={event._id} title={event.title} description={event.description}/>
 
                   ))}
-                </div> //class eventList
+                </div>
               ) : (
                 <h5> No events yet - Be the first to add! </h5>
               )}
-            </div> //class panel-body
-          </div> //class panel panel-default col-sm-9
-          </div> //row
-        </div> //container-fluid
+            </div>
+          </div>
+          </div>
+        </div>
         <div>
           <Footer />
         </div>
