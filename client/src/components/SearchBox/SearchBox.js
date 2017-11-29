@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 
 
-class SearchBox extends Component {
+
+export class SearchBox extends Component {
+
   constructor(props){
     super(props);
       //set the component's initial state
@@ -56,6 +58,3 @@ render(){
 
 
 }; //closes Form extends Component
-
-
-export default SearchBox;

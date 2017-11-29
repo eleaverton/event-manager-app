@@ -12,14 +12,17 @@ export class UserEventsList extends Component{
 		}
 	};
 
+	//api call to get events user is registered for 
+	//api call to get events user created
+
 
 	render(){
 		return(
-			<div className="col-sm-2" data-spy="affix" data-offset-top="205">
+			<div className="col-sm-2" data-spy="affix" data-offset-top="400">
 				<div className="panel panel-default">
 					<div className="panel-body">
 						<CommentList>
-							<CommentSingle> Test </CommentSingle>
+							<CommentSingle> Registered Events </CommentSingle>
 							<CommentSingle> Test </CommentSingle>
 							<CommentSingle> Test </CommentSingle>
 							<CommentSingle> Test </CommentSingle>
@@ -28,7 +31,7 @@ export class UserEventsList extends Component{
 						</CommentList>
 
 						<CommentList>
-							<CommentSingle> Test </CommentSingle>
+							<CommentSingle> Created Events </CommentSingle>
 							<CommentSingle> Test </CommentSingle>
 							<CommentSingle> Test </CommentSingle>
 							<CommentSingle> Test </CommentSingle>

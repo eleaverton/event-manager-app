@@ -12,8 +12,8 @@ import SearchBox from "../components/SearchBox";
 class App extends Component {
   render() {
 
+
       return (<div className="App">
-          
           <HomeCarousel />
           <div className="container">
 
@@ -37,6 +37,7 @@ class App extends Component {
             <Footer />
           </div>
         </div>)
+
   }
 }
 
