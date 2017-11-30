@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import axios from "axios";
 import {SingleInput} from './SingleInput';
 import {TextArea} from './TextArea';
 import CheckboxOrRadioGroup from './CheckboxOrRadio';
 import "./Form.css";
+import Button from "../../../node_modules/react-bootstrap/lib/Button";
 
 //This component will use a get API call to get the user info
 //and another to get the needed registrant info
@@ -11,7 +13,8 @@ export class EventRegistrationForm extends Component {
 	constructor(props){
 		super(props);
 		this.state={
-			registrationDate:''
+			registrationDate:'',
+			specificFields:null
 		};
 
     	this.handleInputChange=this.handleInputChange.bind(this);
@@ -27,7 +30,14 @@ export class EventRegistrationForm extends Component {
 		    this.setState({
 		      [name]: value
 		    });
-	  	};
+	  	}
+
+	  	handleEasyRegistration(event){
+	  		event.preventDefault();
+	  		axios
+	  			.post("api/events/"+this.props.eventId+"/register")
+	  	}
+
 		// loadSpecificFields(specificFields) {
 		// 	specificFields.forEach(function(element){
 		// 		this.setState({
@@ -35,7 +45,7 @@ export class EventRegistrationForm extends Component {
 		// 		});
 		// 		console.log(this.state);
 		// 	}
-		// };
+		// }
 
 		//render a form based on the information that the event creator specified
 		render(){
@@ -48,8 +58,8 @@ export class EventRegistrationForm extends Component {
 						</div>
 		  				<div className="panel-body">
 		  					<form>
-								<p>We can autopopulate base user info here if needed </p>
-								{this.props.specificFields.length ? (
+								<p>We can autopopulate base user info here if needed (Name, email) </p>
+								{this.props.specificFields ? (
 									<div className="registration">
 										{this.props.specificFields.map( (specificField,idx) =>(
 										<div key= {idx}>
@@ -59,29 +69,31 @@ export class EventRegistrationForm extends Component {
 												name={'input1'}
 												controlFunc={this.handleInputChange}
 												content={this.state.input1} />
-											<input
+											<Button
 										        type="submit"
 										        className="btn btn-primary float-right"
-										        value="Submit">
+										        value="Submit"
+										        onClick={this.handleFormSubmit}>
 										        Register
-										    </input>
-										</div>
-									))}
+										    </Button>
+										</div>	
+									))}	
 								    </div>
 								):(
 									<div>
-										<input
+										<Button
 									        type="submit"
 									        className="btn btn-primary float-right"
-									        value="Submit">
+									        value="Submit"
+									        onClick={this.handleEasyRegistration}>
 									        Register
-									    </input>
+									    </Button>
 								    </div>
 								)}
 							</form>
-						</div> //panel-body
-					</div> //panel panel-default
-				</div> //container
+						</div> 
+					</div> 
+				</div> 
 				)
 		}
 	}
