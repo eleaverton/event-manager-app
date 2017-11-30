@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import {EventRegistrationForm} from "../Form";
 import {CommentDisplay} from "../Comments";
 import Jumbotron from "../../../node_modules/react-bootstrap/lib/Jumbotron";
-
+import "./EventDetails.css";
 
 export class EventDetails extends Component{
 	constructor(props){
@@ -20,7 +20,7 @@ export class EventDetails extends Component{
 	render(){
 		return(
 		<div className="container-fluid">
-		<Jumbotron />
+		<Jumbotron className="jumbo"/>
 		<div className="container">
 			<div className="panel-body">
 				
@@ -32,7 +32,7 @@ export class EventDetails extends Component{
                 <p>{this.props.data[0].description}</p>
             	
 			</div>
-			<EventRegistrationForm specificFields={this.props.data[0].specificFields} />
+			<EventRegistrationForm eventId={this.props.data[0]._id} specificFields={this.props.data[0].specificFields} />
 			<CommentDisplay eventId={this.props.data[0]._id} />
 		</div>
 		</div>
