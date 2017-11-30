@@ -35,6 +35,13 @@ class LandingPage extends Component {
      this.setState({events:events})
   }
 
+  // addEvent = (events)=> {
+  //   console.log("events: ", events);
+  //   const temp = {... this.state.event, events};
+  //    this.setState({events:temp})
+  // }
+
+
   render() {
 
     return <div className="App">

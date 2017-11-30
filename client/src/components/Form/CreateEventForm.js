@@ -132,7 +132,7 @@ export class CreateEventForm extends Component {
 			}).catch(err => console.log(err));
 			console.log(this);
 			setTimeout(()=> {
-      	//this.context.router.history.replace("/");
+      	//this.context.router.history.replace("/eventProfile/");
 				window.location.reload();
       },1000);
 	    this.handleClearForm(event);
