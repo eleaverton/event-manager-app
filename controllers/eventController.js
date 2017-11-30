@@ -95,5 +95,45 @@ module.exports = {
       )
       .catch(err => res.json(err));
   },
-  
+  unregisterUserFromEvent: (req, res) => {
+    const eventId = req.params.eventId;
+    const userId = req.user;
+    let eventData = {};
+    console.log("unregister user route");
+    Event.findOneAndUpdate(
+      { _id: eventId },
+      {
+        $pull: {
+          attendees: userId
+        }
+      },
+      {
+        new: true
+      }
+    )
+      .populate("attendees organizer comments")
+      .then(event => {
+        eventData = event;
+        const user = User.findOneAndUpdate(
+          {
+            _id: req.user
+          },
+          {
+            $pull: {
+              eventsRegistered: eventId
+            }
+          },
+          {
+            new: true
+          }
+        );
+        return user;
+      })
+      .then(() =>
+        res.json({
+          eventData
+        })
+      )
+      .catch(err => res.json(err));
+  }
 };
