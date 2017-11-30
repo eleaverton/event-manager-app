@@ -4,45 +4,37 @@
 import React, { Component } from "react";
 import {EventRegistrationForm} from "../Form";
 import {CommentDisplay} from "../Comments";
-import API from "../../utils/API";
+import Jumbotron from "../../../node_modules/react-bootstrap/lib/Jumbotron";
+
 
 export class EventDetails extends Component{
 	constructor(props){
 		super(props);
-	this.state={
-		event:[]
-		// title:'',
-		// date:'',
-		// time:'',
-		// location:'',
-		// description:'',
-		// newField:'',
-		// specificFields:[],
-		// attendeeRegistrationOptions:['One registration per attendee','One registration for multiple attendees'],
-		// attendeeRegistration: []
-
+		
 	}
-}
 
 	componentDidMount(){
-		this.loadEvent();
+		console.log(this.props.data);
 	}
-
-	loadEvent = () => {
-		API.getEvent(this.props._id)
-			.then(res => this.setState({event:res.data}))
-			.catch(err =>console.log(err));
-		console.log(this.state);
-	}
+	//jumbotron background needs to populate from Firebase picture
 	render(){
 		return(
+		<div className="container-fluid">
+		<Jumbotron />
 		<div className="container">
 			<div className="panel-body">
-				<h3>{this.state.event}</h3>
-			
+				
+                <h1>{this.props.data[0].title}</h1>
+                <h3>{this.props.data[0].dateOfEvent}</h3>
+                <h3>{this.props.data[0].time}</h3>
+                <h3>{this.props.data[0].location}</h3>
+                <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
+                <p>{this.props.data[0].description}</p>
+            	
 			</div>
-			<EventRegistrationForm specificFields={this.state.specificFields} />
-			<CommentDisplay eventId={this.props._id} />
+			<EventRegistrationForm specificFields={this.props.data[0].specificFields} />
+			<CommentDisplay eventId={this.props.data[0]._id} />
+		</div>
 		</div>
 		)
 	}
