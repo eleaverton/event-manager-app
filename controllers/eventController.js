@@ -34,7 +34,7 @@ module.exports = {
   },
   getAllEvents: (req, res) => {
     Event.find({})
-      .populate("organizer")
+      .populate("attendees organizer comments")
       .then(events => res.json(events));
     // .then(events => res.json(events));
   },

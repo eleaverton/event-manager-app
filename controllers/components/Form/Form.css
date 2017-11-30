@@ -1,0 +1,12 @@
+.container{
+	text-align: left
+}
+
+.form-header {
+	font-size: 18px;
+	font-weight:bold;
+}
+
+#contained-modal-title-sm {
+	background: none;
+}
