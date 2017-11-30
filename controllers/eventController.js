@@ -15,9 +15,17 @@ module.exports = {
     })
       .then(event => {
         return User.findOneAndUpdate(
-          { _id: req.user },
-          { $push: { eventsOrganized: event._id } },
-          { new: true }
+          {
+            _id: req.user
+          },
+          {
+            $push: {
+              eventsOrganized: event._id
+            }
+          },
+          {
+            new: true
+          }
         );
       })
       .then(user => {
@@ -32,33 +40,60 @@ module.exports = {
   },
   getOneEvent: (req, res) => {
     const eventId = req.params.eventId;
-    Event.find({ _id: eventId })
+    Event.find({
+      _id: eventId
+    })
       .populate("organizer")
       .then(event => res.json(event));
   },
   findEvents: (req, res) => {
     const title = req.query.title;
     console.log(req);
-    Event.find({ title: new RegExp(title, "i") })
+    Event.find({
+      title: new RegExp(title, "i")
+    })
       .populate("organizer")
       .then(event => res.json(event));
   },
   registerUserToEvent: (req, res) => {
     const eventId = req.params.eventId;
     const userId = req.user;
-
-    User.findOneAndUpdate(
-      { _id: req.user },
-      { $addToSet: { eventsRegistered: eventId } },
-      { new: true }
+    let eventData = {};
+    Event.findOneAndUpdate(
+      { _id: eventId },
+      {
+        $addToSet: {
+          attendees: userId
+        }
+      },
+      {
+        new: true
+      }
     )
-      .then(user =>
-        Event.findOneAndUpdate(
-          { _id: eventId },
-          { $addToSet: { attendees: userId } },
-          { new: true }
-        )
+      .populate("attendees organizer comments")
+      .then(event => {
+        eventData = event;
+        const user = User.findOneAndUpdate(
+          {
+            _id: req.user
+          },
+          {
+            $addToSet: {
+              eventsRegistered: eventId
+            }
+          },
+          {
+            new: true
+          }
+        );
+        return user;
+      })
+      .then(() =>
+        res.json({
+          eventData
+        })
       )
-      .then(event => res.json({ event }));
-  }
+      .catch(err => res.json(err));
+  },
+  
 };
