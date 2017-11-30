@@ -96,7 +96,10 @@ module.exports = function(passport) {
         const userData = {
           email: email.trim(),
           password: password.trim(),
-          name: req.body.name.trim()
+          name: req.body.name.trim(),
+          twitterHandle: req.body.twitterHandle.trim(),
+          dateOfBirth: req.body.dateOfBirth,
+          zip: req.body.zip.trim(),
         };
 
         const newUser = new User(req.body);
