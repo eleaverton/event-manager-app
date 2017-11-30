@@ -5,6 +5,11 @@ export default {
   getAllEvents: function() {
     return axios.get("/api/events");
   },
+
+  //Gets the events with the searched term
+  getSearchedEvents: function(search) {
+    return axios.get("/api/events/search?title=" +search);
+  },
   // Gets the event with the given id (single event page)
   getEvent: function(id) {
     return axios.get("/api/events/" + id);

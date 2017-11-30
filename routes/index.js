@@ -27,8 +27,8 @@ router
 router.route("/api/events/search").get(eventController.findEvents);
 
 router
-  .route("api/events/:eventId/register")
-  .post() // register a user for an event
+  .route("/api/events/:eventId/register")
+  .post(authCheckMiddleware,eventController.registerUserToEvent) // register a user for an event
   .put(); // unregister a user for an event
 
 router

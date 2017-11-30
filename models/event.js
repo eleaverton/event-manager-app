@@ -12,7 +12,8 @@ const EventSchema = new mongoose.Schema({
   description: String,
  
   organizer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Event = mongoose.model("Event", EventSchema);

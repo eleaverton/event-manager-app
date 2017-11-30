@@ -61,7 +61,7 @@ export class EventRegistrationForm extends Component {
 								<p>We can autopopulate base user info here if needed (Name, email) </p>
 								{this.props.specificFields ? (
 									<div className="registration">
-										{this.props.specificFields.map((specificField,idx) =>(
+										{this.props.specificFields.map( (specificField,idx) =>(
 										<div key= {idx}>
 											<SingleInput
 												inputType={'text'}
@@ -91,9 +91,9 @@ export class EventRegistrationForm extends Component {
 								    </div>
 								)}
 							</form>
-						</div>
-					</div>
-				</div>
+						</div> 
+					</div> 
+				</div> 
 				)
 		}
 	}
