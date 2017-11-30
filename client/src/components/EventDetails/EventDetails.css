@@ -1,0 +1,7 @@
+.jumbo{
+	background: url("pic.jpg") no-repeat center center; 
+   	height: 400px;
+    background-repeat:no-repeat;
+	background-size:cover;
+	background-position:center;
+}

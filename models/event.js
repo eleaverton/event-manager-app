@@ -10,9 +10,13 @@ const EventSchema = new mongoose.Schema({
   createdDate: { type: Date, default: Date.now },
   time: String,
   description: String,
+  hashtag: String,
+  image: String,
+  specificFields: [String],
  
   organizer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Event = mongoose.model("Event", EventSchema);
