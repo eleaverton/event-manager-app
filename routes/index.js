@@ -5,6 +5,7 @@ const homeController = require("../controllers/homeController");
 const authTutorialController = require("../controllers/authTutorialController");
 const apiController = require("../controllers/apiController");
 const eventController = require("../controllers/eventController");
+const commentController = require("../controllers/commentController");
 
 const authCheckMiddleware = require("../middleware/auth-check");
 
@@ -27,9 +28,30 @@ router
 router.route("/api/events/search").get(eventController.findEvents);
 
 router
-  .route("api/events/:eventId/register")
-  .post() // register a user for an event
-  .put(); // unregister a user for an event
+  .route("/api/events/:eventId/register")
+  .post(authCheckMiddleware, eventController.registerUserToEvent) // register a user for an event
+  .put(authCheckMiddleware, eventController.unregisterUserFromEvent); // unregister a user for an event
+
+
+   /**
+     * 
+     * Comment Routes
+     */
+router
+  .route("/api/events/:eventId/comments")
+  .post(authCheckMiddleware,commentController.createNewComment); // create new comment
+
+router
+  .route("/api/events/:eventId/comments/:commentId")
+  .get()
+  .delete() // delete a comment
+  .put(); // edit a comment
+
+     /**
+     * 
+     * End Comment Routes
+     */
+
 
 router
   .route("/api/events/:eventId")
@@ -44,13 +66,6 @@ router
   .get() // get detail for one user
   .put() // edit detail for one user
   .delete(); // delete one user
-
-router.route("/api/events/:eventId/comment").post(); // create new comment
-
-router
-  .route("/api/events/:eventId/comment/:commentId")
-  .delete() // delete a comment
-  .put(); // edit a comment
 
 //default to React app
 router.use(function(req, res) {

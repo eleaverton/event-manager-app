@@ -1,24 +1,42 @@
 import React, {Component} from 'react';  
 import Bootstrap from "react-bootstrap";
 import {EventDetails} from "../components/EventDetails";
-import ThisJumbotron from "../components/ThisJumbotron";
+import API from "../utils/API";
 
 
 //need to pass eventId as a prop when this page is loaded
 
-class App extends Component {
-  render() {
-    
-    return (
-    	<div className="App">
-    		<ThisJumbotron />
-           <EventDetails  />
+class EventProfile extends Component {
+	constructor(props){
+		super(props);
+		this.state={
+			data:null
+		}
+	}
 
-          
-      </div>
-      )
+	componentDidMount(){
+		this.loadEvent();
+	}
 
-  }
+	loadEvent = () => {
+		console.log(this.props.match.params.eventId);
+		API.getEvent(this.props.match.params.eventId)
+			.then(res => this.setState({data:res.data}))
+			.catch(err =>console.log(err));
+		console.log(this.state);
+	}
+
+	render() {
+	    var eventId = this.props.match.params.eventId;
+	    console.log(eventId);
+	    if (this.state.data){
+	    	return (
+	       		<EventDetails id={eventId} data={this.state.data}/>	     
+	    	);
+	    }
+
+	    return(<div> Loading... </div>);  
+	}
 }
 
-export default App;
+export default EventProfile;
