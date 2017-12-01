@@ -59,6 +59,7 @@ export class EventRegistrationForm extends Component {
 			console.log(this.props);
 			return(
 				<div className="container">
+						()
 		  				
 	  					<form onSubmit={this.handleEasyRegistration}>
 							<Button
