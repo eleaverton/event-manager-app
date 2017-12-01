@@ -18,7 +18,9 @@ class LandingPage extends Component {
   constructor(props){
     super(props);
     this.state={
-      events:[]
+      events:[],
+      registered:[],
+      created:[]
     };
   };
 
@@ -28,6 +30,7 @@ class LandingPage extends Component {
 
   loadEvents = () => {
     //if allEvents Button is selected
+    this.state.events='';
     API.getAllEvents()
       .then(res => this.setState({events:res.data}))
       .catch(err => console.log(err));
@@ -36,16 +39,23 @@ class LandingPage extends Component {
 
   loadRegistered = () =>{
   //need to set up auth so that we can get id
+    console.log("load Registered");
+    this.state.events='';
     const authToken = Auth.getToken();
     const headers = { Authorization: authToken}
-    API.getUser(headers)
-      .then(res => this.setState({events:res.data}))
+    API.getAllUserEvents(headers)
+      .then(res => this.setState({events:res.data.eventsRegistered}))
+      .catch(err => console.log(err));
   }
   loadCreated = () =>{
     //if Created Button is selected
+    console.log("load Created");
+    this.state.events='';
     const authToken = Auth.getToken();
     const headers = { Authorization: authToken}
-    API.getUser(headers)
+    API.getAllUserEvents(headers)
+      .then(res => this.setState({events:res.data.eventsOrganized}))
+      .catch(err => console.log(err));
   }
   updateEventsBasedOnSearch = (events)=> {
     console.log("events: ", events);
@@ -57,9 +67,9 @@ class LandingPage extends Component {
     return <div className="App">
            <HomeCarousel />
            <SearchBox updateSearch={this.updateEventsBasedOnSearch}/>
-           <button type="button" className="btn btn-default">All Events</button>
-           <button type="button" className="btn btn-default">Registered Events</button>
-           <button type="button" className="btn btn-default">Created Events</button>
+           <button type="button" className="btn btn-default" onClick={this.loadEvents}>All Events</button>
+           <button type="button" className="btn btn-default" onClick={this.loadRegistered}>Registered Events</button>
+           <button type="button" className="btn btn-default" onClick={this.loadCreated}>Created Events</button>
            <br></br>
            <br></br>
         <div className="container">
