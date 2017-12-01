@@ -10,7 +10,6 @@ export class SearchBox extends Component {
       };
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    
   }
   
 
@@ -32,7 +31,6 @@ handleFormSubmit = event => {
   //API magic here
   
 }
-
 
 
 render(){
