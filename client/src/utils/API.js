@@ -24,7 +24,7 @@ export default {
   },
   //gets User information for sign in (may not be necessary with existing authentication pathways) and event registration
   getUser:function(id) {
-    return axios.get("/api/users/"+ id);
+    return axios.get("/api/users");
   },
   //saves User to database (sign up)
   saveUser: function(userData) {

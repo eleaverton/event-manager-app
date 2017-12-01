@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Bootstrap from "react-bootstrap";
 import EventBox from "../components/EventBox";
 import Nav1 from "../components/Nav1";
@@ -7,6 +8,7 @@ import HomeCarousel from "../components/HomeCarousel";
 import Footer from "../components/Footer";
 import API from "../utils/API";
 import {SearchBox} from "../components/SearchBox";
+import Auth from "../modules/Auth";
 
 
 //eventBoxes will render based on a get API call
@@ -25,11 +27,26 @@ class LandingPage extends Component {
   }
 
   loadEvents = () => {
+    //if allEvents Button is selected
     API.getAllEvents()
       .then(res => this.setState({events:res.data}))
       .catch(err => console.log(err));
+
   };
 
+  loadRegistered = () =>{
+  //need to set up auth so that we can get id
+    const authToken = Auth.getToken();
+    const headers = { Authorization: authToken}
+    API.getUser(headers)
+      .then(res => this.setState({events:res.data}))
+  }
+  loadCreated = () =>{
+    //if Created Button is selected
+    const authToken = Auth.getToken();
+    const headers = { Authorization: authToken}
+    API.getUser(headers)
+  }
   updateEventsBasedOnSearch = (events)=> {
     console.log("events: ", events);
      this.setState({events:events})
@@ -40,10 +57,14 @@ class LandingPage extends Component {
     return <div className="App">
            <HomeCarousel />
            <SearchBox updateSearch={this.updateEventsBasedOnSearch}/>
-        <div className="container-fluid">
+           <button type="button" className="btn btn-default">All Events</button>
+           <button type="button" className="btn btn-default">Registered Events</button>
+           <button type="button" className="btn btn-default">Created Events</button>
+           <br></br>
+           <br></br>
+        <div className="container">
           <div className="row">
-          <UserEventsList />
-          <div className="panel panel-default col-sm-9">
+          <div className="panel panel-default">
             <div className="panel-body">
               {this.state.events.length ? (
                 <div className="eventList">
