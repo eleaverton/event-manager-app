@@ -6,6 +6,7 @@ const authTutorialController = require("../controllers/authTutorialController");
 const apiController = require("../controllers/apiController");
 const eventController = require("../controllers/eventController");
 const commentController = require("../controllers/commentController");
+const userController = require("../controllers/userController");
 
 const authCheckMiddleware = require("../middleware/auth-check");
 
@@ -59,7 +60,7 @@ router
   .put(); // change details of one event
 //no delete route as we want to set status to cancel
 
-router.route("/api/users").get(); //get all users
+router.route("/api/users").get(authCheckMiddleware,userController.getAllUserEvents); //get all users
 
 router
   .route("/api/users/:userId")
