@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./EventBox.css";
 
 
 
@@ -16,8 +17,10 @@ class EventBox extends Component {
                 <img src="/images/event.jpg" alt="..." />
                 <div className="caption">
                     <h3>{this.props.title}</h3>
-                    <p>{this.props.description}</p>
-                    <p><a href={'api/events/'+ this.props.id} className="btn btn-primary" role="button">Button</a> </p>
+                    <div className="box">
+                    <p className="demo1">{this.props.description}</p>
+                    </div>
+                    <p><a href={'api/events/'+ this.props.id} className="btn btn-primary" role="button">More Info</a> </p>
 
                 </div>
             </div>

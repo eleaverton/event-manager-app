@@ -2,3 +2,19 @@
     text-align: center;
     font-family: 'Muli', sans-serif;
 }
+
+.demo1 { 
+ height: 4em; 
+ text-overflow: ellipsis;
+ opacity: 1;
+   background: -webkit-linear-gradient(#333, #333, #eee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+}
+
+
+
+.box {
+  max-width: 500px;
+  overflow: hidden;
+}
