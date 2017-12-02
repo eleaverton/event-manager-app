@@ -20,7 +20,7 @@ class Nav1 extends Component {
        signInShow:false,
        loginShow:false,
        eventShow:false
-      
+
       //  createEventShow:false
 
      };
@@ -92,8 +92,19 @@ class Nav1 extends Component {
                </Nav>}
            </Nav>
          </Navbar.Collapse>
+<<<<<<< HEAD
          <SignUpForm show={this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
          <LoginForm show={this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose} />
+=======
+         <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
+         <LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
+
+         <CreateEventForm show = {this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose}/>
+
+
+
+       </Navbar>
+>>>>>>> 8dba32c4998d7f77f764c61524402df244eeda6b
 
          <CreateEventForm show={this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose} />
        </Navbar>;
