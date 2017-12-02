@@ -3,29 +3,33 @@ import Carousel from "../../../node_modules/react-bootstrap/lib/Carousel";
 import CarouselItem from "../../../node_modules/react-bootstrap/lib/CarouselItem";
 import CarouselCaption from "../../../node_modules/react-bootstrap/lib/CarouselCaption";
 import "./HomeCarousel.css";
-// import Nav1 from "../Nav1";
+import Image from "../../../node_modules/react-bootstrap/lib/Image";
+
 
 const HomeCarousel = () => (
   <Carousel>
     <Carousel.Item>
-     <Carousel.Caption>
-        
-       
-      </Carousel.Caption>
-      <img width={900} height={500} alt="" src="https://static.pexels.com/photos/433452/pexels-photo-433452.jpeg" />
+      <a>
+        <Image className="Image" src="/images/carnival2.jpg" />
+      </a>
     </Carousel.Item>
+
     <Carousel.Item>
-      <img width={900} height={500} alt="" src="/assets/carousel.png" />
-      <Carousel.Caption>
-        
-       
-      </Carousel.Caption>
+      <a>
+        <Image className="Image" src="/images/event2.jpg" />
+      </a>
     </Carousel.Item>
+
     <Carousel.Item>
-      <img width={900} height={500} alt="" src="/assets/carousel.png" />
-      <Carousel.Caption>
-                
-      </Carousel.Caption>
+      <a>
+        <Image className="Image" src="/images/violin2.jpg" />
+      </a>
+    </Carousel.Item>
+
+    <Carousel.Item>
+      <a>
+        <Image className="Image" src="/images/balloon2.jpg" />
+      </a>
     </Carousel.Item>
   </Carousel>
 );

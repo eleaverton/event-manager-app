@@ -38,13 +38,12 @@ handleFormSubmit = event => {
 
 render(){
   return (
-
+<div className="searchBox">
 <div className="container">
   <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">Search for Your Next Event</h3>
-            </div>
+            
           <div className="panel-body">
+          <h1 className="tagline">We are great!</h1>
               <div className="form-group">
                  <input name = "title" type="text" value = {this.state.title} className="form-control" placeholder="Search" onChange = {this.handleInputChange} />
               </div>
@@ -53,6 +52,7 @@ render(){
                 </button>
           </div>
   </div>
+</div>
 </div>
         )
 

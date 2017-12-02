@@ -50,10 +50,11 @@ export class CreateEventForm extends Component {
     	this.handleFieldNameChange=this.handleFieldNameChange.bind(this);
     	this.handleRadioSelection=this.handleRadioSelection.bind(this);
 
-			this.signInOpen=this.signInOpen.bind(this);
-      this.signInClose=this.signInClose.bind(this);
-      this.loginOpen=this.loginOpen.bind(this);
-      this.loginClose=this.loginClose.bind(this);
+		this.signInOpen=this.signInOpen.bind(this);
+      	this.signInClose=this.signInClose.bind(this);
+      	this.loginOpen=this.loginOpen.bind(this);
+      	this.loginClose=this.loginClose.bind(this);
+      	
 	}
 
 	signInClose() {
@@ -61,28 +62,17 @@ export class CreateEventForm extends Component {
 	}
 	signInOpen(){
 		this.setState({signInShow:true});
+		this.setState({eventShow:false});
 	}
 	loginClose() {
 		this.setState({loginShow:false});
 	}
 	loginOpen(){
 		this.setState({loginShow:true});
+		this.setState({eventShow:false});
 	}
+	
 
-	//Need data path to not get error with fetch
-	// componentDidMount(){
-	// 	fetch()
-	// 	.then(res => res.json())
-	// 	.then(data =>{
-	// 		this.setState({
-	// 		title=data.title,
-	// 		date=data.date,
-	// 		time=data.time,
-	// 		location=data.location,
-	//
-	// 		});
-	// 	});
-	// }
 	handleInputChange(event){
     	const { name, value } = event.target;
 			if (event.target.files){
@@ -172,111 +162,117 @@ export class CreateEventForm extends Component {
   	}
 
 	render(){
+		const isLoggedIn = Auth.isUserAuthenticated();
+		console.log(isLoggedIn);
 
 		return(
-
-
-
-<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
-			<Modal.Header closeButton>
-			<Modal.Title id="contained-modal-title-sm">Create an Event</Modal.Title>
-			</Modal.Header>
-<Modal.Body>
-		{Auth.isUserAuthenticated() ? (
-
-					<form onSubmit={this.handleFormSubmit}>
-						<SingleInput
-							inputType={'text'}
-							title={'Title'}
-							name={'title'}
-							controlFunc={this.handleInputChange}
-							content={this.state.title} />
-						<SingleInput
-							inputType={'date'}
-							title={'Event Date'}
-							name={'dateOfEvent'}
-							controlFunc={this.handleInputChange}
-							content={this.state.dateOfEvent} />
-						<SingleInput
-							inputType={'time'}
-							title={'Event Time'}
-							name={'time'}
-							controlFunc={this.handleInputChange}
-							content={this.state.time} />
-						<SingleInput
-							inputType={'text'}
-							title={'Location'}
-							name={'location'}
-							controlFunc={this.handleInputChange}
-							content={this.state.location} />
-						<TextArea
-					        title={'Description'}
-					        rows={4}
-					        resize={false}
-					        content={this.state.description}
-					        name={'description'}
-					        controlFunc={this.handleInputChange} />
-						<SingleInput
-							inputType={'text'}
-							title={'Event Hashtag'}
-							name={'hashtag'}
-							controlFunc={this.handleInputChange}
-							content={this.state.hashtag} />
-					    <SingleInput
-							inputType={'file'}
-							title={'Event Image'}
-							name={'image'}
-							controlFunc={this.handleInputChange}
-							content={this.state.image} />
-					    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
-					    {this.state.specificFields.map((specificField, idx) => (
-				          <div key = {idx}>
-				            <SingleInput
-				              inputType={'text'}
-				              placeholder={`New Field #${idx + 1}`}
-				              value={specificField.newField}
-				              controlFunc={this.handleFieldNameChange(idx)}
-				            />
-				          </div>
-				        ))}
-				        <button type="button" onClick={this.handleAddSpecificField} className="btn btn-primary small">Add Registrant Field</button>
-				        <br></br>
-          				<br></br>
-				        <CheckboxOrRadioGroup
-						    title={'Do you need each attendee to register individually or can one person register multiple attendees?'}
-						    setName={'attendee'}
-						    type={'radio'}
-						    controlFunc={this.handleRadioSelection}
-						    options={this.state.attendeeRegistrationOptions}
-						    selectedOptions={this.state.attendeeRegistration} />
-
-
-          				<br></br>
-          				<br></br>
-					    <input
-					        type="submit"
-					        className="btn btn-primary float-right"
-					        value="Submit"/>
-					</form>
+			<div>
+				{isLoggedIn ? (
+					<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+						<Modal.Header closeButton>
+						<Modal.Title id="contained-modal-title-sm">Create an Event</Modal.Title>
+						</Modal.Header>
+					<Modal.Body>
+						<form onSubmit={this.handleFormSubmit}>
+							<SingleInput
+								inputType={'text'}
+								title={'Title'}
+								name={'title'}
+								controlFunc={this.handleInputChange}
+								content={this.state.title} />
+							<SingleInput
+								inputType={'date'}
+								title={'Event Date'}
+								name={'dateOfEvent'}
+								controlFunc={this.handleInputChange}
+								content={this.state.dateOfEvent} />
+							<SingleInput
+								inputType={'time'}
+								title={'Event Time'}
+								name={'time'}
+								controlFunc={this.handleInputChange}
+								content={this.state.time} />
+							<SingleInput
+								inputType={'text'}
+								title={'Location'}
+								name={'location'}
+								controlFunc={this.handleInputChange}
+								content={this.state.location} />
+							<TextArea
+						        title={'Description'}
+						        rows={4}
+						        resize={false}
+						        content={this.state.description}
+						        name={'description'}
+						        controlFunc={this.handleInputChange} />
+							<SingleInput
+								inputType={'text'}
+								title={'Event Hashtag'}
+								name={'hashtag'}
+								controlFunc={this.handleInputChange}
+								content={this.state.hashtag} />
+						    <SingleInput
+								inputType={'file'}
+								title={'Event Image'}
+								name={'image'}
+								controlFunc={this.handleInputChange}
+								content={this.state.image} />
+						    <h5>Besides basic user info, what inputs do you need from your attendees?</h5>
+						    {this.state.specificFields.map((specificField, idx) => (
+					          <div key = {idx}>
+					            <SingleInput
+					              inputType={'text'}
+					              placeholder={`New Field #${idx + 1}`}
+					              value={specificField.newField}
+					              controlFunc={this.handleFieldNameChange(idx)}
+					            />
+					          </div>
+					        ))}
+					        <button type="button" onClick={this.handleAddSpecificField} className="btn btn-primary small">Add Registrant Field</button>
+					        <br></br>
+							<br></br>
+					        <CheckboxOrRadioGroup
+							    title={'Do you need each attendee to register individually or can one person register multiple attendees?'}
+							    setName={'attendee'}
+							    type={'radio'}
+							    controlFunc={this.handleRadioSelection}
+							    options={this.state.attendeeRegistrationOptions}
+							    selectedOptions={this.state.attendeeRegistration} />
+							<br></br>
+							<br></br>
+						    <input
+						        type="submit"
+						        className="btn btn-primary float-right"
+						        value="Submit"/>
+						</form>
+					</Modal.Body>
+				</Modal>
 
 						):(
-					<div className="container">
-						<Nav>
-							<NavItem eventKey={2} onClick={this.loginOpen}>Log In</NavItem>
-							<NavItem eventKey={3} onClick={this.signInOpen}>Sign Up</NavItem>
-						</Nav>
-						<SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
-						<LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
-					</div>
-					)}
-	</Modal.Body>
-	</Modal>
+							<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
+								<Modal.Header closeButton>
+									<Modal.Title id="contained-modal-title-sm">Sign Up or Log In to Create an Event</Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+									<div className="container">
+										<Nav>
+											<NavItem eventKey={2} onClick={this.loginOpen }>Log In</NavItem>
+											<NavItem eventKey={3} onClick={this.signInOpen }>Sign Up</NavItem>
+										</Nav>
+										<SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
+										<LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
+									</div>
+								</Modal.Body>
+							</Modal>
+									)}
+					
+			</div>
 
 
 
-) //return
-	} //render
-}; //class
+				) //return
+					} //render
+				}; //class
 
 
 CreateEventForm.contextTypes = {

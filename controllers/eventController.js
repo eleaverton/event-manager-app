@@ -60,40 +60,19 @@ module.exports = {
     const eventId = req.params.eventId;
     const userId = req.user;
     let eventData = {};
-    Event.findOneAndUpdate(
-      { _id: eventId },
-      {
-        $addToSet: {
-          attendees: userId
-        }
-      },
-      {
-        new: true
-      }
-    )
-      .populate("attendees organizer comments")
+    Event.findOneAndUpdate({ _id: eventId }, { $addToSet: { attendees: userId } }, { new: true })
+      // .populate("attendees organizer comments")
+      .populate([
+        { path: "comments", model: "Comment", populate: {path:"user", model:"User"} },
+        { path: "organizer", model: "User" },
+        { path: "attendees", model: "User" },
+      ])
       .then(event => {
         eventData = event;
-        const user = User.findOneAndUpdate(
-          {
-            _id: req.user
-          },
-          {
-            $addToSet: {
-              eventsRegistered: eventId
-            }
-          },
-          {
-            new: true
-          }
-        );
+        const user = User.findOneAndUpdate({ _id: req.user }, { $addToSet: { eventsRegistered: eventId } }, { new: true });
         return user;
       })
-      .then(() =>
-        res.json({
-          eventData
-        })
-      )
+      .then(() => res.json({ eventData }))
       .catch(err => res.json(err));
   },
   unregisterUserFromEvent: (req, res) => {

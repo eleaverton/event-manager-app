@@ -16,8 +16,11 @@ module.exports = {
           description: comment,
           user: userId,
           event: eventId
-        }).then(comment => {
+        })
+        .populate("user")
+        .then(comment => {
           newComment = comment;
+          console.log(newComment);
           Event.findByIdAndUpdate(
             { _id: eventId },
             { $addToSet: { comments: newComment._id } },
@@ -34,6 +37,16 @@ module.exports = {
         });
       })
       .catch(err => res.json({ err: "erorr" }));
+  },
+
+  getComments: (req,res) =>{
+    console.log("getComments");
+    const eventId = req.params.eventId;
+    console.log(eventId);
+    Comment.find({event:eventId})
+      .populate("user")          
+      .then(comments => res.json(comments))
+      .catch(err => res.json ({err:"error"}))
   }
-};
+}
 

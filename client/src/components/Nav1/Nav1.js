@@ -11,43 +11,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import LogoutButton from '../LogoutButton';
 import Auth from "../../modules/Auth";
 
-// const Nav1 = () => (
-//   <Navbar inverse collapseOnSelect>
-//     <Navbar.Header>
-//       <Navbar.Brand>
-//         <a href="#">React-Bootstrap</a>
-//       </Navbar.Brand>
-//       <Navbar.Toggle />
-//     </Navbar.Header>
-//     <Navbar.Collapse>
-//       <Nav>
-//         <NavItem eventKey={1} href="#">Link</NavItem>
-//         <NavItem eventKey={2} href="#">Link</NavItem>
-//         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-//           <MenuItem eventKey={3.1}>Action</MenuItem>
-//           <MenuItem eventKey={3.2}>Another action</MenuItem>
-//           <MenuItem eventKey={3.3}>Something else here</MenuItem>
-//           <MenuItem divider />
-//           <MenuItem eventKey={3.3}>Separated link</MenuItem>
-//         </NavDropdown>
-//       </Nav>
-//
-//       <Nav pullRight>
-//         <LinkContainer to="/event">
-//           <NavItem eventKey={4}>Create an Event</NavItem>
-//         </LinkContainer>
-//         {Auth.isUserAuthenticated() ? (
-//         <LinkContainer to="/logout" onClick = {Auth.deauthenticateUser}>
-//           <NavItem eventKey={5}>Log Out</NavItem>
-//         </LinkContainer>):(
-//         <LinkContainer to="/login">
-//           <NavItem eventKey={6}>Log In</NavItem>
-//         </LinkContainer>)}
-//       </Nav>
-//     </Navbar.Collapse>
-//   </Navbar>
-// );
-// ======
 
 
 class Nav1 extends Component {
@@ -57,7 +20,7 @@ class Nav1 extends Component {
        signInShow:false,
        loginShow:false,
        eventShow:false
-       //
+
       //  createEventShow:false
 
      };
@@ -94,13 +57,7 @@ class Nav1 extends Component {
    eventOpen(){
      this.setState({eventShow:true});
    }
-  //  createEventClose() {
-  //    this.setState({createEventShow:false});
-  //  }
-  //  createEventOpen(){
-  //    this.setState({createEventShow:true});
-   //
-  //  }
+
 
    render(){
 
@@ -109,22 +66,14 @@ class Nav1 extends Component {
        <Navbar inverse collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
-             <a href="/">Eventster</a>
+
+             <h1 className="navBrand">Eventster</h1>
+
            </Navbar.Brand>
            <Navbar.Toggle />
          </Navbar.Header>
          <Navbar.Collapse>
-           <Nav>
-             <NavItem eventKey={1} href="#">Link</NavItem>
-             <NavItem eventKey={2} href="#">Link</NavItem>
-             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-               <MenuItem eventKey={3.1}>Action</MenuItem>
-               <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-               <MenuItem divider />
-               <MenuItem eventKey={3.3}>Separated link</MenuItem>
-             </NavDropdown>
-           </Nav>
+
            <Nav pullRight>
              <Nav>
               <NavItem eventKey={1} onClick={this.eventOpen}>Create an Event</NavItem>
@@ -147,7 +96,7 @@ class Nav1 extends Component {
 
          <CreateEventForm show = {this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose}/>
 
-    //     <CreateEventForm show = {this.state.createEventShow} onHide={this.createEventClose} closeModal={this.createEventClose}/>
+
 
        </Navbar>
 

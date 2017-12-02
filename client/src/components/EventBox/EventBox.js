@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import {storage} from '../../firebase/fire';
+import axios from "axios";
+import "./EventBox.css";
+
 
 const storageRef = storage.ref("eventprofile/");
 
@@ -14,9 +17,13 @@ class EventBox extends Component {
 
 
   componentWillMount(){
-		 storageRef.child(this.props.id+"/img_fjords.jpg").getDownloadURL().then((url) => {
-			this.setState({img:url});
-		 });
+		//  storageRef.child(this.props.id+"/img_fjords.jpg").getDownloadURL().then((url) => {
+		// 	this.setState({img:url});
+		//  });
+    axios.get("/api/events/" + this.props.id).then(res => {
+      console.log(res);
+      this.setState({img:res.data[0].imageUrl});
+    }).catch(err => console.log(err));
 	}
 
 
@@ -29,8 +36,10 @@ class EventBox extends Component {
                 <img src= {this.state.img} alt="..." />
                 <div className="caption">
                     <h3>{this.props.title}</h3>
-                    <p>{this.props.description}</p>
-                    <p><a href={'api/events/'+ this.props.id} className="btn btn-primary" role="button">Button</a> </p>
+                    <div className="box">
+                    <p className="demo1">{this.props.description}</p>
+                    </div>
+                    <p><a href={'api/events/'+ this.props.id} className="btn btn-primary" role="button">More Info</a> </p>
 
                 </div>
             </div>

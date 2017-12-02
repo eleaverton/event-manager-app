@@ -23,8 +23,8 @@ export default {
     return axios.post("/api/events", eventData);
   },
   //gets User information for sign in (may not be necessary with existing authentication pathways) and event registration
-  getUser:function(id) {
-    return axios.get("/api/users/"+ id);
+  getAllUserEvents:function(headers) {
+    return axios.get("/api/users", {headers: headers});
   },
   //saves User to database (sign up)
   saveUser: function(userData) {
@@ -32,10 +32,10 @@ export default {
   },
   //gets comments associated with an event (event page)
   getComments:function(eventId){
-    return axios.get("/api/comments/"+ eventId);
+    return axios.get("/api/events/"+ eventId+"/comments");
   },
   //saves a user posted comment (event page)
-  saveComment: function(commentData){
-    return axios.post("/api/comments", commentData);
+  createNewComment: function(commentData, headers){
+    return axios.post("/api/events/"+ commentData.eventId+"/comments", {headers:headers});
   }
 };

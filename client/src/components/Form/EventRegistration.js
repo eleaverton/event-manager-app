@@ -5,6 +5,7 @@ import {TextArea} from './TextArea';
 import CheckboxOrRadioGroup from './CheckboxOrRadio';
 import "./Form.css";
 import Button from "../../../node_modules/react-bootstrap/lib/Button";
+import Auth from "../../modules/Auth";
 
 //This component will use a get API call to get the user info
 //and another to get the needed registrant info
@@ -18,6 +19,7 @@ export class EventRegistrationForm extends Component {
 		};
 
     	this.handleInputChange=this.handleInputChange.bind(this);
+    	this.handleEasyRegistration=this.handleEasyRegistration.bind(this);
 		// this.loadSpecificFields=this.loadSpecificFields.bind(this);
 		}
 
@@ -34,8 +36,13 @@ export class EventRegistrationForm extends Component {
 
 	  	handleEasyRegistration(event){
 	  		event.preventDefault();
+	  		console.log(this.props);
+	  		const authToken = Auth.getToken();
+	    	const headers = { Authorization: authToken}
 	  		axios
-	  			.post("api/events/"+this.props.eventId+"/register")
+	  			.post("/api/events/"+this.props.eventId+"/register",{},{headers:headers})
+	  			.then(response => {console.log(response)})
+	  			.catch(err =>console.log(err));
 	  	}
 
 		// loadSpecificFields(specificFields) {
@@ -52,47 +59,17 @@ export class EventRegistrationForm extends Component {
 			console.log(this.props);
 			return(
 				<div className="container">
-					<div className="panel panel-default">
-						<div className="panel-header form-header">
-							Event Registration
-						</div>
-		  				<div className="panel-body">
-		  					<form>
-								<p>We can autopopulate base user info here if needed (Name, email) </p>
-								{this.props.specificFields ? (
-									<div className="registration">
-										{this.props.specificFields.map( (specificField,idx) =>(
-										<div key= {idx}>
-											<SingleInput
-												inputType={'text'}
-												title={specificField.newField}
-												name={'input1'}
-												controlFunc={this.handleInputChange}
-												content={this.state.input1} />
-											<Button
-										        type="submit"
-										        className="btn btn-primary float-right"
-										        value="Submit"
-										        onClick={this.handleFormSubmit}>
-										        Register
-										    </Button>
-										</div>	
-									))}	
-								    </div>
-								):(
-									<div>
-										<Button
-									        type="submit"
-									        className="btn btn-primary float-right"
-									        value="Submit"
-									        onClick={this.handleEasyRegistration}>
-									        Register
-									    </Button>
-								    </div>
-								)}
-							</form>
-						</div> 
-					</div> 
+						
+		  				
+	  					<form onSubmit={this.handleEasyRegistration}>
+							<Button
+						        type="submit"
+						        className="btn btn-primary float-right"
+						        value="Submit">
+
+						        Register
+							</Button>	
+						</form>		 
 				</div> 
 				)
 		}
