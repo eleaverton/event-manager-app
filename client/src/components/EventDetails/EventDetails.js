@@ -31,12 +31,16 @@ export class EventDetails extends Component{
 	//jumbotron background needs to populate from Firebase picture
 	render(){
 		console.log(this.props);
+		const background = {
+			background: 'url('+this.state.img+')'
+			
+		};
 		return(
 		<div className="container-fluid">
-		<Jumbotron className="jumbo"/>
+		<Jumbotron className="jumbo" style={background} />
 		<div className="container">
 			<div className="panel-body">
-								<img src= {this.state.img} alt="..." />
+				
                 <h1>{this.props.data[0].title}</h1>
                 <h3>{this.props.data[0].dateOfEvent}</h3>
                 <h3>{this.props.data[0].time}</h3>
