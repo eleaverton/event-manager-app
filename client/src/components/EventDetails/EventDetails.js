@@ -32,7 +32,7 @@ export class EventDetails extends Component{
                 <p>{this.props.data[0].description}</p>
             	
 			</div>
-			<EventRegistrationForm eventId={this.props.data[0]._id} specificFields={this.props.data[0].specificFields} />
+			<EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
 			<br></br>
 			<br></br>
 			<CommentDisplay eventId={this.props.data[0]._id} />

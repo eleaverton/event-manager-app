@@ -15,6 +15,7 @@ export class EventRegistrationForm extends Component {
 		super(props);
 		this.state={
 			registrationDate:'',
+			registered:'',
 			specificFields:null
 		};
 
@@ -23,9 +24,9 @@ export class EventRegistrationForm extends Component {
 		// this.loadSpecificFields=this.loadSpecificFields.bind(this);
 		}
 
-		// componentDidMount(){
-		// 	this.loadSpecificFields(this.props.specificFields);
-		// }
+		componentDidMount(){
+			this.checkRegistration();
+		}
 		//define functions here
 		handleInputChange(event){
 	    	const { name, value } = event.target;
@@ -43,6 +44,8 @@ export class EventRegistrationForm extends Component {
 	  			.post("/api/events/"+this.props.eventId+"/register",{},{headers:headers})
 	  			.then(response => {console.log(response)})
 	  			.catch(err =>console.log(err));
+
+	  		this.setState({registered:true});
 	  	}
 
 		// loadSpecificFields(specificFields) {
@@ -54,14 +57,29 @@ export class EventRegistrationForm extends Component {
 		// 	}
 		// }
 
+		checkRegistration(){
+			const user = Auth.getUserId();
+			console.log(user);
+			console.log(this.props.attendees);
+			this.setState({registered: this.props.attendees.includes(user)});
+			console.log(this.state.registered);
+
+		}
+
 		//render a form based on the information that the event creator specified
 		render(){
 			console.log(this.props);
+			const registered = this.state.registered;
+			
+
 			return(
 				<div className="container">
-						
+
+		  			{registered ? (
+		  				<h5> You are registered for this event! </h5>
 		  				
-	  					<form onSubmit={this.handleEasyRegistration}>
+						):(
+						<form onSubmit={this.handleEasyRegistration}>
 							<Button
 						        type="submit"
 						        className="btn btn-primary float-right"
@@ -69,7 +87,10 @@ export class EventRegistrationForm extends Component {
 
 						        Register
 							</Button>	
-						</form>		 
+						</form>	
+
+						)}	
+	  						 
 				</div> 
 				)
 		}

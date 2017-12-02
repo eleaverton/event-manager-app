@@ -97,7 +97,7 @@ export class SignUpForm extends React.Component {
       .post("/signup", { email, password, name: firstName, lastName, dateOfBirth, zip, twitterHandle })
       .then(response =>{
         console.log(response);
-        Auth.authenticateUser(response.data.token);
+        Auth.authenticateUser(response.data.token, response.data.user);
 
         jwt.verify(response.data.token, "a secret phrasesssssss!!", (err, decoded) => {
           // the 401 code is for unauthorized status
