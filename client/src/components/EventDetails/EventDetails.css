@@ -5,3 +5,7 @@
 	background-size:cover;
 	background-position:center;
 }
+
+.eventDescription {
+	text-align: left;
+}

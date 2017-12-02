@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
 
-h1, h2, h3, h4, h5, p{
+
+h1, h2, h3, h4, h5, p {
   font-family: 'Muli', sans-serif;
 }
+
+.eventster {
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+}
+
 body {
   color: black;
   margin: 0;
@@ -92,8 +98,6 @@ body {
 }
 
 
-
-
 .carousel-indicators{
  visibility: hidden;
 }
@@ -107,9 +111,6 @@ body {
   border-color:#696969;
   }
  
-  .hoverTest{
-    
-  }
 
   table{
     border-collapse: separate;
@@ -159,6 +160,11 @@ body {
 .navBrand {
   font-weight: bolder;
   font-size: 200%;
+  margin-top: 10px; 
+}
+
+.navbarItem {
+  margin-top: 10px;
 }
 
 .tagline{
@@ -167,7 +173,7 @@ body {
   }
 
   .searchBox{
-    margin-top: -90px;
+    margin-top: -140px;
     position: relative;
     margin-bottom: 10px;
     z-index: 5;
