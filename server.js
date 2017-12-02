@@ -21,6 +21,7 @@ require("./models").connect(config.dbUri);
 
 //initialize then load passport configurations
 app.use(passport.initialize());
+
 //load passport strategies
 require("./config/passport.js")(passport);
 

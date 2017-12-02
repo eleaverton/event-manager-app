@@ -7,25 +7,10 @@ import { Link } from 'react-router-dom';
 import Auth from "../../modules/Auth";
 import { FileInput } from "./FileInput";
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
+import {storage} from '../../firebase/fire';
 
-
-const firebase = require("firebase");
 const jwt = require("jsonwebtoken");
-
-
-
-const config = {
-  apiKey: "AIzaSyBzQgBrwi4n--HUeIHap9BInecSmfGZwSA",
-  authDomain: "fantasyleague-932e1.firebaseapp.com",
-  databaseURL: "https://fantasyleague-932e1.firebaseio.com",
-  projectId: "fantasyleague-932e1",
-  storageBucket: "fantasyleague-932e1.appspot.com",
-  messagingSenderId: "300882421573"
-};
-
-firebase.initializeApp(config);
-const storage = firebase.storage()
-const storageRef = storage.ref();
+const storageRef = storage.ref("users/");
 var file;
 var decode;
 
@@ -43,6 +28,8 @@ export class SignUpForm extends React.Component {
       email: "",
       zip: "",
       image:"",
+      imageName:'',
+      imageUrl:'',
       twitterHandle: "",
       password: ""
     };
@@ -70,7 +57,7 @@ export class SignUpForm extends React.Component {
     const { name, value } = event.target;
     if (event.target.files){
       file = event.target.files[0];
-      this.setState({image:file});
+      this.setState({imageName:file.name});
     }
     this.setState({
       [name]: value
@@ -86,30 +73,35 @@ export class SignUpForm extends React.Component {
       email: this.state.email,
       zip: this.state.zip,
       twitterHandle: this.state.twitterHandle,
-      password: this.state.password
+      password: this.state.password,
+      imageName: this.state.imageName,
+      imageUrl: this.state.imageUrl
     };
 
 
     //create post request with right data path
     console.log("Send this in a POST request:", formPayload);
-    const { firstName, email, password, dateOfBirth, lastName, zip, twitterHandle } = this.state;
+    console.log(this.state);
+    const { firstName, email, password, dateOfBirth, lastName, zip, imageUrl, imageName, image, twitterHandle } = this.state;
     axios
-      .post("/signup", { email, password, name: firstName, lastName, dateOfBirth, zip, twitterHandle })
+      .post("/signup", { email, password, name: firstName, lastName, dateOfBirth, imageUrl, imageName, image, zip, twitterHandle })
       .then(response =>{
         console.log(response);
-        Auth.authenticateUser(response.data.token);
+        Auth.authenticateUser(response.data.token, response.data.user);
 
         jwt.verify(response.data.token, "a secret phrasesssssss!!", (err, decoded) => {
           // the 401 code is for unauthorized status
           decode = decoded.sub;
-          storageRef.child(decode + "/" + file.name).put(file).then(function(snapshot) {
-            console.log(snapshot);
+          storageRef.child(decode + "/" + file.name).put(file).then((snapshot) => {
+            console.log(snapshot.downloadURL);
+            this.setState({imageUrl:snapshot.downloadURL});
+            axios.put("/userImageUrl", {imageUrl: snapshot.downloadURL, id: decode}).catch(err => console.log(err));
           });
         });
       }).catch(err => console.log(err));
       setTimeout(()=> {
         this.context.router.history.replace("/");
-      },1000);
+      },2000);
 	    this.handleClearForm(event);
 	    this.props.closeModal();
 	};

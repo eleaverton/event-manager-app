@@ -11,9 +11,11 @@ const EventSchema = new mongoose.Schema({
   time: String,
   description: String,
   hashtag: String,
-  image: String,
+  imageName: String,
+  imageUrl: String,
+  image:String,
   specificFields: [String],
- 
+
   organizer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
