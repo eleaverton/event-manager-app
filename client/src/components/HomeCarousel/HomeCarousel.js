@@ -9,16 +9,27 @@ import Image from "../../../node_modules/react-bootstrap/lib/Image";
 const HomeCarousel = () => (
   <Carousel>
     <Carousel.Item>
-      <a><Image className="Image" src="/images/event.jpg" /></a>
-      
-    </Carousel.Item>
-    <Carousel.Item>
-      <a><Image className="Image" src="/images/event.jpg" /></a>
-      
+      <a>
+        <Image className="Image" src="/images/carnival2.jpg" />
+      </a>
     </Carousel.Item>
 
     <Carousel.Item>
-      <a><Image className="Image" src="/images/event.jpg" /></a>
+      <a>
+        <Image className="Image" src="/images/event2.jpg" />
+      </a>
+    </Carousel.Item>
+
+    <Carousel.Item>
+      <a>
+        <Image className="Image" src="/images/violin2.jpg" />
+      </a>
+    </Carousel.Item>
+
+    <Carousel.Item>
+      <a>
+        <Image className="Image" src="/images/balloon2.jpg" />
+      </a>
     </Carousel.Item>
   </Carousel>
 );

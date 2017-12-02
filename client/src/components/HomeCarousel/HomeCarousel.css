@@ -7,6 +7,10 @@ body {
 
 }
 
+.wrapper {
+    height: 100%;
+}
+
 .slideLabel {
     font-family: 'Muli', sans-serif;
 }
@@ -44,6 +48,11 @@ body {
     }
 }
 
+.party {
+    background-image: url("/images/party1.jpg") ;
+    height: 100%;
+   
+}
 
 .carousel {
     height: 50% !important;
