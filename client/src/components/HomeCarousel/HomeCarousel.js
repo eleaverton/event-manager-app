@@ -6,28 +6,29 @@ import "./HomeCarousel.css";
 // import Nav1 from "../Nav1";
 
 const HomeCarousel = () => (
+
   <Carousel>
     <Carousel.Item>
-     <Carousel.Caption>
-        
-       
-      </Carousel.Caption>
-      <img width={900} height={500} alt="" src="https://static.pexels.com/photos/433452/pexels-photo-433452.jpeg" />
+      <Carousel.Caption />
+      <img className="party" alt="" src="" />
     </Carousel.Item>
+
     <Carousel.Item>
-      <img width={900} height={500} alt="" src="/assets/carousel.png" />
+      <img
+        className="img-responsive"
+        alt=""
+        src="/images/carnival1.jpg"
+      />
       <Carousel.Caption>
-        
-       
       </Carousel.Caption>
     </Carousel.Item>
+
     <Carousel.Item>
-      <img width={900} height={500} alt="" src="/assets/carousel.png" />
-      <Carousel.Caption>
-                
-      </Carousel.Caption>
+      <img width={900} height={500} alt="" src="/images/pool1.jpg" />
+      <Carousel.Caption />
     </Carousel.Item>
   </Carousel>
+  
 );
 
 export default HomeCarousel;
