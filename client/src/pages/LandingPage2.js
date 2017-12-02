@@ -9,28 +9,52 @@ import Footer from "../components/Footer";
 import API from "../utils/API";
 import {SearchBox} from "../components/SearchBox";
 import Auth from "../modules/Auth";
+import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
+import NavItem from "../../../node_modules/react-bootstrap/lib/NavItem";
+import {SignUpForm, LoginForm} from  "../components/Form";
+import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
 
-
-//eventBoxes will render based on a get API call
-//need to use map to render the boxes
 
 class LandingPage extends Component {
   constructor(props){
     super(props);
     this.state={
       events:[],
-      registered:[],
-      created:[]
+      render:'',
+      signInShow:false,
+      loginShow:false,
+      eventShow:false,
     };
+    this.loadEvents=this.loadEvents.bind(this);
+    this.loadRegistered=this.loadRegistered.bind(this);
+    this.loadCreated=this.loadCreated.bind(this);
+    this.signInOpen=this.signInOpen.bind(this);
+    this.signInClose=this.signInClose.bind(this);
+    this.loginOpen=this.loginOpen.bind(this);
+    this.loginClose=this.loginClose.bind(this);
   };
+  signInClose() {
+    this.setState({signInShow:false});
+  }
+  signInOpen(){
+    this.setState({signInShow:true});
+    this.setState({eventShow:false});
+  }
+  loginClose() {
+    this.setState({loginShow:false});
+  }
+  loginOpen(){
+    this.setState({loginShow:true});
+    this.setState({eventShow:false});
+  }
 
   componentDidMount(){
     this.loadEvents();
   }
 
   loadEvents = () => {
-    //if allEvents Button is selected
-    this.state.events='';
+    this.setState({ render:true});
+    this.state.events=[];
     API.getAllEvents()
       .then(res => this.setState({events:res.data}))
       .catch(err => console.log(err));
@@ -38,24 +62,41 @@ class LandingPage extends Component {
   };
 
   loadRegistered = () =>{
-  //need to set up auth so that we can get id
     console.log("load Registered");
-    this.state.events='';
+    this.state.events=[];
     const authToken = Auth.getToken();
     const headers = { Authorization: authToken}
-    API.getAllUserEvents(headers)
-      .then(res => this.setState({events:res.data.eventsRegistered}))
-      .catch(err => console.log(err));
+    console.log(Auth.isUserAuthenticated());
+
+    if (Auth.isUserAuthenticated()){
+      this.setState({ render:true})
+      API.getAllUserEvents(headers)
+        .then(res => this.setState({events:res.data.eventsRegistered}))
+        .catch(err => console.log(err));
+    }
+    else{
+      this.setState({render:false});
+    }
+    console.log(this.state.render);
+    console.log(this.state.events.length);
   }
   loadCreated = () =>{
-    //if Created Button is selected
     console.log("load Created");
-    this.state.events='';
+    this.state.events=[];
     const authToken = Auth.getToken();
     const headers = { Authorization: authToken}
-    API.getAllUserEvents(headers)
-      .then(res => this.setState({events:res.data.eventsOrganized}))
-      .catch(err => console.log(err));
+    console.log(Auth.isUserAuthenticated());
+    if (Auth.isUserAuthenticated()){
+      this.setState({ render:true})
+      API.getAllUserEvents(headers)
+        .then(res => this.setState({events:res.data.eventsOrganized}))
+        .catch(err => console.log(err));
+    }
+    else{
+      this.setState({render:false});
+    }
+    console.log(this.state.render);
+    console.log(this.state.events.length);
   }
   updateEventsBasedOnSearch = (events)=> {
     console.log("events: ", events);
@@ -63,38 +104,62 @@ class LandingPage extends Component {
   }
 
   render() {
+    const render=this.state.render;
+    console.log(render);
+    let eventsList = null;
+    if (this.state.events.length > 0) {
+      eventsList = true;
+    } else {
+      eventsList = false;
+    }
+    console.log(this.state.events.length);
 
-    return <div className="App">
-           <HomeCarousel />
-           <SearchBox updateSearch={this.updateEventsBasedOnSearch}/>
-           <button type="button" className="btn btn-default" onClick={this.loadEvents}>All Events</button>
-           <button type="button" className="btn btn-default" onClick={this.loadRegistered}>Registered Events</button>
-           <button type="button" className="btn btn-default" onClick={this.loadCreated}>Created Events</button>
-           <br></br>
-           <br></br>
-        <div className="container">
-          <div className="row">
+    return (
+    <div className="App">
+      <HomeCarousel />
+      <SearchBox updateSearch={this.updateEventsBasedOnSearch}/>
+      <button type="button" className="btn btn-default" onClick={this.loadEvents}>All Events</button>
+      <button type="button" className="btn btn-default" onClick={this.loadRegistered}>Registered Events</button>
+      <button type="button" className="btn btn-default" onClick={this.loadCreated}>Created Events</button>
+      <br></br>
+      <br></br>
+      <div>
+      {render ? (
+      <div className="container">
+        <div className="row">
           <div className="panel panel-default">
             <div className="panel-body">
-              {this.state.events.length ? (
+              {eventsList ? (
                 <div className="eventList">
                   {this.state.events.map(event => (
                     <EventBox key={event._id} id={event._id} title={event.title} description={event.description}/>
-
                   ))}
                 </div>
               ) : (
-                <h5> No events yet - Be the first to add! </h5>
+                <h5> No events added yet! </h5>
               )}
             </div>
           </div>
-          </div>
-        </div>
-        <div>
-          <Footer />
         </div>
       </div>
-  }
+      ):(
+      <div className="container">
+        <div className="row">
+          <div className="panel panel-default">
+            <div className="panel-body">
+              <p>Sign up or log in to see events</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      )}   
+      </div>  
+      <div>
+        <Footer />
+      </div>
+    </div>
+  )}
 }
 
 export default LandingPage;
