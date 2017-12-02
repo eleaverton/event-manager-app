@@ -32,10 +32,10 @@ export default {
   },
   //gets comments associated with an event (event page)
   getComments:function(eventId){
-    return axios.get("/api/comments/"+ eventId);
+    return axios.get("/api/events/"+ eventId+"/comments");
   },
   //saves a user posted comment (event page)
-  saveComment: function(commentData){
-    return axios.post("/api/comments", commentData);
+  createNewComment: function(commentData, headers){
+    return axios.post("/api/events/"+ commentData.eventId+"/comments", {headers:headers});
   }
 };

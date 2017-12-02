@@ -40,7 +40,8 @@ router
      */
 router
   .route("/api/events/:eventId/comments")
-  .post(authCheckMiddleware,commentController.createNewComment); // create new comment
+  .post(authCheckMiddleware,commentController.createNewComment)// create new comment
+  .get(commentController.getComments);
 
 router
   .route("/api/events/:eventId/comments/:commentId")
