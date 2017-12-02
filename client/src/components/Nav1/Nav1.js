@@ -109,7 +109,7 @@ class Nav1 extends Component {
        <Navbar inverse collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
-             <a href="#">React-Bootstrap</a>
+             <a href="/">Eventster</a>
            </Navbar.Brand>
            <Navbar.Toggle />
          </Navbar.Header>

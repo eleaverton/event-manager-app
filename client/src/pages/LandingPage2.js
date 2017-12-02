@@ -9,6 +9,7 @@ import API from "../utils/API";
 import {SearchBox} from "../components/SearchBox";
 
 
+
 //eventBoxes will render based on a get API call
 //need to use map to render the boxes
 
