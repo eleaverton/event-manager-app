@@ -156,3 +156,19 @@ body {
   opacity: .75;
   color: black;
 }
+.navBrand {
+  font-weight: bolder;
+  font-size: 200%;
+}
+
+.tagline{
+ margin-top: -10px;
+ text-align: center;
+  }
+
+  .searchBox{
+    margin-top: -90px;
+    position: relative;
+    margin-bottom: 10px;
+    z-index: 5;
+  }
