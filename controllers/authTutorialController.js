@@ -102,7 +102,7 @@ module.exports = {
         errors: validationResult.errors
       });
     }
-    console.log(req);
+    //console.log(req);
 
     return passport.authenticate("local-signup", (err,token,userData) => {
       if (err) {

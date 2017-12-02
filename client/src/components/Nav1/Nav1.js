@@ -20,7 +20,7 @@ class Nav1 extends Component {
        signInShow:false,
        loginShow:false,
        eventShow:false
-      
+
       //  createEventShow:false
 
      };
@@ -66,12 +66,14 @@ class Nav1 extends Component {
        <Navbar inverse collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
+
              <h1 className="navBrand">Eventster</h1>
+
            </Navbar.Brand>
            <Navbar.Toggle />
          </Navbar.Header>
          <Navbar.Collapse>
-           
+
            <Nav pullRight>
              <Nav>
               <NavItem eventKey={1} onClick={this.eventOpen}>Create an Event</NavItem>
@@ -94,7 +96,7 @@ class Nav1 extends Component {
 
          <CreateEventForm show = {this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose}/>
 
-   
+
 
        </Navbar>
 

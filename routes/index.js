@@ -15,6 +15,8 @@ router.route("/").get(homeController.loadHomeRoute);
 //authorization routes
 router.route("/login").post(authTutorialController.postLogin);
 router.route("/signup").post(authTutorialController.postSignup); // need to delete for api/user post route below
+router.route("/userImageUrl").put(eventController.updateUserImageUrl);
+router.route("/eventImageUrl").put(eventController.updateEventImageUrl); 
 
 //test authorization routes
 router.route("/dashboard").get(authCheckMiddleware, apiController.getDashboard);
@@ -35,7 +37,7 @@ router
 
 
    /**
-     * 
+     *
      * Comment Routes
      */
 router
@@ -50,7 +52,7 @@ router
   .put(); // edit a comment
 
      /**
-     * 
+     *
      * End Comment Routes
      */
 

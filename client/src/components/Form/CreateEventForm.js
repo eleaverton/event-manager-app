@@ -10,15 +10,13 @@ import PropTypes from 'prop-types';
 import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
 import NavItem from "../../../node_modules/react-bootstrap/lib/NavItem";
 import {SignUpForm, LoginForm} from  "../Form";
+import {storage} from '../../firebase/fire';
 
-
-const firebase = require("firebase");
 const jwt = require("jsonwebtoken");
-const storage = firebase.storage()
-const storageRef = storage.ref();
+const storageRef = storage.ref("eventprofile/");
 var file;
 var decode;
-
+var id;
 
 
 
@@ -36,7 +34,9 @@ export class CreateEventForm extends Component {
 			location:'',
 			description:'',
 			hashtag:'',
-			image:'',
+			imageName:'',
+			imageUrl:'',
+			image: '',
 			newField:'',
 			specificFields:[],
 			attendeeRegistrationOptions:['One registration per attendee','One registration for multiple attendees'],
@@ -77,7 +77,7 @@ export class CreateEventForm extends Component {
     	const { name, value } = event.target;
 			if (event.target.files){
 	      file = event.target.files[0];
-	      this.setState({image:file});
+	      this.setState({imageName:file.name});
 	    }
 	    this.setState({
 	      [name]: value
@@ -99,6 +99,9 @@ export class CreateEventForm extends Component {
 	      	location: this.state.location,
 	      	description:this.state.description,
 	      	hashtag:this.state.hashtag,
+					image: this.state.image,
+					imageUrl: this.state.imageUrl,
+					imageName: this.state.imageName,
 	      	//this array will be used to populate the registration form for the event
 	      	specificFields:this.state.specificFields,
 	      	attendeeRegistration:this.state.attendeeRegistration
@@ -109,22 +112,20 @@ export class CreateEventForm extends Component {
 	    console.log('Send this in a POST request:', formPayload)
 	    const authToken = Auth.getToken();
 	    const headers = { Authorization: authToken}
-	    axios
-	    	.post("/api/events", formPayload, {headers:headers})
-	    	.then(response =>{ console.log(response)
-					jwt.verify(localStorage.getItem("token"), "a secret phrasesssssss!!", (err, decoded) => {
-						// the 401 code is for unauthorized status
-						decode = decoded.sub;
-						storageRef.child(decode + "/events/" + response.data.eventOrganized[response.data.eventOrganized.length-1] +"/"+file.name).put(file).then(function(snapshot) {
-							console.log(snapshot);
-						});
-					});
+
+			axios.post("/api/events", formPayload, {headers:headers}).then((response) =>{
+					console.log(response);
+						id = response.data.eventsOrganized[response.data.eventsOrganized.length-1];
+						storageRef.child(id +"/"+file.name).put(file).then((snapshot) => {
+	            console.log(snapshot);
+							this.setState({imageUrl:snapshot.downloadURL});
+						 axios.put("/eventImageUrl", {imageUrl: snapshot.downloadURL, id: id}).catch(err => console.log(err));
+	          });
 			}).catch(err => console.log(err));
-			console.log(this);
 			setTimeout(()=> {
-      	//this.context.router.history.replace("/");
-				window.location.reload();
-      },1000);
+      	this.context.router.history.push("/api/events/"+id);
+      },1700);
+
 	    this.handleClearForm(event);
 	    this.props.closeModal();
 	}

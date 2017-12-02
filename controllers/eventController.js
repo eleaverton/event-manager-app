@@ -14,23 +14,23 @@ module.exports = {
       hashtag,
       organizer: req.user
     })
-      .then(event => {
+      .then(events => {
+        console.log(events);
         return User.findOneAndUpdate(
           {
             _id: req.user
           },
           {
             $push: {
-              eventsOrganized: event._id
+              eventsOrganized: events._id
             }
           },
           {
             new: true
           }
-        );
-      })
-      .then(user => {
-        res.json(user);
+        ).then(user => {
+          res.json(user);
+        });
       });
   },
   getAllEvents: (req, res) => {
@@ -115,5 +115,49 @@ module.exports = {
         })
       )
       .catch(err => res.json(err));
+  },
+
+
+  updateUserImageUrl: (req,res) => {
+      console.log("here");
+      console.log(req.body);
+      User.findOneAndUpdate(
+        {
+          _id: req.body.id
+        },
+        {
+          $set: {
+            imageUrl: req.body.imageUrl
+          }
+        },
+        {
+          new: true
+        }
+      ).then((user)=>{
+        console.log("here send");
+        res.json(user);
+      });
+  },
+
+  updateEventImageUrl: (req,res) => {
+      console.log("here");
+      console.log(req.body);
+      Event.findOneAndUpdate(
+        {
+          _id: req.body.id
+        },
+        {
+          $set: {
+            imageUrl: req.body.imageUrl
+          }
+        },
+        {
+          new: true
+        }
+      ).then((user)=>{
+        console.log("here send");
+        res.json(user);
+      });
   }
+
 };

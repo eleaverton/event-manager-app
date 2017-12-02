@@ -101,9 +101,13 @@ module.exports = function(passport) {
           twitterHandle: req.body.twitterHandle.trim(),
           dateOfBirth: req.body.dateOfBirth,
           zip: req.body.zip.trim(),
+          imageUrl: req.body.imageUrl,
+          imageName: req.body.imageName,
+          image: req.body.image
         };
 
         const newUser = new User(req.body);
+        
         newUser.save((err,user) => {
           if (err) {
             return done(err);

@@ -15,6 +15,10 @@ import {SignUpForm, LoginForm} from  "../components/Form";
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
 
 
+
+//eventBoxes will render based on a get API call
+//need to use map to render the boxes
+
 class LandingPage extends Component {
   constructor(props){
     super(props);
@@ -103,6 +107,13 @@ class LandingPage extends Component {
      this.setState({events:events})
   }
 
+  // addEvent = (events)=> {
+  //   console.log("events: ", events);
+  //   const temp = {... this.state.event, events};
+  //    this.setState({events:temp})
+  // }
+
+
   render() {
     const render=this.state.render;
     console.log(render);
@@ -152,9 +163,9 @@ class LandingPage extends Component {
           </div>
         </div>
       </div>
-      
-      )}   
-      </div>  
+
+      )}
+      </div>
       <div>
         <Footer />
       </div>
