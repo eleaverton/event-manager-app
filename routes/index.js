@@ -48,7 +48,7 @@ router
 router
   .route("/api/events/:eventId/comments/:commentId")
   .get()
-  .delete() // delete a comment
+  .delete(commentController.deleteComment) // delete a comment
   .put(); // edit a comment
 
      /**
