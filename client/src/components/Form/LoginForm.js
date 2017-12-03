@@ -86,7 +86,6 @@ export class LoginForm extends Component {
               className="btn btn-primary float-right"
               value="Submit"
             />
-            // <small>Already have an account? <Link to={'/signup'}>Sign Up</Link></small>
           </form>
 
         </Modal.Body>
