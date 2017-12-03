@@ -181,7 +181,6 @@ export class SignUpForm extends React.Component {
 					        type="submit"
 					        className="btn btn-primary float-right"
 					        value="Submit"/>
-          // <small>Already have an account? <Link to={'/login'}>Log In</Link></small>
 
 					</form>
 

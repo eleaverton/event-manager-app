@@ -9,3 +9,20 @@
 .eventDescription {
 	text-align: left;
 }
+
+.countDown{
+	margin-top: -400px;
+	padding-left: 10px;
+}
+.JT {
+	 font-family: 'Muli', sans-serif;
+	font-weight: bolder !important;
+	color: white;
+	opacity: .8;
+   	text-shadow:
+   		2px 2px 0 #000,
+    	-1px -1px 0 #000,  
+    	1px -1px 0 #000,
+    	-1px 1px 0 #000,
+     	1px 1px 0 #000;
+}
