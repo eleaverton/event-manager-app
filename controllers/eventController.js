@@ -4,8 +4,10 @@ const User = require("../models/user");
 module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
-    console.log(`got to post create new event route. User = ${req.user}`);
     const { title, location, dateOfEvent, description, hashtag, specificFields } = req.body;
+    console.log("req.body: ", req.body);
+    console.log("req.body.specificFields: ", req.body.specificFields);
+
     Event.create({
       title,
       location,
