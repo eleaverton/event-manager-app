@@ -11,6 +11,7 @@ import axios from "axios";
 
 const storageRef = storage.ref("eventprofile/");
 
+
 export class EventDetails extends Component{
 	constructor(props){
 		super(props);
@@ -19,18 +20,24 @@ export class EventDetails extends Component{
 		}
 	}
 
+
+
 	componentWillMount(){
 		//  storageRef.child(this.props.id+"/img_fjords.jpg").getDownloadURL().then((url) => {
 		// 	this.setState({img:url});
 		//  });
+
 		axios.get("/api/events/" + this.props.id).then(res => {
 			console.log(res);
 			this.setState({img:res.data[0].imageUrl});
+
+
+
 		}).catch(err => console.log(err));
 	}
 	//jumbotron background needs to populate from Firebase picture
 	render(){
-		console.log(this.props);
+
 		return(
 		<div className="container-fluid">
 		<Jumbotron className="jumbo"/>
