@@ -21,13 +21,14 @@ export class EventRegistrationForm extends Component {
 
     	this.handleInputChange=this.handleInputChange.bind(this);
     	this.handleEasyRegistration=this.handleEasyRegistration.bind(this);
-		// this.loadSpecificFields=this.loadSpecificFields.bind(this);
+		this.loadSpecificFields=this.loadSpecificFields.bind(this);
 		}
 
 		componentDidMount(){
 			this.checkRegistration();
+			this.loadSpecificFields(this.props.specificFields);
 		}
-		//define functions here
+		
 		handleInputChange(event){
 	    	const { name, value } = event.target;
 		    this.setState({
@@ -48,14 +49,14 @@ export class EventRegistrationForm extends Component {
 	  		this.setState({registered:true});
 	  	}
 
-		// loadSpecificFields(specificFields) {
-		// 	specificFields.forEach(function(element){
-		// 		this.setState({
-		// 			[element]:''
-		// 		});
-		// 		console.log(this.state);
-		// 	}
-		// }
+		loadSpecificFields(specificFields) {
+			specificFields.forEach(function(element){
+				this.setState({
+					[element]:''
+				});
+				console.log(this.state);
+			});
+		}
 
 		checkRegistration(){
 			const user = Auth.getUserId();
@@ -92,6 +93,6 @@ export class EventRegistrationForm extends Component {
 						)}	
 	  						 
 				</div> 
-				)
+			)
 		}
 	}
