@@ -62,7 +62,7 @@ class Nav1 extends Component {
    render(){
 
 
-     return <Navbar inverse collapseOnSelect>
+     return <Navbar inverse collapseOnSelect navbar-fixed-top>
          <Navbar.Header>
            <Navbar.Brand>
              <h1 className="navBrand eventster">Eventster</h1>
@@ -93,14 +93,11 @@ class Nav1 extends Component {
            </Nav>
          </Navbar.Collapse>
 
-         <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
-         <LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
+         <SignUpForm show={this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
+         <LoginForm show={this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose} />
 
-         <CreateEventForm show = {this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose}/>
-
-
-
-       </Navbar>
+         <CreateEventForm show={this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose} />
+       </Navbar>;
 
    }
  };
