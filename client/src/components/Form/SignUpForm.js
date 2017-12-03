@@ -140,13 +140,15 @@ export class SignUpForm extends React.Component {
 							title={'Last Name'}
 							name={'lastName'}
 							controlFunc={this.handleInputChange}
-							content={this.state.lastName} />
-						<SingleInput
+              content={this.state.lastName} />
+                       
+              <SingleInput
 							inputType={'password'}
-							title={'Password'}
+							title={'Password (must be at least 8 characters in length)'}
 							name={'password'}
 							controlFunc={this.handleInputChange}
-							content={this.state.password} />
+              content={this.state.password} />
+             
 						<SingleInput
 							inputType={'date'}
 							title={'Birthday'}
