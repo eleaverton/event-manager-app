@@ -5,14 +5,14 @@ module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
     console.log(`got to post create new event route. User = ${req.user}`);
-    const { title, location, dateOfEvent, description, hashtag, specificFields:[Object] } = req.body;
+    const { title, location, dateOfEvent, time, description, hashtag, specificFields } = req.body;
     Event.create({
       title,
       location,
       dateOfEvent,
+      time,
       description,
       hashtag,
-      specificFields,
       organizer: req.user
     })
       .then(events => {

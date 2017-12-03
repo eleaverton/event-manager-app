@@ -94,7 +94,7 @@ export class CreateEventForm extends Component {
 	    const formPayload = {
 	    	//admin: however we get the user id from authentication
 	      	title: this.state.title,
-	      	dateOfEvent: this.state.date,
+	      	dateOfEvent: this.state.dateOfEvent,
 	      	time: this.state.time,
 	      	location: this.state.location,
 	      	description:this.state.description,

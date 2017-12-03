@@ -14,7 +14,7 @@ const EventSchema = new mongoose.Schema({
   imageName: String,
   imageUrl: String,
   image:String,
-  specificFields: [{type: String}],
+  specificFields: [String],
 
   organizer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
