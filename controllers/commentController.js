@@ -49,9 +49,14 @@ module.exports = {
       .catch(err => res.json ({err:"error"}))
   },
   deleteComment: (req,res) => {
-    const {eventId, commentId} = req.params.eventId;
+    console.log("delete");
+    const eventId = req.params.eventId;
+    const commentId = req.params.commentId;
     Comment.remove({ _id: commentId })
-      .then(comments => res.json(comments))
+      .then(comments => {
+        res.json(comments);
+        console.log("comments "+comments);
+      })
       .catch(err => res.json({ err: "error" }));
   }
 }
