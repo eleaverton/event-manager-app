@@ -10,12 +10,12 @@ export class DelButton extends Component {
 
 	delComment(event){
 		event.preventDefault();
-
+		console.log(this.props);
 		axios
 			.delete("/api/events/"+this.props.eventId+"/comments/"+this.props.commId)
-			.then(res => {
-				console.log(res.data);
-				this.props.loadComments();
+			.then(comments => {
+				console.log(comments);
+				this.props.loadComments(this.props.eventId);
 			})
 			.catch(err => console.log(err))
 
