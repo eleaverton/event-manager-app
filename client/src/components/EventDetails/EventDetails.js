@@ -75,6 +75,7 @@ export class EventDetails extends Component {
 		if(organizer==true){
 			orgText=<p>(This is your event)</p>
 		}
+	const example = [{_id: 456789, fieldName:"does this work?", event: 34567},{_id: 567890, fieldName:"does it really?", event: 34567}]
     return (<div className="container">
         <div className="row">
           <div className="col-md-8">
@@ -95,7 +96,8 @@ export class EventDetails extends Component {
           </div>
         </div>
           <div className="panel-body" />
-          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
+          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={example} />
+			
 
           <br />
           <CommentDisplay eventId={this.props.data[0]._id} organizer={this.state.organizerUser}/>
