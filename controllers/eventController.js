@@ -9,7 +9,6 @@ module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
 
-
     const {
       title,
       location,
@@ -18,7 +17,6 @@ module.exports = {
       time,
       hashtag
     } = req.body;
-
 
     //push specific fields into array
     const specificFields = [];
@@ -126,9 +124,9 @@ module.exports = {
         //add event to user model
         User.findOneAndUpdate(
           { _id: req.user },
-          { $addToSet: { eventsRegistered: eventId } },
+          { $addToSet: { eventsRegistered: event._id } },
           { new: true }
-        );
+        ).then((user)=> console.log("User model here: ", user));
       })
       //TODO: Loop through specificfield array and create response item and then push response id to specificfield model
       .then(() => {
@@ -145,7 +143,9 @@ module.exports = {
             SpecificField.findOneAndUpdate(
               { _id: response.specificField },
               { $addToSet: { responses: response._id } }
-            ).then((ef)=> console.log("ef: ", ef));
+
+            ).then(ef => console.log("ef: ", ef));
+
           });
         });
       })

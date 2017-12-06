@@ -1,1 +1,1 @@
-export { default } from "./Nav1";
+export * from "./Nav1";
