@@ -18,3 +18,7 @@
   max-width: 500px;
   overflow: hidden;
 }
+
+.eventBoxImage{
+	height:200px !important;
+}

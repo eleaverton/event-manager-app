@@ -5,6 +5,7 @@ import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 const google = window.google;
 
 
+
 const NewMap = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
@@ -25,12 +26,12 @@ const NewMap = compose(
 )(props =>
   <GoogleMap
     defaultZoom={14}
-    defaultCenter={props.center}
+    defaultCenter={props.location}
 
   >
 
     <Marker
-      position={{ lat: 29.7221625, lng: -95.3924962 }}
+      position={{ lat: props.location.lat, lng: props.location.lng }}
       onClick={props.onToggleOpen}
     >
       {props.isOpen && <InfoBox
@@ -39,7 +40,7 @@ const NewMap = compose(
       >
         <div style={{ backgroundColor: `green`, opacity: 0.85, padding: `12px` }}>
           <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-            Cockrell Butterfly Center
+            {props.title}
           </div>
         </div>
       </InfoBox>}
@@ -47,4 +48,19 @@ const NewMap = compose(
   </GoogleMap>
 );
 
-export default NewMap;
+class Map extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <NewMap location={this.props.location} title = {this.props.title}/>
+    )
+  }
+}
+
+
+
+
+export default Map;

@@ -13,6 +13,7 @@ import Nav from "../../../node_modules/react-bootstrap/lib/Nav";
 import NavItem from "../../../node_modules/react-bootstrap/lib/NavItem";
 import {SignUpForm, LoginForm} from  "../components/Form";
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
+import {OrganizerTableAll} from "../components/OrganizerTableAll";
 
 
 
@@ -25,6 +26,7 @@ class LandingPage extends Component {
     this.state={
       events:[],
       render:'',
+      orgView: false,
       signInShow:false,
       loginShow:false,
       eventShow:false,
@@ -59,6 +61,7 @@ class LandingPage extends Component {
   loadEvents = () => {
     this.setState({ render:true});
     this.state.events=[];
+    this.setState({orgView:false});
     API.getAllEvents()
       .then(res => this.setState({events:res.data}))
       .catch(err => console.log(err));
@@ -68,6 +71,7 @@ class LandingPage extends Component {
   loadRegistered = () =>{
     console.log("load Registered");
     this.state.events=[];
+    this.setState({orgView:false});
     const authToken = Auth.getToken();
     const headers = { Authorization: authToken}
     console.log(Auth.isUserAuthenticated());
@@ -91,10 +95,11 @@ class LandingPage extends Component {
     const headers = { Authorization: authToken}
     console.log(Auth.isUserAuthenticated());
     if (Auth.isUserAuthenticated()){
-      this.setState({ render:true})
+      
       API.getAllUserEvents(headers)
         .then(res => this.setState({events:res.data.eventsOrganized}))
         .catch(err => console.log(err));
+      this.setState({ render:true, orgView:true})
     }
     else{
       this.setState({render:false});
@@ -125,6 +130,12 @@ class LandingPage extends Component {
     }
     console.log(this.state.events.length);
 
+    let table=null
+    const orgView=this.state.orgView;
+    if (orgView){
+      table=<OrganizerTableAll data={this.state.events}/>
+    }
+
     return (
     <div className="App">
       <HomeCarousel />
@@ -145,7 +156,9 @@ class LandingPage extends Component {
                   {this.state.events.map(event => (
                     <EventBox key={event._id} id={event._id} title={event.title} description={event.description}/>
                   ))}
+                  {table}
                 </div>
+              
               ) : (
                 <h5> No events added yet! </h5>
               )}

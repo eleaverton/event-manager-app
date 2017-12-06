@@ -47,6 +47,12 @@ module.exports = {
       .populate("user")          
       .then(comments => res.json(comments))
       .catch(err => res.json ({err:"error"}))
+  },
+  deleteComment: (req,res) => {
+    const {eventId, commentId} = req.params;
+    Comment.remove({ _id: commentId })
+      .then(comments => res.json({success:"comment deleted"}))
+      .catch(err => res.json({ err: "error" }));
   }
 }
 

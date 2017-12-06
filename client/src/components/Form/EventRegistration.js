@@ -16,23 +16,30 @@ export class EventRegistrationForm extends Component {
 		this.state={
 			registrationDate:'',
 			registered:'',
-			specificFields:null
+			specificFields:[]
+
 		};
 
-    	this.handleInputChange=this.handleInputChange.bind(this);
+    	this.handleSpecificResponseChange=this.handleSpecificResponseChange.bind(this);
     	this.handleEasyRegistration=this.handleEasyRegistration.bind(this);
-		// this.loadSpecificFields=this.loadSpecificFields.bind(this);
+		this.loadSpecificFields=this.loadSpecificFields.bind(this);
+		this.checkRegistration=this.checkRegistration.bind(this);
+		this.handleSpecificFieldsRegistration=this.handleSpecificFieldsRegistration.bind(this);
 		}
 
 		componentDidMount(){
+			console.log("mount");
 			this.checkRegistration();
+			this.loadSpecificFields(this.props.specificFields);
 		}
-		//define functions here
-		handleInputChange(event){
-	    	const { name, value } = event.target;
-		    this.setState({
-		      [name]: value
-		    });
+		
+		handleSpecificResponseChange = (idx) => (event) => {
+			const newSpecificFields = this.state.specificFields.map((specificField,sidx)=>{
+				if (idx !== sidx) return specificField;
+				return {...specificField, response:event.target.value};
+			});
+			this.setState({specificFields: newSpecificFields});
+	    	
 	  	}
 
 	  	handleEasyRegistration(event){
@@ -48,14 +55,48 @@ export class EventRegistrationForm extends Component {
 	  		this.setState({registered:true});
 	  	}
 
-		// loadSpecificFields(specificFields) {
-		// 	specificFields.forEach(function(element){
-		// 		this.setState({
-		// 			[element]:''
-		// 		});
-		// 		console.log(this.state);
-		// 	}
-		// }
+	  	handleSpecificFieldsRegistration(event){
+	  		event.preventDefault();
+	  		console.log(this.props);
+	  		const authToken = Auth.getToken();
+	    	const headers = { Authorization: authToken}
+
+	    	const formPayload = this.state.specificFields;
+	    	console.log(formPayload);
+	    	axios
+	  			.post("/api/events/"+this.props.eventId+"/register",formPayload,{headers:headers})
+	  			.then(response => {console.log(response)})
+	  			.catch(err =>console.log(err));
+
+	  		this.setState({registered:true});
+
+	  	}
+	    	
+	    	// const formPayload = {specificFields:[
+	    	// 	{specificFieldId:111111, response: userInput}, 
+	    	// 	{specificFieldId:22222, response: userInput}]
+	    	// 	}
+
+	    	// }
+	
+
+		loadSpecificFields = (specificFields) => {
+			console.log(specificFields);
+			console.log(this);
+					
+			specificFields.forEach((element)=>{
+				console.log(this);
+				this.setState({
+					specificFields:this.state.specificFields.concat([{
+						specificFieldId:element._id,
+						fieldName:element.fieldName,
+						response: ''
+					}])
+				});
+				
+			})
+			console.log(this.state.specificFields);	
+		}
 
 		checkRegistration(){
 			const user = Auth.getUserId();
@@ -69,8 +110,17 @@ export class EventRegistrationForm extends Component {
 		//render a form based on the information that the event creator specified
 		render(){
 			console.log(this.props);
+			let specificFieldsPresent
 			const registered = this.state.registered;
-			
+
+			if (this.props.specificFields.length > 0) {
+		      specificFieldsPresent = true;
+		    } else {
+		      specificFieldsPresent = false;
+		    }
+		    console.log(specificFieldsPresent)
+
+		
 
 			return(
 				<div className="container">
@@ -79,19 +129,46 @@ export class EventRegistrationForm extends Component {
 		  				<h5> You are registered for this event! </h5>
 		  				
 						):(
-						<form onSubmit={this.handleEasyRegistration}>
-							<Button
-						        type="submit"
-						        className="btn btn-primary float-right"
-						        value="Submit">
+						<div className = "registrationForm">
+						{specificFieldsPresent ? (
+							<form onSubmit={this.handleSpecificFieldsRegistration}>
+								{this.state.specificFields.map((specificField,idx) =>(
+	 									<div className="specificFieldDiv">
+	 										<SingleInput
+	 										inputType={'text'}
+	 										title={specificField.fieldName}
+	 										value={specificField.response}
+	 					
+	 										controlFunc={this.handleSpecificResponseChange(idx)}
+	 										 />
+	 									</div>
 
-						        Register
-							</Button>	
-						</form>	
+	 								))}
+								<Button
+							        type="submit"
+							        className="btn btn-primary float-right"
+							        value="Submit">
+
+							        Register
+								</Button>
+							</form>
+
+							):(
+							<form onSubmit={this.handleEasyRegistration}>
+									<Button
+								        type="submit"
+								        className="btn btn-primary float-right"
+								        value="Submit">
+
+								        Register
+									</Button>	
+								</form>
+							)}
+						</div>
 
 						)}	
 	  						 
 				</div> 
-				)
+			)
 		}
 	}

@@ -1,41 +1,73 @@
 const Event = require("../models/event");
 const User = require("../models/user");
+const SpecificField = require("../models/specificfield");
 
 module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
-    console.log(`got to post create new event route. User = ${req.user}`);
-    const { title, location, dateOfEvent, description, hashtag, specificFields } = req.body;
+
+    const { title, location, dateOfEvent, description, hashtag } = req.body;
+
+    //push specific fields into array
+    const specificFields = [];
+    req.body.specificFields.forEach(field => {
+      if (field !== "") {
+        specificFields.push(field.newField);
+      }
+    });
+
+    let createdEvent = {};
+    let createdUser = {};
+
+    //create event w/o specific field
+
     Event.create({
       title,
       location,
       dateOfEvent,
+      time,
       description,
       hashtag,
       organizer: req.user
-    })
-      .then(events => {
-        console.log(events);
-        return User.findOneAndUpdate(
-          {
-            _id: req.user
-          },
-          {
-            $push: {
-              eventsOrganized: events._id
-            }
-          },
-          {
-            new: true
+    }).then(events => {
+      createdEvent = events;
+
+      //create specific field object
+
+      return User.findOneAndUpdate(
+        {
+          _id: req.user
+        },
+        {
+          $push: {
+            eventsOrganized: events._id
           }
-        ).then(user => {
-          res.json(user);
-        });
-      });
+        },
+        {
+          new: true
+        }
+      )
+        .then(user => {
+          createdUser = user;
+          specificFields.forEach(fieldName => {
+            SpecificField.create({
+              fieldName: fieldName,
+              event: createdEvent._id
+            }).then(field =>
+              Event.findOneAndUpdate(
+                { _id: createdEvent._id },
+                { $addToSet: { specificFields: field._id } },
+                { new: true }
+              )
+            );
+          });
+        })
+        .then(() => res.json(createdUser));
+    });
   },
   getAllEvents: (req, res) => {
     Event.find({})
-      .populate("attendees organizer comments")
+      .populate("attendees organizer comments specificFields")
       .then(events => res.json(events));
     // .then(events => res.json(events));
   },
@@ -59,19 +91,34 @@ module.exports = {
   registerUserToEvent: (req, res) => {
     const eventId = req.params.eventId;
     const userId = req.user;
+    //TODO: Get specificfield ID and response from req.body
     let eventData = {};
-    Event.findOneAndUpdate({ _id: eventId }, { $addToSet: { attendees: userId } }, { new: true })
-      // .populate("attendees organizer comments")
+    //add user to Event
+    Event.findOneAndUpdate(
+      { _id: eventId },
+      { $addToSet: { attendees: userId } },
+      { new: true }
+    )
+      // deep populate("attendees organizer comments")
       .populate([
-        { path: "comments", model: "Comment", populate: {path:"user", model:"User"} },
+        {
+          path: "comments",
+          model: "Comment",
+          populate: { path: "user", model: "User" }
+        },
         { path: "organizer", model: "User" },
-        { path: "attendees", model: "User" },
+        { path: "attendees", model: "User" }
       ])
       .then(event => {
         eventData = event;
-        const user = User.findOneAndUpdate({ _id: req.user }, { $addToSet: { eventsRegistered: eventId } }, { new: true });
-        return user;
+        //add event to user model
+       User.findOneAndUpdate(
+          { _id: req.user },
+          { $addToSet: { eventsRegistered: eventId } },
+          { new: true }
+        );
       })
+      //TODO: Loop through specificfield array and create response item and then push response id to specificfield model
       .then(() => res.json({ eventData }))
       .catch(err => res.json(err));
   },
@@ -117,47 +164,45 @@ module.exports = {
       .catch(err => res.json(err));
   },
 
-
-  updateUserImageUrl: (req,res) => {
-      console.log("here");
-      console.log(req.body);
-      User.findOneAndUpdate(
-        {
-          _id: req.body.id
-        },
-        {
-          $set: {
-            imageUrl: req.body.imageUrl
-          }
-        },
-        {
-          new: true
+  updateUserImageUrl: (req, res) => {
+    console.log("here");
+    console.log(req.body);
+    User.findOneAndUpdate(
+      {
+        _id: req.body.id
+      },
+      {
+        $set: {
+          imageUrl: req.body.imageUrl
         }
-      ).then((user)=>{
-        console.log("here send");
-        res.json(user);
-      });
+      },
+      {
+        new: true
+      }
+    ).then(user => {
+      console.log("here send");
+      res.json(user);
+    });
   },
 
-  updateEventImageUrl: (req,res) => {
-      console.log("here");
-      console.log(req.body);
-      Event.findOneAndUpdate(
-        {
-          _id: req.body.id
-        },
-        {
-          $set: {
-            imageUrl: req.body.imageUrl
-          }
-        },
-        {
-          new: true
+  updateEventImageUrl: (req, res) => {
+    console.log("here");
+    console.log(req.body);
+    Event.findOneAndUpdate(
+      {
+        _id: req.body.id
+      },
+      {
+        $set: {
+          imageUrl: req.body.imageUrl
         }
-      ).then((user)=>{
-        console.log("here send");
-        res.json(user);
-      });
+      },
+      {
+        new: true
+      }
+    ).then(user => {
+      console.log("here send");
+      res.json(user);
+    });
   }
-
 };

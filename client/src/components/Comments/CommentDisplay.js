@@ -7,6 +7,7 @@ import axios from "axios";
 import {TextArea} from '../Form/TextArea'; 
 import "../Form/Form.css"; 
 import Auth from "../../modules/Auth";
+import {DelButton} from "./DelButton";
 
 //props with event id
 export class CommentDisplay extends Component {
@@ -72,8 +73,19 @@ export class CommentDisplay extends Component {
 	    });
 	};
 
+
+
 	render(){
 		console.log(this.state.comments);
+		console.log(this.props.organizer);
+
+		const delButton = this.props.organizer;
+		console.log(delButton);
+
+		// const delButton = null;
+		// if(this.props.organizer == true){
+		// 	delButton= <button type="button" onClick={this.deleteComment} className="btn btn-danger">Delete</button>
+		// }
 		return (
 			<div className="container">
 				<div className="panel panel-default">
@@ -90,6 +102,7 @@ export class CommentDisplay extends Component {
 
 										</div>
 										<p>{comment.user.name}</p>
+										<div> {delButton ? (<DelButton eventId = {this.props.eventId} commId = {comment._id} loadComments = {this.loadComments}/>):(<p> </p>)} </div>
 									</CommentSingle>
 								))}
 							</CommentList>

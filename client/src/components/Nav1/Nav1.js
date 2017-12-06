@@ -65,7 +65,7 @@ class Nav1 extends Component {
      return <Navbar inverse collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
-             <h1 className="navBrand eventster">Eventster</h1>
+             <a className=" navbar-brand navBrand eventster" href = "/">Eventster</a>
            </Navbar.Brand>
            <Navbar.Toggle />
          </Navbar.Header>
