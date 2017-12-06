@@ -62,7 +62,7 @@ export class EventRegistrationForm extends Component {
 	  		const authToken = Auth.getToken();
 	    	const headers = { Authorization: authToken}
 
-	    	const formPayload = this.state.specificFields;
+	    	const formPayload = {specificFields: this.state.specificFields};
 	    	console.log(formPayload);
 	    	axios
 	  			.post("/api/events/"+this.props.eventId+"/register",formPayload,{headers:headers})
