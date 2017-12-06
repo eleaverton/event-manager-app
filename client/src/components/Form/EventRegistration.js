@@ -112,8 +112,16 @@ export class EventRegistrationForm extends Component {
 			const user = Auth.getUserId();
 			console.log(user);
 			console.log(this.props.attendees);
+
+			var registeredUser = false;
+				for(var i = 0; i < this.props.attendees.length; i++) {
+					if (this.props.attendees[i]._id == user) {
+						registeredUser = true;
+						break;
+					}
+				}
 			console.log(this.props.attendees.includes(user));
-			this.setState({registered: this.props.attendees.includes(user)});
+			this.setState({registered: registeredUser});
 			console.log(this.state.registered);
 
 		}
