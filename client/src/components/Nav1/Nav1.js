@@ -60,7 +60,7 @@ export class Nav1 extends Component {
 
    render(){
      return (
-        <Navbar className="collapseOnSelect navbar-fixed-top">
+        <Navbar fixedTop collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
              <a className="navbar-brand navBrand eventster" href="/">
