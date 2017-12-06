@@ -26,6 +26,7 @@
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
+    "react-sticky-dynamic-header": "^0.1.2",
     "react-zoomify": "^1.0.9",
     "request": "^2.83.0"
   },
