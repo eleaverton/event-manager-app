@@ -39,9 +39,16 @@ export class EventDetails extends Component {
     // 	this.setState({img:url});
     //  });
 		// Geocoding
-		geocoder.geocode("616 memorial heights drive houston texas 77007", ( err, data ) => {
+
+		geocoder.geocode(this.props.data[0].location, ( err, data ) => {
 		  // do something with data
-			this.setState({ location: data.results[0].geometry.location });
+
+			if (data.results[0] !== undefined){
+				this.setState({ location: data.results[0].geometry.location });
+			}
+			else {
+				this.setState({ location: { lat: 29.76328, lng: -95.36327 }});
+			}
 		});
 
 
