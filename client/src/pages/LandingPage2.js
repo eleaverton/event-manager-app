@@ -95,6 +95,7 @@ class LandingPage extends Component {
     this.state.events=[];
     const authToken = Auth.getToken();
     const headers = { Authorization: authToken}
+    console.log(authToken);
     console.log(Auth.isUserAuthenticated());
     if (Auth.isUserAuthenticated()){
       
