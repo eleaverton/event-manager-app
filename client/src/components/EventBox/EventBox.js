@@ -33,7 +33,7 @@ class EventBox extends Component {
 
         <div className="col-sm-6 col-md-4">
             <div className="thumbnail">
-                <img src= {this.state.img} alt="..." />
+                <img className="eventBoxImage" src= {this.state.img} alt="..." />
                 <div className="caption">
                     <h3>{this.props.title}</h3>
                     <div className="box">

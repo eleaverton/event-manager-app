@@ -94,7 +94,7 @@ export class CreateEventForm extends Component {
 	    const formPayload = {
 	    	//admin: however we get the user id from authentication
 	      	title: this.state.title,
-	      	dateOfEvent: this.state.date,
+	      	dateOfEvent: this.state.dateOfEvent,
 	      	time: this.state.time,
 	      	location: this.state.location,
 	      	description:this.state.description,
@@ -113,18 +113,20 @@ export class CreateEventForm extends Component {
 	    const authToken = Auth.getToken();
 	    const headers = { Authorization: authToken}
 
-			axios.post("/api/events", formPayload, {headers:headers}).then((response) =>{
+			axios.post("/api/events", formPayload, {headers:headers})
+				.then((response) =>{
 					console.log(response);
-						id = response.data.eventsOrganized[response.data.eventsOrganized.length-1];
-						storageRef.child(id +"/"+file.name).put(file).then((snapshot) => {
-	            console.log(snapshot);
+					id = response.data.eventsOrganized[response.data.eventsOrganized.length-1];
+					storageRef.child(id +"/"+file.name).put(file)
+						.then((snapshot) => {
+	            			console.log(snapshot);
 							this.setState({imageUrl:snapshot.downloadURL});
-						 axios.put("/eventImageUrl", {imageUrl: snapshot.downloadURL, id: id}).catch(err => console.log(err));
-	          });
-			}).catch(err => console.log(err));
+							axios.put("/eventImageUrl", {imageUrl: snapshot.downloadURL, id: id}).catch(err => console.log(err));
+	          			});
+				}).catch(err => console.log(err));
 			setTimeout(()=> {
-      	this.context.router.history.push("/api/events/"+id);
-      },1700);
+		      	this.context.router.history.push("/api/events/"+id);
+		      },1700);
 
 	    this.handleClearForm(event);
 	    this.props.closeModal();
@@ -270,9 +272,9 @@ export class CreateEventForm extends Component {
 
 
 
-				) //return
-					} //render
-				}; //class
+				) 
+					} 
+				}; 
 
 
 CreateEventForm.contextTypes = {

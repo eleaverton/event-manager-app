@@ -12,6 +12,10 @@ import CountDown from "../CountDown";
 import Row from "../../../node_modules/react-bootstrap/lib/Row";
 import Col from "../../../node_modules/react-bootstrap/lib/Col";
 import Map1 from "../Map1";
+import Auth from "../../modules/Auth";
+import API from "../../utils/API";
+
+var moment = require('moment');
 
 const storageRef = storage.ref("eventprofile/");
 
@@ -19,8 +23,11 @@ export class EventDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: ""
-    };
+		img:"",
+		organizerUser:"",
+		events:[]
+	}
+	this.checkIfOrganizer=this.checkIfOrganizer.bind(this);
   }
 
   componentWillMount() {
@@ -34,21 +41,50 @@ export class EventDetails extends Component {
         this.setState({ img: res.data[0].imageUrl });
       })
       .catch(err => console.log(err));
+      this.setState({organizerUser:false});
+		this.checkIfOrganizer();
   }
+
+  checkIfOrganizer(){
+		
+		const authToken = Auth.getToken();
+    	const headers = { Authorization: authToken};
+		API.getAllUserEvents(headers)
+	        .then(res => {
+	        	this.setState({events:res.data.eventsOrganized})
+	        	console.log(this.props.id);
+	        	console.log(this.state.events);
+	        	for (var i=0;i<this.state.events.length;i++){
+			    	if (this.props.id == this.state.events[i]._id){
+			    		this.setState({organizerUser:true});
+			    		console.log(this.state.organizerUser);
+			    	};
+			    }
+			    })
+	        	// console.log(res.data))
+	        .catch(err => console.log(err));
+	}
   
   render() {
     console.log(this.props);
     const background = {
       background: ""
     };
+    let orgText=null;
+		const organizer=this.state.organizerUser;
+		if(organizer==true){
+			orgText=<p>(This is your event)</p>
+		}
+	const example = [{_id: 456789, fieldName:"does this work?", event: 34567},{_id: 567890, fieldName:"does it really?", event: 34567}]
     return (<div className="container">
         <div className="row">
           <div className="col-md-8">
             <h1> {this.props.data[0].title}</h1>
-            <h3>{this.props.data[0].dateOfEvent}</h3>
+            <h3>{moment(this.props.data[0].dateOfEvent).format("MMMM Do YYYY")}</h3>
             <h3>{this.props.data[0].time}</h3>
             <h3>{this.props.data[0].location}</h3>
             <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
+            {orgText}
             <p className="eventDescription">
               {this.props.data[0].description}
             </p>
@@ -60,11 +96,13 @@ export class EventDetails extends Component {
           </div>
         </div>
           <div className="panel-body" />
-          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
+          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={example} />
+			
 
           <br />
-          <CommentDisplay eventId={this.props.data[0]._id} />
+          <CommentDisplay eventId={this.props.data[0]._id} organizer={this.state.organizerUser}/>
         
       </div>);
   }
+
 }

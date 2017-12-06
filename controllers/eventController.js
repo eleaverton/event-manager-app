@@ -5,6 +5,7 @@ const SpecificField = require("../models/specificfield");
 module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
+
     const { title, location, dateOfEvent, description, hashtag } = req.body;
 
     //push specific fields into array
@@ -19,10 +20,12 @@ module.exports = {
     let createdUser = {};
 
     //create event w/o specific field
+
     Event.create({
       title,
       location,
       dateOfEvent,
+      time,
       description,
       hashtag,
       organizer: req.user
@@ -64,7 +67,7 @@ module.exports = {
   },
   getAllEvents: (req, res) => {
     Event.find({})
-      .populate("attendees organizer comments")
+      .populate("attendees organizer comments specificFields")
       .then(events => res.json(events));
     // .then(events => res.json(events));
   },
@@ -88,13 +91,15 @@ module.exports = {
   registerUserToEvent: (req, res) => {
     const eventId = req.params.eventId;
     const userId = req.user;
+    //TODO: Get specificfield ID and response from req.body
     let eventData = {};
+    //add user to Event
     Event.findOneAndUpdate(
       { _id: eventId },
       { $addToSet: { attendees: userId } },
       { new: true }
     )
-      // .populate("attendees organizer comments")
+      // deep populate("attendees organizer comments")
       .populate([
         {
           path: "comments",
@@ -106,13 +111,14 @@ module.exports = {
       ])
       .then(event => {
         eventData = event;
-        const user = User.findOneAndUpdate(
+        //add event to user model
+       User.findOneAndUpdate(
           { _id: req.user },
           { $addToSet: { eventsRegistered: eventId } },
           { new: true }
         );
-        return user;
       })
+      //TODO: Loop through specificfield array and create response item and then push response id to specificfield model
       .then(() => res.json({ eventData }))
       .catch(err => res.json(err));
   },
