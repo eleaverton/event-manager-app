@@ -1,15 +1,26 @@
+// import { Response } from "../../../../../Library/Caches/typescript/2.6/node_modules/@types/node-fetch";
+
 const Event = require("../models/event");
 const User = require("../models/user");
 const SpecificField = require("../models/specificfield");
+const Response = require("../models/response");
 
 module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
 
-    const { title, location, dateOfEvent, description, hashtag } = req.body;
+    const {
+      title,
+      location,
+      dateOfEvent,
+      description,
+      time,
+      hashtag
+    } = req.body;
 
     //push specific fields into array
     const specificFields = [];
+    console.log("specific fields", req.body.specificFields);
     req.body.specificFields.forEach(field => {
       if (field !== "") {
         specificFields.push(field.newField);
@@ -76,7 +87,7 @@ module.exports = {
     Event.find({
       _id: eventId
     })
-      .populate("organizer")
+      .populate("attendees organizer comments specificFields")
       .then(event => res.json(event));
   },
   findEvents: (req, res) => {
@@ -91,7 +102,7 @@ module.exports = {
   registerUserToEvent: (req, res) => {
     const eventId = req.params.eventId;
     const userId = req.user;
-    //TODO: Get specificfield ID and response from req.body
+    const specificFields = req.body.specificFields;
     let eventData = {};
     //add user to Event
     Event.findOneAndUpdate(
@@ -99,7 +110,6 @@ module.exports = {
       { $addToSet: { attendees: userId } },
       { new: true }
     )
-      // deep populate("attendees organizer comments")
       .populate([
         {
           path: "comments",
@@ -112,13 +122,33 @@ module.exports = {
       .then(event => {
         eventData = event;
         //add event to user model
-       User.findOneAndUpdate(
+        User.findOneAndUpdate(
           { _id: req.user },
           { $addToSet: { eventsRegistered: eventId } },
           { new: true }
         );
       })
       //TODO: Loop through specificfield array and create response item and then push response id to specificfield model
+      .then(() => {
+        specificFields.map(sf => {
+          console.log("sf: ", sf);
+          const testId = "5a27412a01ff1a1b58517c81";
+          Response.create({
+            event: eventData._id,
+            user: userId,
+            specificField: testId,
+            // specificField: sf.specificFieldId,
+            response: sf.response
+          }).then(response => {
+            console.log("response: " + response);
+            console.log("specificId: " + response.specificField);
+            SpecificField.findOneAndUpdate(
+              { _id: response.specificField },
+              { $addToSet: { responses: response._id } },
+            ).then((ef)=> console.log("ef: ", ef));
+          });
+        });
+      })
       .then(() => res.json({ eventData }))
       .catch(err => res.json(err));
   },
