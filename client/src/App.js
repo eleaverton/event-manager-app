@@ -20,7 +20,7 @@ const App = () => (
     <div>
       <Nav1 />
       <Route exact path="/" component={LandingPage} />
-      <Route path="/api/events/:eventId" component={EventProfile} />
+      <Route path="/events/:eventId" component={EventProfile} />
       <Route exact path="/test" component={TestPage} />
       <Route exact path="/signup" component={SignUpForm} />
       <Route exact path="/login" component={LoginForm} />

@@ -39,7 +39,7 @@ class EventBox extends Component {
                     <div className="box">
                     <p className="demo1">{this.props.description}</p>
                     </div>
-                    <p><a href={'api/events/'+ this.props.id} className="btn btn-primary" role="button">More Info</a> </p>
+                    <p><a href={'events/'+ this.props.id} className="btn btn-primary" role="button">More Info</a> </p>
 
                 </div>
             </div>
