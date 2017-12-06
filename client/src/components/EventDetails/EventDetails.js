@@ -93,38 +93,45 @@ export class EventDetails extends Component {
 			orgText=<p>(This is your event)</p>
 		}
 	const example = [{_id: 456789, fieldName:"does this work?", event: 34567},{_id: 567890, fieldName:"does it really?", event: 34567}]
-    return (<div className="container">
+		return <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <h1> {this.props.data[0].title}</h1>
-            <h3>{moment(this.props.data[0].dateOfEvent).format("MMMM Do YYYY")}</h3>
-            <h3>{moment(this.props.data[0].time).format("h A")}</h3>
-            <h3>{this.props.data[0].location}</h3>
-            <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
-            {orgText}
-            <p className="eventDescription">
-              {this.props.data[0].description}
-            </p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="row">
+            <div className="col-md-4">
+              <h1> {this.props.data[0].title}</h1>
+              <h3>
+                {moment(this.props.data[0].dateOfEvent).format(
+                  "MMMM Do YYYY"
+                )}
+              </h3>
+              <h3>{moment(this.props.data[0].time).format("h A")}</h3>
+              <h3>{this.props.data[0].location}</h3>
+              <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
+              {orgText}
+              <p className="eventDescription">
+                {this.props.data[0].description}
+              </p>
+            </div>
+            <div className="col-md-4">
+              <Map1 location={this.state.location} title={this.props.data[0].title} />
+            </div>
+            <div className="col-md-4">
+              <a className="thumbnail">
+                <img src={this.state.img} />
+              </a>
+            </div>
           </div>
-					<div className="col-md-4">
-				  	<Map1 location = {this.state.location} title = {this.props.data[0].title} />
-		          </div>
-		  <div className="col-md-4">
-		  	<a  className="thumbnail">
-				<img src={this.state.img} />
-			</a>
-          </div>
-        </div>
           <div className="panel-body" />
 
           <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
-			
-
 
           <br />
-          <CommentDisplay eventId={this.props.data[0]._id} organizer={this.state.organizerUser}/>
-
-      </div>);
+          <CommentDisplay eventId={this.props.data[0]._id} organizer={this.state.organizerUser} />
+        </div>
+      </div>;
   }
 
 }
