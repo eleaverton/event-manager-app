@@ -9,6 +9,7 @@ module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
 
+
     const {
       title,
       location,
@@ -17,6 +18,7 @@ module.exports = {
       time,
       hashtag
     } = req.body;
+
 
     //push specific fields into array
     const specificFields = [];

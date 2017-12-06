@@ -39,9 +39,16 @@ export class EventDetails extends Component {
     // 	this.setState({img:url});
     //  });
 		// Geocoding
-		geocoder.geocode("616 memorial heights drive houston texas 77007", ( err, data ) => {
+
+		geocoder.geocode(this.props.data[0].location, ( err, data ) => {
 		  // do something with data
-			this.setState({ location: data.results[0].geometry.location });
+
+			if (data.results[0] !== undefined){
+				this.setState({ location: data.results[0].geometry.location });
+			}
+			else {
+				this.setState({ location: { lat: 29.76328, lng: -95.36327 }});
+			}
 		});
 
 
@@ -92,7 +99,7 @@ export class EventDetails extends Component {
           <div className="col-md-4">
             <h1> {this.props.data[0].title}</h1>
             <h3>{moment(this.props.data[0].dateOfEvent).format("MMMM Do YYYY")}</h3>
-            <h3>{this.props.data[0].time}</h3>
+            <h3>{moment(this.props.data[0].time).format("h A")}</h3>
             <h3>{this.props.data[0].location}</h3>
             <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
             {orgText}
@@ -110,7 +117,9 @@ export class EventDetails extends Component {
           </div>
         </div>
           <div className="panel-body" />
-          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={example} />
+
+          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
+			
 
 
           <br />
