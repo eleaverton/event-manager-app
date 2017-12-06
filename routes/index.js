@@ -10,7 +10,7 @@ const userController = require("../controllers/userController");
 
 const authCheckMiddleware = require("../middleware/auth-check");
 
-router.route("/").get(homeController.loadHomeRoute);
+// router.route("/").get(homeController.loadHomeRoute);
 
 //authorization routes
 router.route("/login").post(authTutorialController.postLogin);

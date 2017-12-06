@@ -40,7 +40,11 @@ export class LoginForm extends Component {
       .post("/login", { email, password })
       .then(response => {
         console.log(`Logged in successfully. Token: ${response.data.token}`)
-        Auth.authenticateUser(response.data.token);
+        Auth.authenticateUser(response.data.token, response.data.user);
+        console.log(response.data.user);
+        console.log(response.data.user.id);
+        console.log(response.data.user._id);
+
         this.context.router.history.replace("/");
       })
       .catch(err => console.log(err));
@@ -82,7 +86,6 @@ export class LoginForm extends Component {
               className="btn btn-primary float-right"
               value="Submit"
             />
-            // <small>Already have an account? <Link to={'/signup'}>Sign Up</Link></small>
           </form>
 
         </Modal.Body>

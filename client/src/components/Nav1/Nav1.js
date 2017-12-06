@@ -62,35 +62,37 @@ class Nav1 extends Component {
    render(){
 
 
-     return(
-       <Navbar inverse collapseOnSelect>
+     return <Navbar inverse collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
-
-             <h1 className="navBrand">Eventster</h1>
-
+             <h1 className="navBrand eventster">Eventster</h1>
            </Navbar.Brand>
            <Navbar.Toggle />
          </Navbar.Header>
          <Navbar.Collapse>
-
            <Nav pullRight>
              <Nav>
-              <NavItem eventKey={1} onClick={this.eventOpen}>Create an Event</NavItem>
+               <NavItem eventKey={1} onClick={this.eventOpen} className="navbarItem">
+                 Create an Event
+               </NavItem>
              </Nav>
-             {Auth.isUserAuthenticated() ? (
-              <Nav>
-             <LinkContainer to="/logout" onClick = {Auth.deauthenticateUser}>
-               <NavItem eventKey={5} >Log Out </NavItem>
-
-             </LinkContainer>
-             </Nav>):(
-             <Nav>
-               <NavItem eventKey={3} onClick={this.loginOpen}>Log In</NavItem>
-               <NavItem eventKey={4} onClick={this.signInOpen}>Sign Up</NavItem>
-             </Nav>)}
+             {Auth.isUserAuthenticated() ? <Nav>
+                 <LinkContainer to="/logout" onClick={Auth.deauthenticateUser}>
+                   <NavItem eventKey={5} className="navbarItem">
+                     Log Out{" "}
+                   </NavItem>
+                 </LinkContainer>
+               </Nav> : <Nav>
+                 <NavItem eventKey={3} onClick={this.loginOpen} className="navbarItem">
+                   Log In
+                 </NavItem>
+                 <NavItem eventKey={4} onClick={this.signInOpen} className="navbarItem">
+                   Sign Up
+                 </NavItem>
+               </Nav>}
            </Nav>
          </Navbar.Collapse>
+
          <SignUpForm show = {this.state.signInShow} onHide={this.signInClose} closeModal={this.signInClose} />
          <LoginForm show = {this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose}/>
 
@@ -100,7 +102,6 @@ class Nav1 extends Component {
 
        </Navbar>
 
-     )
    }
  };
 
