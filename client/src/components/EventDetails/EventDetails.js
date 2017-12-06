@@ -1,5 +1,4 @@
-//this component will populate based on a get API call
-//based on the id(?) of the button clicked to get here
+
 
 import React, { Component } from "react";
 import { EventRegistrationForm } from "../Form";
