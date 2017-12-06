@@ -31,6 +31,7 @@ class EventProfile extends Component {
 	    console.log(eventId);
 	    if (this.state.data){
 	    	return (
+				
 	       		<EventDetails id={eventId} data={this.state.data}/>	     
 	    	);
 	    }
