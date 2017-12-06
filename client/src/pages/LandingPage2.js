@@ -79,7 +79,9 @@ class LandingPage extends Component {
     if (Auth.isUserAuthenticated()){
       this.setState({ render:true})
       API.getAllUserEvents(headers)
-        .then(res => this.setState({events:res.data.eventsRegistered}))
+        .then(res => {
+          console.log(res.data);
+          this.setState({events:res.data.eventsRegistered})})
         .catch(err => console.log(err));
     }
     else{
