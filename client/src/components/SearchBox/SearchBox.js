@@ -43,7 +43,7 @@ render(){
   <div className="panel panel-default">
             
           <div className="panel-body">
-          <h1 className="tagline">We are great!</h1>
+          <h1 className="tagline">Fun happens here! Signup and find your next event.</h1>
               <div className="form-group">
                  <input name = "title" type="text" value = {this.state.title} className="form-control" placeholder="Search" onChange = {this.handleInputChange} />
               </div>
