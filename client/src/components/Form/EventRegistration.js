@@ -30,6 +30,7 @@ export class EventRegistrationForm extends Component {
 		componentDidMount(){
 			console.log("mount");
 			this.checkRegistration();
+			console.log(this.state);
 			this.loadSpecificFields(this.props.specificFields);
 		}
 		
@@ -83,18 +84,27 @@ export class EventRegistrationForm extends Component {
 		loadSpecificFields = (specificFields) => {
 			console.log(specificFields);
 			console.log(this);
-					
-			specificFields.forEach((element)=>{
-				console.log(this);
-				this.setState({
-					specificFields:this.state.specificFields.concat([{
-						specificFieldId:element._id,
-						fieldName:element.fieldName,
-						response: ''
-					}])
-				});
-				
+
+			specificFields.forEach((element) => {
+				var sfObj = {
+					specificFieldId:element._id,
+					fieldName:element.fieldName,
+					response:''
+				}
+				this.state.specificFields.push(sfObj);
 			})
+					
+			// specificFields.forEach((element)=>{
+			// 	console.log(this);
+			// 	this.setState({
+			// 		specificFields:this.state.specificFields.concat([{
+			// 			specificFieldId:element._id,
+			// 			fieldName:element.fieldName,
+			// 			response: ''
+			// 		}])
+			// 	});
+			// console.log(this.state.specificFields);	
+			// })
 			console.log(this.state.specificFields);	
 		}
 
@@ -102,6 +112,7 @@ export class EventRegistrationForm extends Component {
 			const user = Auth.getUserId();
 			console.log(user);
 			console.log(this.props.attendees);
+			console.log(this.props.attendees.includes(user));
 			this.setState({registered: this.props.attendees.includes(user)});
 			console.log(this.state.registered);
 
@@ -112,6 +123,7 @@ export class EventRegistrationForm extends Component {
 			console.log(this.props);
 			let specificFieldsPresent
 			const registered = this.state.registered;
+			console.log(this.state.specificFields);
 
 			if (this.props.specificFields.length > 0) {
 		      specificFieldsPresent = true;

@@ -6,7 +6,7 @@ module.exports = {
   createNewEvent: (req, res) => {
     // res.send("Got to event post route");
 
-    const { title, location, dateOfEvent, description, hashtag } = req.body;
+    const { title, location, dateOfEvent, time, description, hashtag } = req.body;
 
     //push specific fields into array
     const specificFields = [];
@@ -76,7 +76,7 @@ module.exports = {
     Event.find({
       _id: eventId
     })
-      .populate("organizer")
+      .populate("attendees organizer comments specificFields")
       .then(event => res.json(event));
   },
   findEvents: (req, res) => {

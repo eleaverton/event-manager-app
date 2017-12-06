@@ -81,7 +81,7 @@ export class EventDetails extends Component {
           <div className="col-md-8">
             <h1> {this.props.data[0].title}</h1>
             <h3>{moment(this.props.data[0].dateOfEvent).format("MMMM Do YYYY")}</h3>
-            <h3>{this.props.data[0].time}</h3>
+            <h3>{moment(this.props.data[0].time).format("h A")}</h3>
             <h3>{this.props.data[0].location}</h3>
             <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
             {orgText}
@@ -96,7 +96,7 @@ export class EventDetails extends Component {
           </div>
         </div>
           <div className="panel-body" />
-          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={example} />
+          <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
 			
 
           <br />

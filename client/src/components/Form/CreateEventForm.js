@@ -125,7 +125,7 @@ export class CreateEventForm extends Component {
 	          			});
 				}).catch(err => console.log(err));
 			setTimeout(()=> {
-		      	this.context.router.history.push("/api/events/"+id);
+		      	this.context.router.history.push("/events/"+id);
 		      },1700);
 
 	    this.handleClearForm(event);
