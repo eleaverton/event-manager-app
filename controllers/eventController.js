@@ -134,12 +134,10 @@ module.exports = {
       .then(() => {
         specificFields.map(sf => {
           console.log("sf: ", sf);
-          const testId = "5a27412a01ff1a1b58517c81";
           Response.create({
             event: eventData._id,
             user: userId,
-            specificField: testId,
-            // specificField: sf.specificFieldId,
+            specificField: sf.specificFieldId,
             response: sf.response
           }).then(response => {
             console.log("response: " + response);
