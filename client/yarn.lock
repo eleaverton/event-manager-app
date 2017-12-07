@@ -1194,7 +1194,7 @@ babel-register@^6.24.1, babel-register@^6.26.0, babel-register@^6.9.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@6.26.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.9.2:
+babel-runtime@6.26.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.6.1, babel-runtime@^6.9.2:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -5607,6 +5607,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-css-transition-group@^0.14.8:
+  version "0.14.8"
+  resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-0.14.8.tgz#c7a2279e71095e743c43a3a4583a1e4f1a2dd61d"
+
 react-bootstrap@^0.31.5:
   version "0.31.5"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-0.31.5.tgz#57040fa8b1274e1e074803c21a1b895fdabea05a"
@@ -5772,6 +5776,13 @@ react-scripts@1.0.14:
     whatwg-fetch "2.0.3"
   optionalDependencies:
     fsevents "1.1.2"
+
+react-sticky-dynamic-header@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-sticky-dynamic-header/-/react-sticky-dynamic-header-0.1.2.tgz#465ae7529a67399b7251dcc57510c432e2331b36"
+  dependencies:
+    babel-runtime "^6.6.1"
+    react-addons-css-transition-group "^0.14.8"
 
 react-transform-catch-errors@^1.0.2:
   version "1.0.2"

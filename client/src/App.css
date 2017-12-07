@@ -163,6 +163,10 @@ body {
   margin-top: 10px; 
 }
 
+Navbar {
+  background-color: black;
+}
+
 .navbarItem {
   margin-top: 10px;
 }

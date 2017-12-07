@@ -10,10 +10,9 @@ import {SignUpForm, LoginForm, CreateEventForm} from  "../Form";
 import { LinkContainer } from 'react-router-bootstrap';
 import LogoutButton from '../LogoutButton';
 import Auth from "../../modules/Auth";
+import "./Nav1.css";
 
-
-
-class Nav1 extends Component {
+export class Nav1 extends Component {
    constructor(props){
      super(props);
      this.state={
@@ -60,12 +59,13 @@ class Nav1 extends Component {
 
 
    render(){
-
-
-     return <Navbar inverse collapseOnSelect navbar-fixed-top>
+     return (
+        <Navbar fixedTop collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
-             <a className=" navbar-brand navBrand eventster" href = "/">Eventster</a>
+             <a className="navbar-brand navBrand eventster" href="/">
+               Eventster
+             </a>
            </Navbar.Brand>
            <Navbar.Toggle />
          </Navbar.Header>
@@ -97,10 +97,11 @@ class Nav1 extends Component {
          <LoginForm show={this.state.loginShow} onHide={this.loginClose} closeModal={this.loginClose} />
 
          <CreateEventForm show={this.state.eventShow} onHide={this.eventClose} closeModal={this.eventClose} />
-       </Navbar>;
-
+       </Navbar>
+     
+)
    }
  };
 
 
-export default Nav1;
+

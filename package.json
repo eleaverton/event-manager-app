@@ -44,6 +44,7 @@
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
+    "react-sticky-dynamic-header": "^0.1.2",
     "request": "^2.83.0",
     "twitter": "^1.7.1",
     "validator": "^9.1.1"
