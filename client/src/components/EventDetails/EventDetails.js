@@ -13,6 +13,7 @@ import Col from "../../../node_modules/react-bootstrap/lib/Col";
 import Map1 from "../Map1";
 import Auth from "../../modules/Auth";
 import API from "../../utils/API";
+import "./EventDetails.css";
 
 var moment = require('moment');
 var geocoder = require('geocoder');
