@@ -32,26 +32,13 @@ export class EventDetails extends Component {
 		location:{}
 	}
 	this.checkIfOrganizer=this.checkIfOrganizer.bind(this);
+  this.locationOnMap = this.locationOnMap.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     //  storageRef.child(this.props.id+"/img_fjords.jpg").getDownloadURL().then((url) => {
     // 	this.setState({img:url});
     //  });
-		// Geocoding
-
-		geocoder.geocode(this.props.data[0].location, ( err, data ) => {
-		  // do something with data
-
-			if (data.results[0] !== undefined){
-				this.setState({ location: data.results[0].geometry.location });
-			}
-			else {
-				this.setState({ location: { lat: 29.76328, lng: -95.36327 }});
-			}
-		});
-
-
     axios
       .get("/api/events/" + this.props.id)
       .then(res => {
@@ -61,6 +48,20 @@ export class EventDetails extends Component {
       .catch(err => console.log(err));
       this.setState({organizerUser:false});
 		this.checkIfOrganizer();
+    this.locationOnMap();
+  }
+
+  locationOnMap(){
+    geocoder.geocode(this.props.data[0].location, ( err, data ) => {
+      // do something with data
+      var loc = { lat:parseFloat(data.results[0].geometry.location.lat), lng:parseFloat(data.results[0].geometry.location.lng)};
+      if (data.results[0] !== undefined){
+        this.setState({ location: loc });
+      }
+      else {
+        this.setState({ location: { lat: 29.76328, lng: -95.36327 }});
+      }
+    });
   }
 
   checkIfOrganizer(){
@@ -119,7 +120,7 @@ export class EventDetails extends Component {
           <div className="panel-body" />
 
           <EventRegistrationForm eventId={this.props.data[0]._id} attendees={this.props.data[0].attendees} specificFields={this.props.data[0].specificFields} />
-			
+
 
 
           <br />
