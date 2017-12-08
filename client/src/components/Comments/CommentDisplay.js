@@ -8,6 +8,7 @@ import {TextArea} from '../Form/TextArea';
 import "../Form/Form.css"; 
 import Auth from "../../modules/Auth";
 import {DelButton} from "./DelButton";
+import "./CommentDisplay.css";
 
 //props with event id
 export class CommentDisplay extends Component {
@@ -90,7 +91,7 @@ export class CommentDisplay extends Component {
 			<div className="container">
 				<div className="panel panel-default">
 					<div className="panel-header">
-						Comments
+						<h4 className="commentsHeader">Comments</h4>
 					</div>
 					<div className="panel-body">
 						{this.state.comments.length ? (
@@ -111,7 +112,7 @@ export class CommentDisplay extends Component {
 							)}
 						<form onSubmit={this.handleFormSubmit}>
 							<TextArea
-						        title={'Comment'}
+						        title={'Add a Comment'}
 						        rows={4}
 						        resize={false}
 						        content={this.state.comment}
