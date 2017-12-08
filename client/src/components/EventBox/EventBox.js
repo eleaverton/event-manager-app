@@ -35,7 +35,7 @@ class EventBox extends Component {
             <div className="thumbnail">
                 <img className="eventBoxImage" src= {this.state.img} alt="..." />
                 <div className="caption">
-                    <h3>{this.props.title}</h3>
+                    <h3 className="titleOfEvent">{this.props.title}</h3>
                     <div className="box">
                     <p className="demo1">{this.props.description}</p>
                     </div>

@@ -22,3 +22,6 @@
 .eventBoxImage{
 	height:200px !important;
 }
+.titleOfEvent {
+    text-align: center;
+}
