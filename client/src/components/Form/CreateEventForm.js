@@ -126,7 +126,7 @@ export class CreateEventForm extends Component {
 				}).catch(err => console.log(err));
 			setTimeout(()=> {
 		      	this.context.router.history.push("/events/"+id);
-		      },1700);
+		      },2200);
 
 	    this.handleClearForm(event);
 	    this.props.closeModal();
