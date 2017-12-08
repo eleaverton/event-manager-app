@@ -20,7 +20,6 @@ module.exports = {
 
     //push specific fields into array
     const specificFields = [];
-    console.log("specific fields", req.body.specificFields);
     req.body.specificFields.forEach(field => {
       if (field !== "") {
         specificFields.push(field.newField);
@@ -92,7 +91,6 @@ module.exports = {
   },
   findEvents: (req, res) => {
     const title = req.query.title;
-    console.log(req);
     Event.find({
       title: new RegExp(title, "i")
     })
@@ -131,15 +129,12 @@ module.exports = {
       //TODO: Loop through specificfield array and create response item and then push response id to specificfield model
       .then(() => {
         specificFields.map(sf => {
-          console.log("sf: ", sf);
           Response.create({
             event: eventData._id,
             user: userId,
             specificField: sf.specificFieldId,
             response: sf.response
           }).then(response => {
-            console.log("response: " + response);
-            console.log("specificId: " + response.specificField);
             SpecificField.findOneAndUpdate(
               { _id: response.specificField },
               { $addToSet: { responses: response._id } }
@@ -156,7 +151,6 @@ module.exports = {
     const eventId = req.params.eventId;
     const userId = req.user;
     let eventData = {};
-    console.log("unregister user route");
     Event.findOneAndUpdate(
       { _id: eventId },
       {
@@ -195,8 +189,6 @@ module.exports = {
   },
 
   updateUserImageUrl: (req, res) => {
-    console.log("here");
-    console.log(req.body);
     User.findOneAndUpdate(
       {
         _id: req.body.id
@@ -210,14 +202,11 @@ module.exports = {
         new: true
       }
     ).then(user => {
-      console.log("here send");
       res.json(user);
     });
   },
 
   updateEventImageUrl: (req, res) => {
-    console.log("here");
-    console.log(req.body);
     Event.findOneAndUpdate(
       {
         _id: req.body.id
@@ -231,7 +220,6 @@ module.exports = {
         new: true
       }
     ).then(user => {
-      console.log("here send");
       res.json(user);
     });
   }

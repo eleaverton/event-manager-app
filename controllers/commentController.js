@@ -20,7 +20,6 @@ module.exports = {
         .populate("user")
         .then(comment => {
           newComment = comment;
-          console.log(newComment);
           Event.findByIdAndUpdate(
             { _id: eventId },
             { $addToSet: { comments: newComment._id } },
@@ -40,9 +39,7 @@ module.exports = {
   },
 
   getComments: (req,res) =>{
-    console.log("getComments");
     const eventId = req.params.eventId;
-    console.log(eventId);
     Comment.find({event:eventId})
       .populate("user")          
       .then(comments => res.json(comments))
