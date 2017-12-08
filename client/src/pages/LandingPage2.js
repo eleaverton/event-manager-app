@@ -15,6 +15,9 @@ import {SignUpForm, LoginForm} from  "../components/Form";
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
 import {OrganizerTableAll} from "../components/OrganizerTableAll";
 import {ChartDiv} from "../components/Chart";
+import FormGroup from '../../../node_modules/react-bootstrap/lib/FormGroup';
+import FormControl from '../../../node_modules/react-bootstrap/lib/FormControl';
+import ControlLabel from '../../../node_modules/react-bootstrap/lib/ControlLabel';
 
 //eventBoxes will render based on a get API call
 //need to use map to render the boxes
@@ -29,6 +32,8 @@ class LandingPage extends Component {
       signInShow:false,
       loginShow:false,
       eventShow:false,
+      eventIdSelected:'',
+      chartData:"chartData"
     };
     this.loadEvents=this.loadEvents.bind(this);
     this.loadRegistered=this.loadRegistered.bind(this);
@@ -37,6 +42,7 @@ class LandingPage extends Component {
     this.signInClose=this.signInClose.bind(this);
     this.loginOpen=this.loginOpen.bind(this);
     this.loginClose=this.loginClose.bind(this);
+    this.handleCreatedEventSelection=this.handleCreatedEventSelection.bind(this);
   };
   signInClose() {
     this.setState({signInShow:false});
@@ -117,11 +123,22 @@ class LandingPage extends Component {
      this.setState({events:events})
   }
 
-  // addEvent = (events)=> {
-  //   console.log("events: ", events);
-  //   const temp = {... this.state.event, events};
-  //    this.setState({events:temp})
-  // }
+  handleCreatedEventSelection = (event) =>{
+    var chartDataArray = [];
+    for (var i=0;i<this.state.events.length;i++){
+      console.log(event.target.value); 
+      console.log(this.state.events[i]._id);
+      if (event.target.value == this.state.events[i]._id){
+        chartDataArray.push(this.state.events[i]);
+        console.log(chartDataArray);
+        console.log(typeof chartDataArray);
+        this.setState({chartData:chartDataArray[0]})
+        
+        console.log(this.state);
+        console.log(this.state.chartData);
+      };
+    }
+  }
 
 
   render() {
@@ -133,16 +150,30 @@ class LandingPage extends Component {
     } else {
       eventsList = false;
     }
-    console.log(this.state.events.length);
+    console.log(this.state.events);
 
     let table=null
     let chartDiv=null
+    let dropdown = null
+    let idSelected = this.state.eventIdSelected
     const orgView=this.state.orgView;
     if (orgView){
       table=<OrganizerTableAll data={this.state.events}/>
       chartDiv=<ChartDiv data={this.state.events} />
+      dropdown=<FormGroup controlId="formControlsSelect">
+        <ControlLabel>Select an event to view details</ControlLabel>
+        <FormControl onChange = {this.handleCreatedEventSelection.bind(this)} componentClass="select" placeholder="select">
+          {this.state.events.map(eventOrganized => (
+            <option value={eventOrganized._id}>{eventOrganized.title}</option>
+            )
+            )}
+        </FormControl>
+      </FormGroup>
+
       
     }
+
+
 
     return (
     <div className="App">
@@ -165,6 +196,7 @@ class LandingPage extends Component {
                     <EventBox key={event._id} id={event._id} title={event.title} description={event.description}/>
                   ))}
                   {table}
+                  {dropdown}
                   {chartDiv}
                 </div>
               

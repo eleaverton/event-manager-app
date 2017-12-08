@@ -112,7 +112,7 @@ export class EventDetails extends Component {
                 "MMMM Do YYYY"
               )}
             </h3>
-            <h3>{this.props.data[0].time}</h3>
+            <h3>{this.props.data[0].time }</h3>
             <h3>{this.props.data[0].location}</h3>
             <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
             {orgText}
