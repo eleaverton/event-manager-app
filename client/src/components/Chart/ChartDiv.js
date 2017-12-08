@@ -106,6 +106,7 @@ export class ChartDiv extends Component {
 	render(){
 		return(
 			<div className="chartDiv">
+				
 				<Chart chartData={this.state.chartData} />
 			</div>
 		

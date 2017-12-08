@@ -12,13 +12,16 @@ export class Chart extends Component {
 		console.log(this.props.chartData);
 		return(
 		<div className="chart">
+
 		{this.props.chartData.map(chart => (
+			<div>
+			<h3> {chart.chartTitle} </h3>
 			<Bar
 				data={chart}
 				width={100}
 				height={50}
 				options={{
-					
+
 					scales: {
 					    yAxes: [{
 					        display: true,
@@ -31,6 +34,7 @@ export class Chart extends Component {
 				
 				}}
 			/>
+			</div>
 
 			))}
 		
