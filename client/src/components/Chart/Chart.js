@@ -18,6 +18,15 @@ export class Chart extends Component {
 				width={100}
 				height={50}
 				options={{
+					scales: {
+					    yAxes: [{
+					        display: true,
+					        ticks: {
+					            
+					            beginAtZero: true   // minimum value will be 0.
+					        }
+					    }]
+					}
 				
 				}}
 			/>
