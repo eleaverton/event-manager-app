@@ -25,6 +25,7 @@ const storageRef = storage.ref("eventprofile/");
 export class EventDetails extends Component {
   constructor(props) {
     super(props);
+    this.locationOnMap();
     this.state = {
 		img:"",
 		organizerUser:"",
@@ -34,6 +35,7 @@ export class EventDetails extends Component {
 	this.checkIfOrganizer=this.checkIfOrganizer.bind(this);
   this.locationOnMap = this.locationOnMap.bind(this);
   }
+
 
   componentDidMount() {
     //  storageRef.child(this.props.id+"/img_fjords.jpg").getDownloadURL().then((url) => {
@@ -48,14 +50,14 @@ export class EventDetails extends Component {
       .catch(err => console.log(err));
       this.setState({organizerUser:false});
 		this.checkIfOrganizer();
-    this.locationOnMap();
+
   }
 
   locationOnMap(){
     geocoder.geocode(this.props.data[0].location, ( err, data ) => {
       // do something with data
-      var loc = { lat:parseFloat(data.results[0].geometry.location.lat), lng:parseFloat(data.results[0].geometry.location.lng)};
       if (data.results[0] !== undefined){
+        var loc = { lat:parseFloat(data.results[0].geometry.location.lat), lng:parseFloat(data.results[0].geometry.location.lng)};
         this.setState({ location: loc });
       }
       else {

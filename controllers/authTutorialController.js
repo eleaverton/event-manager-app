@@ -102,8 +102,7 @@ module.exports = {
         errors: validationResult.errors
       });
     }
-    //console.log(req);
-
+    
     return passport.authenticate("local-signup", (err,token,userData) => {
       if (err) {
         if (err.name === "MongoError" && err.code === 11000) {
