@@ -207,12 +207,6 @@ export class CreateEventForm extends Component {
 						        content={this.state.description}
 						        name={'description'}
 						        controlFunc={this.handleInputChange} />
-							<SingleInput
-								inputType={'text'}
-								title={'Event Hashtag'}
-								name={'hashtag'}
-								controlFunc={this.handleInputChange}
-								content={this.state.hashtag} />
 						    <SingleInput
 								inputType={'file'}
 								title={'Event Image'}
@@ -232,15 +226,6 @@ export class CreateEventForm extends Component {
 					        ))}
 					        <button type="button" onClick={this.handleAddSpecificField} className="btn btn-primary small">Add Registrant Field</button>
 					        <br></br>
-							<br></br>
-					        <CheckboxOrRadioGroup
-							    title={'Do you need each attendee to register individually or can one person register multiple attendees?'}
-							    setName={'attendee'}
-							    type={'radio'}
-							    controlFunc={this.handleRadioSelection}
-							    options={this.state.attendeeRegistrationOptions}
-							    selectedOptions={this.state.attendeeRegistration} />
-							<br></br>
 							<br></br>
 						    <input
 						        type="submit"
