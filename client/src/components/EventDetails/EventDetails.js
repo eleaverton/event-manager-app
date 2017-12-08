@@ -108,7 +108,7 @@ export class EventDetails extends Component {
                   "MMMM Do YYYY"
                 )}
               </h3>
-              <h3>{moment(this.props.data[0].time).format("h A")}</h3>
+              <h3>{this.props.data[0].time}</h3>
               <h3>{this.props.data[0].location}</h3>
               <h4> Hosted by: {this.props.data[0].organizer.name}</h4>
               {orgText}
@@ -124,7 +124,7 @@ export class EventDetails extends Component {
                 <img src={this.state.img} />
               </a>
             </div>
->>>>>>> bdbad640ef17a7baab84abb15d3463e2f21254c5
+
           </div>
           <div className="panel-body" />
 

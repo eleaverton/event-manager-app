@@ -14,8 +14,7 @@ import NavItem from "../../../node_modules/react-bootstrap/lib/NavItem";
 import {SignUpForm, LoginForm} from  "../components/Form";
 import Modal from '../../../node_modules/react-bootstrap/lib/Modal';
 import {OrganizerTableAll} from "../components/OrganizerTableAll";
-
-
+import {ChartDiv} from "../components/Chart";
 
 //eventBoxes will render based on a get API call
 //need to use map to render the boxes
@@ -100,7 +99,10 @@ class LandingPage extends Component {
     if (Auth.isUserAuthenticated()){
       
       API.getAllUserEvents(headers)
-        .then(res => this.setState({events:res.data.eventsOrganized}))
+        .then(res => {
+          this.setState({events:res.data.eventsOrganized});
+          console.log(this.state.events);
+        })
         .catch(err => console.log(err));
       this.setState({ render:true, orgView:true})
     }
@@ -108,7 +110,7 @@ class LandingPage extends Component {
       this.setState({render:false});
     }
     console.log(this.state.render);
-    console.log(this.state.events.length);
+    console.log(this.state.events);
   }
   updateEventsBasedOnSearch = (events)=> {
     console.log("events: ", events);
@@ -134,9 +136,12 @@ class LandingPage extends Component {
     console.log(this.state.events.length);
 
     let table=null
+    let chartDiv=null
     const orgView=this.state.orgView;
     if (orgView){
       table=<OrganizerTableAll data={this.state.events}/>
+      chartDiv=<ChartDiv data={this.state.events} />
+      
     }
 
     return (
@@ -160,6 +165,7 @@ class LandingPage extends Component {
                     <EventBox key={event._id} id={event._id} title={event.title} description={event.description}/>
                   ))}
                   {table}
+                  {chartDiv}
                 </div>
               
               ) : (
