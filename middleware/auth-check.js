@@ -7,7 +7,6 @@ const User = require("../models/user");
  */
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
-    console.log("No Authorization Headers");
     return res.status(401).end();
   }
 
@@ -18,7 +17,6 @@ module.exports = (req, res, next) => {
   return jwt.verify(token, config.jwtSecret, (err, decoded) => {
     // the 401 code is for unauthorized status
     if (err) {
-      console.log("Token error");
       return res.status(401).end();
     }
     const userId = decoded.sub;
@@ -26,7 +24,6 @@ module.exports = (req, res, next) => {
     // check if a user exists
     return User.findById(userId, (userErr, user) => {
       if (userErr || !user) {
-        console.log("User error");
         return res.status(401).end();
       }
       
