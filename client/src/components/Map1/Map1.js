@@ -8,7 +8,7 @@ const google = window.google;
 
 const NewMap = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIH4itMkNd8-WdG9gFoS9dbysNMVFUKI&callback=initMap",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIH4itMkNd8-WdG9gFoS9dbysNMVFUKI",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `300px`, width: `300px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
